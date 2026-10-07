@@ -181,12 +181,6 @@
     width: 100%; padding: 8px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 12px; background: #fff; font-weight: 600;
   }
 
-  .bloque-bloqueado {
-    background: #fff; border: 1.5px dashed #cbd5e1; border-radius: 8px;
-    padding: 14px 12px; margin-top: 10px; text-align: center; color: #475569; font-size: 11.5px; line-height: 1.4;
-  }
-  .bloque-bloqueado b { color: var(--azul); display: block; font-size: 12px; margin-bottom: 3px; }
-  
   .input-error {
     border-color: #dc2626 !important; background-color: #fef2f2 !important; box-shadow: 0 0 0 2px rgba(220,38,38,0.2) !important;
   }
@@ -202,7 +196,7 @@
     font-size: 10px; color: #64748b; font-style: italic; line-height: 1.3; margin-bottom: 10px;
   }
 
-  /* MODAL GUÍA RÁPIDA (MANUAL DE 3 PASOS) */
+  /* MODAL GUÍA RÁPIDA */
   .modal-overlay {
     position: fixed; inset: 0; background: rgba(15, 61, 83, 0.78); backdrop-filter: blur(3px);
     display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
@@ -398,15 +392,15 @@
       <div class="guide-step-row">
         <span class="guide-icon">✍️</span>
         <div class="guide-text">
-          <b>2. Ingresá tu Nombre y Ciudad</b>
-          <span>Desbloqueá el cotizador de cuotas mensuales a 12, 24 y 36 meses.</span>
+          <b>2. Ingresá tu Nombre, WhatsApp y Ciudad</b>
+          <span>Desbloqueá de inmediato los precios de preventa y cuotas mensuales.</span>
         </div>
       </div>
       <div class="guide-step-row">
         <span class="guide-icon">📲</span>
         <div class="guide-text">
           <b>3. Cotizá y apartá tu lote</b>
-          <span>Conocé tu cuota mensual y apartá tu ubicación con solo $250 USD vía WhatsApp (+505 7694-0400).</span>
+          <span>Conocé tu cuota mensual estimada y apartá con solo $250 USD vía WhatsApp (+505 7694-0400).</span>
         </div>
       </div>
     </div>
@@ -418,13 +412,18 @@
 </div>
 
 <script>
+// ==================== CONFIGURACIÓN GOOGLE SHEETS ====================
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec";
+
 // ==================== BASE DE DATOS Y ESTADO GLOBAL ====================
 let vendMS = [1,2,3,10,11,12,13,14,15,17,25,26,27,28,29,30,42,45,46,49,59,60,70,71,83,84,94,95,96,105,106,113,116,125,123];
 let resSP = [23,115,18,41,38,72];
 let vendidosCerrados = [24,73,93,92,74,75,22,124,21,39];
 
 let nombreClientePersistente = "";
+let telefonoClientePersistente = "";
 let ciudadClientePersistente = "";
+let usuarioDesbloqueado = false;
 
 const tablaPrecios = {
   1: { contado: 17987, m12: 19380, m24: 20727, m36: 22131 },
@@ -809,8 +808,18 @@ function renderizarMapa() {
   });
 }
 
-function estaDesbloqueado() {
-  return nombreClientePersistente.trim().length >= 3 && ciudadClientePersistente.trim().length >= 2;
+// FUNCIÓN PARA ENVIAR A GOOGLE SHEETS
+function enviarAGoogleSheets(datos) {
+  if (!GOOGLE_SHEETS_URL || GOOGLE_SHEETS_URL.includes("PEGA_AQUI")) {
+    console.warn("Google Sheets URL aún no configurada.");
+    return;
+  }
+  fetch(GOOGLE_SHEETS_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(datos)
+  }).catch(err => console.error("Error al registrar en Google Sheets:", err));
 }
 
 function actualizarStepper() {
@@ -828,7 +837,7 @@ function actualizarStepper() {
     circ1.innerText = "✓";
   }
 
-  if(estaDesbloqueado()) {
+  if(usuarioDesbloqueado) {
     node2.className = "step-node completed";
     circ2.innerText = "✓";
     node3.className = "step-node active";
@@ -850,31 +859,47 @@ function seleccionar(id) {
   if(el) el.classList.add('selected');
 
   const colorPill = l.est === "Disponible" ? "#2E7D32" : (l.est === "Reservado S/P" ? "#0288D1" : (l.est === "Vendido" ? "#8E24AA" : "#B8962E"));
-  const abierto = estaDesbloqueado();
 
   let seccionCotizador = "";
   if (l.est === "Disponible") {
-    seccionCotizador = `
-      <div class="calc-box">
-        <h4>🧮 Cotizador de tu Lote</h4>
-        <div class="calc-field">
-          <label for="clientName"><b>1. Nombre y Apellido:</b> <span style="color:#dc2626;">* (Requerido)</span></label>
-          <input type="text" id="clientName" value="${nombreClientePersistente}" placeholder="Ej. Carlos Mendoza..." oninput="manejarDesbloqueo(${l.id})">
+    if (!usuarioDesbloqueado) {
+      // FORMULARIO DE CAPTURA PREVIO (CANDADO OBLIGATORIO)
+      seccionCotizador = `
+        <div class="calc-box">
+          <h4>🔒 Desbloqueá Precios y Cuotas</h4>
+          <p style="font-size:11px; color:#556b75; margin-bottom:10px; line-height:1.35;">
+            Ingresá tus datos para conocer el precio oficial de preventa y calcular tus opciones de pago a 12, 24 y 36 meses:
+          </p>
+          <div class="calc-field">
+            <label for="clientName"><b>1. Nombre y Apellido:</b> <span style="color:#dc2626;">*</span></label>
+            <input type="text" id="clientName" value="${nombreClientePersistente}" placeholder="Ej. Carlos Mendoza">
+          </div>
+          <div class="calc-field">
+            <label for="clientPhone"><b>2. Teléfono / WhatsApp:</b> <span style="color:#dc2626;">*</span></label>
+            <input type="tel" id="clientPhone" value="${telefonoClientePersistente}" placeholder="Ej. +505 8888-8888">
+          </div>
+          <div class="calc-field">
+            <label for="clientCity"><b>3. Ciudad o País:</b> <span style="color:#dc2626;">*</span></label>
+            <input type="text" id="clientCity" value="${ciudadClientePersistente}" placeholder="Ej. Managua, Rivas, Miami...">
+          </div>
+          <div class="error-text" id="datosError" style="margin-bottom:8px;">⚠️ Completá tu nombre, WhatsApp (mínimo 8 dígitos) y ciudad.</div>
+          <button class="btn" id="btnDesbloquear" style="width:100%; padding:10px; font-size:13px; background:#00695c; color:#fff; justify-content:center;" onclick="desbloquearYRegistrar(${l.id})">
+            🔓 Ver Precios y Calcular Cuotas
+          </button>
         </div>
-        <div class="calc-field">
-          <label for="clientCity"><b>2. Ciudad de Residencia:</b> <span style="color:#dc2626;">* (Requerido)</span></label>
-          <input type="text" id="clientCity" value="${ciudadClientePersistente}" placeholder="Ej. Managua, Rivas, Miami..." oninput="manejarDesbloqueo(${l.id})">
-          <div class="error-text" id="datosError">⚠️ Ingresa tu nombre, apellido y ciudad para ver las cuotas disponibles.</div>
-        </div>
+      `;
+    } else {
+      // COTIZADOR DESBLOQUEADO (LOS DATOS YA ESTÁN EN SHEETS)
+      seccionCotizador = `
+        <div class="calc-box">
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:6px 9px; border-radius:6px; font-size:11px; color:#166534; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span>👤 <b>${nombreClientePersistente}</b> (${telefonoClientePersistente})</span>
+            <a href="javascript:void(0)" onclick="editarDatos()" style="color:#0369a1; font-weight:700; text-decoration:none;">Editar</a>
+          </div>
 
-        <div id="avisoDesbloqueo" class="bloque-bloqueado" style="display:${abierto ? 'none' : 'block'};">
-          <b>🔒 Cotizador bloqueado</b>
-          Ingresa tus datos arriba para desplegar las opciones de pago de contado y cuotas mensuales a 12, 24 y 36 meses.
-        </div>
-
-        <div id="bloqueFinanciamiento" style="display:${abierto ? 'block' : 'none'};">
-          <div class="calc-field" style="margin-top:10px;">
-            <label><b>3. Modalidad de Pago para este Lote:</b></label>
+          <h4>🧮 Opciones de Pago para Lote ${l.id}</h4>
+          <div class="calc-field">
+            <label><b>Modalidad de Pago:</b></label>
             <select id="planPago" onchange="calcularCuota(${l.id})">
               <option value="contado">Pago de Contado: $${l.precios.contado.toLocaleString()} USD</option>
               <option value="m12">Financiamiento a 12 Meses (1 Año)</option>
@@ -884,18 +909,18 @@ function seleccionar(id) {
           </div>
           <div class="calc-results" id="calcResults"></div>
           <div class="calc-note">
-            * Primas desde $2,000 USD. Aparta hoy tu lote con solo $250 USD (100% abonables a tu prima). La prima se puede ajustar con tu asesor.
+            * Primas desde $2,000 USD. Aparta hoy tu lote con solo $250 USD (100% abonables a tu prima).
           </div>
           <button class="btn" style="display:block;text-align:center;width:100%;padding:10px;font-size:12.5px;background:#00695c;color:#fff;" onclick="enviarCotizacionWhatsApp(${l.id})">
-            📲 Cotizar y Apartar Lote por WhatsApp
+            📲 Apartar y Congelar Precio por WhatsApp
           </button>
         </div>
-      </div>
-    `;
+      `;
+    }
   } else {
     seccionCotizador = `
       <div style="background:#ffebee; border:1px solid #ffcdd2; color:#c62828; padding:10px; border-radius:6px; font-size:11.5px; margin-top:10px; text-align:center;">
-        <b>Lote no disponible para cotizar</b><br>Este lote se encuentra ${l.est}. Consulta con un asesor por lotes similares disponibles.
+        <b>Lote no disponible para cotizar</b><br>Este lote se encuentra ${l.est}. Consulta con un asesor por opciones disponibles.
       </div>
     `;
   }
@@ -935,7 +960,7 @@ function seleccionar(id) {
 
   actualizarStepper();
 
-  if (l.est === "Disponible" && abierto) {
+  if (l.est === "Disponible" && usuarioDesbloqueado) {
     calcularCuota(l.id);
   }
 
@@ -943,28 +968,75 @@ function seleccionar(id) {
   document.getElementById('admSelect').value = l.est;
 }
 
-function manejarDesbloqueo(id) {
+// ACCIÓN DE DESBLOQUEO Y ENVÍO INMEDIATO A GOOGLE SHEETS
+function desbloquearYRegistrar(id) {
   const inputNom = document.getElementById('clientName');
+  const inputTel = document.getElementById('clientPhone');
   const inputCiu = document.getElementById('clientCity');
   const errorText = document.getElementById('datosError');
-  const bloque = document.getElementById('bloqueFinanciamiento');
-  const aviso = document.getElementById('avisoDesbloqueo');
-  
-  nombreClientePersistente = inputNom ? inputNom.value : "";
-  ciudadClientePersistente = inputCiu ? inputCiu.value : "";
+  const btn = document.getElementById('btnDesbloquear');
 
-  if (estaDesbloqueado()) {
-    if (inputNom) inputNom.classList.remove('input-error');
-    if (inputCiu) inputCiu.classList.remove('input-error');
-    if (errorText) errorText.style.display = 'none';
-    if (bloque) bloque.style.display = 'block';
-    if (aviso) aviso.style.display = 'none';
-    calcularCuota(id);
+  const nom = inputNom ? inputNom.value.trim() : "";
+  const tel = inputTel ? inputTel.value.trim() : "";
+  const ciu = inputCiu ? inputCiu.value.trim() : "";
+
+  let valido = true;
+  if (nom.length < 3) {
+    if (inputNom) inputNom.classList.add('input-error');
+    valido = false;
   } else {
-    if (bloque) bloque.style.display = 'none';
-    if (aviso) aviso.style.display = 'block';
+    if (inputNom) inputNom.classList.remove('input-error');
   }
-  actualizarStepper();
+
+  const digitos = tel.replace(/\D/g, '');
+  if (digitos.length < 8) {
+    if (inputTel) inputTel.classList.add('input-error');
+    valido = false;
+  } else {
+    if (inputTel) inputTel.classList.remove('input-error');
+  }
+
+  if (ciu.length < 2) {
+    if (inputCiu) inputCiu.classList.add('input-error');
+    valido = false;
+  } else {
+    if (inputCiu) inputCiu.classList.remove('input-error');
+  }
+
+  if (!valido) {
+    if (errorText) errorText.style.display = 'block';
+    return;
+  }
+
+  if (errorText) errorText.style.display = 'none';
+
+  nombreClientePersistente = nom;
+  telefonoClientePersistente = tel;
+  ciudadClientePersistente = ciu;
+  usuarioDesbloqueado = true;
+
+  if (btn) {
+    btn.innerText = "⏳ Desbloqueando...";
+    btn.disabled = true;
+  }
+
+  // DISPARO A GOOGLE SHEETS ANTES DE MOSTRAR COTIZACIÓN
+  const l = lotes.find(x => x.id == id);
+  enviarAGoogleSheets({
+    nombre: nom,
+    telefono: tel,
+    ciudad: ciu,
+    lote: id,
+    modalidad: "Desbloqueó Cotizador",
+    cuota: "Precio Contado: $" + (l ? l.precios.contado.toLocaleString() : "") + " USD"
+  });
+
+  seleccionar(id);
+}
+
+function editarDatos() {
+  usuarioDesbloqueado = false;
+  seleccionar(loteActualId);
 }
 
 function calcularCuota(id) {
@@ -1001,43 +1073,44 @@ function calcularCuota(id) {
 
 function enviarCotizacionWhatsApp(id) {
   const l = lotes.find(x => x.id == id);
-  const inputNom = document.getElementById('clientName');
-  const inputCiu = document.getElementById('clientCity');
-  const errorText = document.getElementById('datosError');
-  
-  const nombre = inputNom ? inputNom.value.trim() : "";
-  const ciudad = inputCiu ? inputCiu.value.trim() : "";
   const plan = document.getElementById('planPago') ? document.getElementById('planPago').value : "contado";
 
-  if (!nombre || nombre.length < 3 || !ciudad || ciudad.length < 2) {
-    if (inputNom && (!nombre || nombre.length < 3)) inputNom.classList.add('input-error');
-    if (inputCiu && (!ciudad || ciudad.length < 2)) inputCiu.classList.add('input-error');
-    if (errorText) errorText.style.display = 'block';
-    return;
-  }
-
-  let mensaje = `Hola, mi nombre es *${nombre}* de la ciudad de *${ciudad}*. Estuve revisando los lotes en Mareas del Sur (https://mareas-del-sur.vercel.app/):\n\n` +
-                `📍 *Lote Seleccionado:* LOTE ${l.id} (${l.m2} m² - Medidas: ${l.rawDim}m)\n` +
-                `🗺️ *Ubicación:* 700m Costanera • 3 min Playa Remanso • 7 min Centro SJDS\n` +
-                `🏡 *Proyecto:* Lotes en Preventa de Alta Plusvalía (Servicios a 32 meses)\n`;
+  let detallePlan = "";
+  let precioOCuota = "";
 
   if (plan === 'contado') {
-    mensaje += `📋 *Modalidad:* Pago de Contado\n` +
-               `💲 *Precio de Contado:* $${l.precios.contado.toLocaleString()} USD\n`;
+    detallePlan = `📋 *Modalidad:* Pago de Contado\n💲 *Precio de Contado:* $${l.precios.contado.toLocaleString()} USD\n`;
+    precioOCuota = "Contado $" + l.precios.contado.toLocaleString();
   } else {
     let meses = parseInt(plan.replace('m', ''));
     const cuota = (l.precios[plan] * 0.85) / meses;
-    mensaje += `📋 *Modalidad:* Financiamiento a ${meses} Meses (${meses/12} ${meses === 12 ? 'Año' : 'Años'})\n` +
-               `📅 *Cuota Estimada:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mes\n` +
-               `💵 *Prima Requerida:* 15%\n`;
+    detallePlan = `📋 *Modalidad:* Financiamiento a ${meses} Meses (${meses/12} ${meses === 12 ? 'Año' : 'Años'})\n` +
+                  `📅 *Cuota Estimada:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mes\n` +
+                  `💵 *Prima Requerida:* 15%\n`;
+    precioOCuota = "$" + cuota.toFixed(2) + "/mes (" + meses + "m)";
   }
 
-  mensaje += `\n🔥 *Deseo apartar este lote con la reserva especial de $250 USD* (100% abonable a la prima). Por favor confirmen disponibilidad.`;
+  // Notificar a Google Sheets que el cliente hizo clic en WhatsApp
+  enviarAGoogleSheets({
+    nombre: nombreClientePersistente,
+    telefono: telefonoClientePersistente,
+    ciudad: ciudadClientePersistente,
+    lote: id,
+    modalidad: "Clic en WhatsApp (" + plan + ")",
+    cuota: precioOCuota
+  });
+
+  let mensaje = `Hola, mi nombre es *${nombreClientePersistente}* de la ciudad de *${ciudadClientePersistente}*. Estuve revisando los lotes en Mareas del Sur (https://mareas-del-sur.vercel.app/):\n\n` +
+                `📍 *Lote Seleccionado:* LOTE ${l.id} (${l.m2} m² - Medidas: ${l.rawDim}m)\n` +
+                `🗺️ *Ubicación:* 700m Costanera • 3 min Playa Remanso • 7 min Centro SJDS\n` +
+                `🏡 *Proyecto:* Lotes en Preventa de Alta Plusvalía (Servicios a 32 meses)\n` +
+                detallePlan +
+                `\n🔥 *Deseo apartar este lote con la reserva especial de $250 USD* (100% abonable a la prima). Por favor confirmen disponibilidad.`;
 
   window.open(`https://wa.me/50576940400?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
-/* FUNCIONES DE LA GUÍA INTERACTIVA (MODAL) */
+/* FUNCIONES DE LA GUÍA INTERACTIVA */
 function abrirGuia() {
   document.getElementById('guideModal').classList.add('open');
 }
@@ -1101,7 +1174,7 @@ construirLotesUniformes();
 renderizarMapa();
 seleccionar(20);
 
-// Se abre SIEMPRE al cargar la página
+// Se abre siempre al cargar
 setTimeout(abrirGuia, 500);
 </script>
 </body>
