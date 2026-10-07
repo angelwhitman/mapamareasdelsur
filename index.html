@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mareas del Sur — Lotes en Preventa en San Juan del Sur</title>
+
+    <meta property="og:title" content="Mareas del Sur — Lotes en Preventa en San Juan del Sur">
+    <meta property="og:description" content="Asegura tu lote en preventa con alta plusvalía a 700m de la Costanera. Primas desde $2,000 USD y aparta hoy con solo $250 USD.">
+    <meta property="og:image" content="https://lotificacionmareasdelsur-masterplan.netlify.app/preview.jpg">
+    <meta property="og:url" content="https://lotificacionmareasdelsur-masterplan.netlify.app">
+    <meta property="og:type" content="website">
+
+<style>
+  :root {
+    --azul: #0F3D53;
+    --dorado: #D4BE7A;
+    --crema: #FAF8F5;
+    --turquesa: #29B6F6;
+    --verde: #2E7D32;
+    --morado-vend: #8E24AA;
+    --gris-adoquin: #32363A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+  body { background: #e8ece9; color: var(--azul); overflow-x: hidden; }
+
+  /* CINTILLO SUPERIOR: DESTACANDO LOTES EN PREVENTA */
+  .promo-top-bar {
+    background: linear-gradient(90deg, #9a3412 0%, #c2410c 50%, #9a3412 100%);
+    color: #fff; padding: 7px 16px; text-align: center; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.3px; border-bottom: 2px solid var(--dorado); display: flex;
+    justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .promo-tag {
+    background: #fef08a; color: #7c2d12; font-size: 10.5px; font-weight: 900;
+    padding: 3px 8px; border-radius: 10px; text-transform: uppercase; animation: pulse 1.8s infinite;
+  }
+
+  header {
+    background: var(--azul); color: #fff; padding: 10px 22px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    border-bottom: 3px solid var(--dorado); position: sticky; top: 0; z-index: 100;
+  }
+  .brand h1 { font-size: 18px; letter-spacing: 0.5px; font-weight: 900; }
+  .brand h1 span { color: var(--dorado); }
+  .brand p { font-size: 11.5px; color: var(--dorado); font-weight: 600; }
+  
+  .toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .btn {
+    background: var(--dorado); color: var(--azul); border: none; padding: 7px 14px;
+    border-radius: 18px; font-weight: 700; font-size: 12px; cursor: pointer; text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .btn-outline { background: transparent; color: #fff; border: 1.5px solid var(--dorado); }
+  .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+  .layout {
+    display: grid; grid-template-columns: 1fr 370px; height: calc(100vh - 90px);
+  }
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; height: auto; }
+  }
+
+  .map-wrapper {
+    position: relative; overflow: auto; background: #dfe5e0; display: flex; flex-direction: column;
+  }
+  .interactive-hint-bar {
+    background: #0F3D53; color: #fff; padding: 6px 16px; font-size: 11.5px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center; gap: 8px; border-bottom: 1px solid var(--dorado);
+  }
+  .hint-badge {
+    background: #d97706; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 800;
+  }
+
+  .legend-bar {
+    background: rgba(15,61,83,0.97); color: #fff; padding: 8px 16px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    font-size: 11.5px; position: sticky; top: 0; left: 0; z-index: 20;
+    border-bottom: 1px solid rgba(212,190,122,0.35);
+  }
+  .leg-group { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .leg-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+  .box-color { width: 13px; height: 13px; border-radius: 3px; border: 1px solid #fff; }
+
+  .canvas-scroll {
+    flex: 1; overflow: auto; padding: 14px; display: flex; justify-content: center; align-items: flex-start;
+  }
+  svg {
+    width: 100%; max-width: 1160px; height: auto; background: #ffffff;
+    border-radius: 10px; border: 2px solid var(--azul);
+    box-shadow: 0 10px 30px rgba(15,61,83,0.16); transform-origin: top center; transition: transform 0.15s ease;
+  }
+
+  .lote { cursor: pointer; transition: opacity 0.2s; }
+  .lote .shape { stroke: #1E293B; stroke-width: 0.9; transition: all 0.15s; }
+  .lote:hover .shape, .lote.selected .shape {
+    stroke: #00E5FF; stroke-width: 2.8; filter: brightness(1.06);
+  }
+  
+  .c-disp { fill: #FAF8F5; }
+  .c-vend { fill: #E5CD78; }
+  .c-res { fill: #29B6F6; }
+  .c-cerrado { fill: #8E24AA; }
+
+  .t-num { font-size: 6.7px; font-weight: 900; fill: #0F3D53; text-anchor: middle; font-style: italic; pointer-events: none; }
+  .t-area { font-size: 6.2px; font-weight: 800; fill: #1B5E20; text-anchor: middle; font-style: italic; pointer-events: none; }
+  .t-dim { font-size: 5.0px; font-weight: 700; fill: #475569; text-anchor: middle; pointer-events: none; }
+  .cota { font-size: 4.8px; font-weight: 700; fill: #334155; text-anchor: middle; pointer-events: none; }
+  .c-cerrado ~ text { fill: #ffffff !important; }
+
+  .fase-watermark {
+    font-size: 26px; font-weight: 900; fill: #64748B; fill-opacity: 0.28;
+    font-style: italic; letter-spacing: 3px; pointer-events: none; stroke: #0F3D53; stroke-width: 0.4;
+  }
+
+  .side-panel {
+    background: var(--crema); border-left: 2px solid var(--dorado);
+    padding: 16px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
+  }
+  .search-input {
+    width: 100%; padding: 9px 12px; border-radius: 8px; border: 1.5px solid var(--azul);
+    font-size: 13px; font-weight: 600; margin-bottom: 8px; background: #fff;
+  }
+
+  .stepper-box {
+    display: flex; justify-content: space-between; background: #ffffff;
+    border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .step-node {
+    display: flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 700; color: #94a3b8;
+    transition: all 0.25s ease;
+  }
+  .step-circle {
+    width: 18px; height: 18px; border-radius: 50%; background: #e2e8f0; color: #64748b;
+    display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800;
+  }
+  .step-node.active { color: var(--azul); }
+  .step-node.active .step-circle { background: var(--azul); color: #fff; }
+  .step-node.completed { color: #16a34a; }
+  .step-node.completed .step-circle { background: #16a34a; color: #fff; }
+
+  .reserva-box {
+    background: #fffbeb; border: 1.5px solid #f59e0b; border-left: 4px solid #b45309;
+    padding: 9px 11px; border-radius: 6px; font-size: 11.5px; margin-bottom: 10px; line-height: 1.38;
+  }
+  .reserva-box b { color: #78350f; }
+
+  .card-lote {
+    background: #fff; border-radius: 10px; border: 1px solid #ded8c8; overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  }
+  .card-head {
+    background: var(--azul); color: #fff; padding: 12px 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card-head h2 { font-size: 20px; font-weight: 800; }
+  .status-pill {
+    padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; color: #fff;
+  }
+  .card-body { padding: 14px; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .stat {
+    background: var(--crema); padding: 9px; border-radius: 6px; border-left: 3px solid var(--dorado);
+  }
+  .stat small { display: block; font-size: 10.5px; color: #556b75; }
+  .stat b { font-size: 13.5px; color: var(--azul); }
+
+  .calc-box {
+    background: #f4f8f6; border: 1.5px solid #b2dfdb; border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 12px;
+  }
+  .calc-box h4 { color: #00695c; font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+  .calc-field { margin-bottom: 8px; }
+  .calc-field label { display: block; font-weight: 700; color: #334155; margin-bottom: 3px; font-size: 11px; }
+  .calc-field input, .calc-field select {
+    width: 100%; padding: 8px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 12px; background: #fff; font-weight: 600;
+  }
+
+  .bloque-bloqueado {
+    background: #fff; border: 1.5px dashed #cbd5e1; border-radius: 8px;
+    padding: 14px 12px; margin-top: 10px; text-align: center; color: #475569; font-size: 11.5px; line-height: 1.4;
+  }
+  .bloque-bloqueado b { color: var(--azul); display: block; font-size: 12px; margin-bottom: 3px; }
+  
+  .input-error {
+    border-color: #dc2626 !important; background-color: #fef2f2 !important; box-shadow: 0 0 0 2px rgba(220,38,38,0.2) !important;
+  }
+  .error-text {
+    color: #dc2626; font-size: 10.5px; font-weight: 700; margin-top: 3px; display: none;
+  }
+
+  .calc-results {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; margin: 10px 0; font-size: 11.5px;
+  }
+  .calc-results div { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .calc-note {
+    font-size: 10px; color: #64748b; font-style: italic; line-height: 1.3; margin-bottom: 10px;
+  }
+
+  /* MODAL GUÍA RÁPIDA */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(15, 61, 83, 0.78); backdrop-filter: blur(3px);
+    display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
+  }
+  .modal-overlay.open { display: flex; }
+  .guide-card {
+    background: #ffffff; border-radius: 14px; max-width: 440px; width: 100%; padding: 22px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25); border: 2px solid var(--dorado); text-align: center;
+  }
+  .guide-card h3 { color: var(--azul); font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+  .guide-card p { font-size: 12.5px; color: #475569; margin-bottom: 16px; line-height: 1.4; }
+  .guide-steps { display: flex; flex-direction: column; gap: 10px; text-align: left; margin-bottom: 18px; }
+  .guide-step-row {
+    display: flex; gap: 12px; align-items: center; background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid #e2e8f0;
+  }
+  .guide-icon { font-size: 22px; line-height: 1; }
+  .guide-text b { display: block; font-size: 12.5px; color: var(--azul); }
+  .guide-text span { font-size: 11px; color: #64748b; }
+
+  .admin-box {
+    display: none; background: #eef4f7; border: 2px dashed var(--azul);
+    padding: 12px; border-radius: 8px; margin-top: 12px; font-size: 12px;
+  }
+  .admin-box select {
+    width: 100%; padding: 7px; margin: 6px 0 10px 0; border-radius: 6px; border: 1px solid var(--azul); font-weight: bold;
+  }
+  .admin-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #6c7a80; padding-top: 8px; border-top: 1px solid #dcd6c8;
+  }
+  .lock-btn { background: none; border: none; cursor: pointer; font-size: 14px; opacity: 0.5; }
+  .lock-btn:hover { opacity: 1; }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  @media print {
+    .promo-top-bar, header .toolbar, .side-panel, .legend-bar button, .interactive-hint-bar, .modal-overlay { display: none !important; }
+    .layout { display: block; height: auto; }
+    svg { max-width: 100%; border: none; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CINTILLO SUPERIOR: ENFOCADO EN LOTES EN PREVENTA -->
+<div class="promo-top-bar">
+  <span class="promo-tag">🏡 LOTES EN PREVENTA</span>
+  <span>Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>32 meses</b> • Apartá hoy con solo <b>$250 USD</b></span>
+</div>
+
+<header>
+  <div class="brand">
+    <h1>MAREAS DEL SUR — <span>LOTES EN PREVENTA</span></h1>
+    <p>Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro SJDS</p>
+  </div>
+  <div class="toolbar">
+    <button class="btn btn-outline" onclick="abrirGuia()">💡 ¿Cómo usar?</button>
+    <button class="btn btn-outline" onclick="filtrar('todos')">Todos (125)</button>
+    <button class="btn btn-outline" onclick="filtrar('Disponible')">Disponibles</button>
+    <button class="btn" onclick="window.print()">📄 Descargar PDF</button>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="map-wrapper">
+    <div class="interactive-hint-bar">
+      <span class="hint-badge">👆 MAPA DE LOTES</span>
+      <span>Tocá cualquier lote en el mapa para ver sus medidas exactas y cotizar tu plan de pago.</span>
+    </div>
+
+    <div class="legend-bar">
+      <div class="leg-group">
+        <div class="leg-item" onclick="filtrar('Disponible')"><span class="box-color" style="background:#FAF8F5"></span> Lote Disponible</div>
+        <div class="leg-item" onclick="filtrar('Vendido M.S.')"><span class="box-color" style="background:#E5CD78"></span> Vendidos M. S.</div>
+        <div class="leg-item" onclick="filtrar('Reservado S/P')"><span class="box-color" style="background:#29B6F6"></span> Reservado S/P</div>
+        <div class="leg-item" onclick="filtrar('Vendido')"><span class="box-color" style="background:#8E24AA"></span> Vendidos</div>
+        <div class="leg-item"><span class="box-color" style="background:#32363A"></span> Adoquinada</div>
+        <div class="leg-item"><span class="box-color" style="background:#E2E8F0"></span> Compactada</div>
+        <div class="leg-item"><span class="box-color" style="background:#4CAF50"></span> Área Verde</div>
+      </div>
+      <div>
+        <button class="btn" style="padding:4px 10px" onclick="cambiarZoom(1.2)">🔍 +</button>
+        <button class="btn" style="padding:4px 10px" onclick="cambiarZoom(0.85)">🔍 −</button>
+        <button class="btn btn-outline" style="padding:4px 10px" onclick="resetZoom()">100%</button>
+      </div>
+    </div>
+
+    <div class="canvas-scroll">
+      <svg id="mapaSvg" viewBox="0 0 1080 1070" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="adoquinGris" width="8" height="8" patternUnits="userSpaceOnUse">
+            <rect width="8" height="8" fill="#32363A"/>
+            <path d="M0 4 H8 M4 0 V4 M0 8 V4" stroke="#474C52" stroke-width="0.8" fill="none"/>
+          </pattern>
+          <pattern id="compactadaPatron" width="12" height="12" patternUnits="userSpaceOnUse">
+            <rect width="12" height="12" fill="#E6ECF2"/>
+            <circle cx="3" cy="4" r="0.6" fill="#94A3B8" opacity="0.45"/>
+            <circle cx="9" cy="9" r="0.6" fill="#94A3B8" opacity="0.45"/>
+          </pattern>
+          <pattern id="bosquePlano" width="28" height="28" patternUnits="userSpaceOnUse">
+            <rect width="28" height="28" fill="#55A630"/>
+            <circle cx="9" cy="9" r="7.5" fill="#2B9348" stroke="#1B4332" stroke-width="0.6"/>
+            <circle cx="21" cy="8" r="5.5" fill="#80B918" stroke="#1B4332" stroke-width="0.5"/>
+            <circle cx="19" cy="20" r="7.5" fill="#2B9348" stroke="#1B4332" stroke-width="0.6"/>
+            <circle cx="7" cy="21" r="5" fill="#AACC00" stroke="#1B4332" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <g id="capaExterior"></g>
+        <g id="capaCallesCompactadas"></g>
+        <g id="capaAreasVerdes"></g>
+        <g id="capaCalleAdoquinada"></g>
+        <g id="capaLotes"></g>
+        <g id="capaRotulosViales"></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="side-panel">
+    <div>
+      <input type="number" class="search-input" min="1" max="125" placeholder="🔎 Buscar por número de lote (ej. 20)..." oninput="seleccionar(this.value)">
+
+      <!-- STEPPER DINÁMICO -->
+      <div class="stepper-box">
+        <div class="step-node active" id="stepNode1"><span class="step-circle" id="stepCircle1">1</span> <span id="stepLabel1">Lote 20</span></div>
+        <div class="step-node" id="stepNode2"><span class="step-circle" id="stepCircle2">2</span> <span>Tus Datos</span></div>
+        <div class="step-node" id="stepNode3"><span class="step-circle" id="stepCircle3">3</span> <span>Tu Cuota</span></div>
+      </div>
+
+      <!-- TARJETA INFORMATIVA -->
+      <div class="reserva-box">
+        <b>🏡 LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>
+        • <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>
+        • <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 32 meses.<br>
+        • <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br>
+        <span style="font-size:10px; color:#92400e; display:block; margin-top:3px;">
+          *Aplican restricciones. Reserva no reembolsable en caso de desistimiento.
+        </span>
+      </div>
+
+      <div id="detalleLote"></div>
+
+      <div class="admin-box" id="adminBox">
+        <strong style="color:var(--azul);display:block;margin-bottom:4px;">⚙️ MODO ADMINISTRADOR ACTIVO</strong>
+        <span>Cambiar estatus del <b id="admLoteLbl">Lote</b>:</span>
+        <select id="admSelect" onchange="cambiarEstatusAdmin(this.value)">
+          <option value="Disponible">Disponible a la Venta</option>
+          <option value="Reservado S/P">Reservado S/P (Celeste)</option>
+          <option value="Vendido M.S.">Vendido M.S. (Dorado)</option>
+          <option value="Vendido">Vendido (Morado)</option>
+        </select>
+        <button class="btn" style="width:100%;background:var(--azul);color:#fff;" onclick="exportarHTMLActualizado()">
+          💾 Descargar HTML Actualizado
+        </button>
+      </div>
+    </div>
+
+    <div class="admin-footer">
+      <span>Mareas del Sur • Etapa 2A y 2B</span>
+      <button class="lock-btn" onclick="activarAdmin()" title="Acceso Administrador">🔒</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL GUÍA RÁPIDA -->
+<div class="modal-overlay" id="guideModal">
+  <div class="guide-card">
+    <h3>Lotes en Mareas del Sur 🌴</h3>
+    <p>Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:</p>
+    
+    <div class="guide-steps">
+      <div class="guide-step-row">
+        <span class="guide-icon">🗺️</span>
+        <div class="guide-text">
+          <b>1. Tocá tu lote en el mapa</b>
+          <span>Seleccioná cualquier lote disponible (color crema) para ver medidas oficiales.</span>
+        </div>
+      </div>
+      <div class="guide-step-row">
+        <span class="guide-icon">✍️</span>
+        <div class="guide-text">
+          <b>2. Ingresá tu Nombre y Ciudad</b>
+          <span>Desbloqueá el cotizador de cuotas mensuales a 12, 24 y 36 meses.</span>
+        </div>
+      </div>
+      <div class="guide-step-row">
+        <span class="guide-icon">📲</span>
+        <div class="guide-text">
+          <b>3. Cotizá y apartá tu lote</b>
+          <span>Conocé tu cuota mensual y apartá tu ubicación con solo $250 USD vía WhatsApp.</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" style="width:100%; padding:11px; font-size:13px; background:var(--azul); color:#fff;" onclick="cerrarGuia()">
+      ¡Ver Lotes Disponibles! 🚀
+    </button>
+  </div>
+</div>
+
+<script>
+// ==================== BASE DE DATOS Y ESTADO GLOBAL ====================
+let vendMS = [1,2,3,10,11,12,13,14,15,17,25,26,27,28,29,30,42,45,46,49,59,60,70,71,83,84,94,95,96,105,106,113,116,125,123];
+let resSP = [23,115,18,41,38,72];
+let vendidosCerrados = [24,73,93,92,74,75,22,124,21,39];
+
+let nombreClientePersistente = "";
+let ciudadClientePersistente = "";
+
+const tablaPrecios = {
+  1: { contado: 17987, m12: 19380, m24: 20727, m36: 22131 },
+  2: { contado: 17987, m12: 19380, m24: 20727, m36: 22131 },
+  3: { contado: 18619, m12: 20061, m24: 21455, m36: 22909 },
+  4: { contado: 18619, m12: 20061, m24: 21455, m36: 22909 },
+  5: { contado: 19366, m12: 20865, m24: 22315, m36: 23827 },
+  6: { contado: 19940, m12: 21484, m24: 22977, m36: 24534 },
+  7: { contado: 19193, m12: 20680, m24: 22117, m36: 23615 },
+  8: { contado: 19768, m12: 21299, m24: 22779, m36: 24322 },
+  9: { contado: 20744, m12: 22351, m24: 23904, m36: 25524 },
+  10: { contado: 21549, m12: 23217, m24: 24831, m36: 26513 },
+  11: { contado: 21721, m12: 23403, m24: 25029, m36: 26725 },
+  12: { contado: 22968, m12: 24746, m24: 26466, m36: 28259 },
+  13: { contado: 21577, m12: 23248, m24: 24864, m36: 26549 },
+  14: { contado: 23094, m12: 24882, m24: 26611, m36: 28415 },
+  15: { contado: 18102, m12: 19504, m24: 20859, m36: 22272 },
+  16: { contado: 16896, m12: 18204, m24: 19469, m36: 20788 },
+  17: { contado: 18102, m12: 19504, m24: 20859, m36: 22272 },
+  18: { contado: 18217, m12: 19628, m24: 20991, m36: 22414 },
+  19: { contado: 19078, m12: 20556, m24: 21984, m36: 23474 },
+  20: { contado: 19940, m12: 21484, m24: 22977, m36: 24534 },
+  21: { contado: 18274, m12: 19689, m24: 21058, m36: 22485 },
+  22: { contado: 19136, m12: 20618, m24: 22050, m36: 23545 },
+  23: { contado: 19998, m12: 21546, m24: 23043, m36: 24605 },
+  24: { contado: 20859, m12: 22475, m24: 24036, m36: 25665 },
+  25: { contado: 19366, m12: 20865, m24: 22315, m36: 23827 },
+  26: { contado: 19653, m12: 21175, m24: 22646, m36: 24181 },
+  27: { contado: 20515, m12: 22103, m24: 23639, m36: 25241 },
+  28: { contado: 21376, m12: 23032, m24: 24632, m36: 26301 },
+  29: { contado: 22238, m12: 23960, m24: 25625, m36: 27361 },
+  30: { contado: 18353, m12: 19774, m24: 21148, m36: 22581 },
+  31: { contado: 18353, m12: 19774, m24: 21148, m36: 22581 },
+  32: { contado: 18353, m12: 19774, m24: 21148, m36: 22581 },
+  33: { contado: 18353, m12: 19774, m24: 21148, m36: 22581 },
+  34: { contado: 18353, m12: 19774, m24: 21148, m36: 22581 },
+  35: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 },
+  36: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 },
+  37: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 },
+  38: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 },
+  39: { contado: 12838, m12: 13832, m24: 14793, m36: 15796 },
+  40: { contado: 12838, m12: 13832, m24: 14793, m36: 15796 },
+  41: { contado: 12838, m12: 13832, m24: 14793, m36: 15796 },
+  42: { contado: 18291, m12: 19708, m24: 21077, m36: 22506 },
+  43: { contado: 17413, m12: 18761, m24: 20065, m36: 21424 },
+  44: { contado: 17413, m12: 18761, m24: 20065, m36: 21424 },
+  45: { contado: 18418, m12: 19844, m24: 21223, m36: 22661 },
+  46: { contado: 18102, m12: 19504, m24: 20859, m36: 22272 },
+  47: { contado: 16896, m12: 18204, m24: 19469, m36: 20788 },
+  48: { contado: 16608, m12: 17895, m24: 19138, m36: 20435 },
+  49: { contado: 17217, m12: 18551, m24: 19840, m36: 21184 },
+  50: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  51: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  52: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  53: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  54: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  55: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  56: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  57: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  58: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  59: { contado: 14987, m12: 16147, m24: 17269, m36: 18439 },
+  60: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 },
+  61: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  62: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  63: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  64: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  65: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  66: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  67: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  68: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  69: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  70: { contado: 21388, m12: 23044, m24: 24645, m36: 26315 },
+  71: { contado: 22020, m12: 23725, m24: 25373, m36: 27093 },
+  72: { contado: 21778, m12: 23465, m24: 25095, m36: 26796 },
+  73: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  74: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  75: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  76: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  77: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  78: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  79: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  80: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  81: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  82: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  83: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 },
+  84: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 },
+  85: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  86: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  87: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  88: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  89: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  90: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  91: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  92: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  93: { contado: 23617, m12: 25446, m24: 27214, m36: 29058 },
+  94: { contado: 22588, m12: 24338, m24: 26029, m36: 27793 },
+  95: { contado: 18291, m12: 19708, m24: 21077, m36: 22506 },
+  96: { contado: 15069, m12: 16236, m24: 17364, m36: 18541 },
+  97: { contado: 16034, m12: 17276, m24: 18476, m36: 19728 },
+  98: { contado: 20400, m12: 21980, m24: 23507, m36: 25100 },
+  99: { contado: 11689, m12: 12594, m24: 13470, m36: 14382 },
+  100: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  101: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  102: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  103: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  104: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  105: { contado: 15050, m12: 16215, m24: 17342, m36: 18517 },
+  106: { contado: 14987, m12: 16147, m24: 17269, m36: 18439 },
+  107: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  108: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  109: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  110: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  111: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  112: { contado: 11689, m12: 12594, m24: 13470, m36: 14382 },
+  113: { contado: 17533, m12: 18891, m24: 20204, m36: 21573 },
+  114: { contado: 16436, m12: 17709, m24: 18939, m36: 20223 },
+  115: { contado: 15115, m12: 16285, m24: 17417, m36: 18597 },
+  116: { contado: 17786, m12: 19163, m24: 20495, m36: 21884 },
+  117: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  118: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  119: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  120: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  121: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  122: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  123: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  124: { contado: 13987, m12: 15070, m24: 16117, m36: 17210 },
+  125: { contado: 15366, m12: 16556, m24: 17706, m36: 18906 }
+};
+
+const areas = {
+  1:240,2:240,3:251,4:251,5:264,6:274,7:261,8:271,9:288,10:302,11:305,12:297,
+  13:275,14:299,15:220,16:221,17:229,18:244,19:259,20:274,21:245,22:260,23:275,24:290,25:254,26:269,27:284,28:299,29:314,
+  30:316,31:316,32:316,33:316,34:316,35:264,36:264,37:264,38:264,39:220,40:220,41:220,
+  42:223,43:230,44:230,45:225,46:220,47:221,48:216,49:206,59:234,60:235,70:272,71:282,72:306,93:338,
+  94:291,95:223,96:172,97:206,98:282,99:200,105:235,106:235,112:200,113:211,114:213,115:190,116:215,125:246
+};
+
+const dims = {
+  1:"13.2x19.0",2:"12.1x19.9",3:"12.0x20.9",4:"11.5x21.8",5:"11.5x23.0",6:"11.4x24.1",
+  7:"10.2x25.2",8:"10.2x26.1",9:"10.2x28.1",10:"10.2x29.2",11:"10.2x29.9",12:"10.2x29.1",
+  13:"23.0x12.0",14:"23.0x13.0",15:"18.8x11.7",16:"18.4x12.0",17:"18.4x12.4",
+  18:"11.1x22.0",19:"11.0x23.5",20:"11.2x24.3",21:"11.2x21.8",22:"11.2x23.0",23:"11.2x24.5",
+  24:"11.2x25.8",25:"11.0x23.1",26:"11.0x24.5",27:"11.0x25.8",28:"11.0x27.2",29:"11.2x28.5",
+  30:"11.0x28.7",31:"11.0x28.7",32:"11.0x28.7",33:"11.0x28.7",34:"11.0x28.7",
+  35:"11.0x24.1",36:"11.0x24.1",37:"11.0x24.1",38:"11.0x24.1",39:"11.0x20.0",40:"11.0x20.0",41:"11.0x20.0",
+  42:"23.0x9.7",43:"23.0x10.0",44:"23.0x10.0",45:"23.0x9.8",46:"22.0x10.1",47:"21.9x10.1",48:"21.5x10.1",49:"20.4x10.1",
+  59:"12.1x19.3",60:"12.1x19.2",70:"22.3x12.2",71:"22.7x12.4",72:"14.8x20.1",93:"16.8x20.1",
+  94:"21.4x14.2",95:"21.4x10.4",96:"19.3x9.0",97:"20.6x10.1",98:"14.0x20.1",99:"10.1x19.8",
+  105:"12.1x19.7",106:"12.1x19.9",112:"10.1x19.8",113:"21.1x10.0",114:"21.4x10.0",115:"20.9x10.0",116:"20.9x10.1",
+  125:"12.9x20.1"
+};
+
+const adoq = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,42,43,44,45,46,47,48,49,70,71,72,93,94,95,96,97,98,113,114,115,116];
+const lotes = [];
+let loteActualId = 20;
+
+function xWestRoad(y) {
+  if (y <= 155) return 772 + (y - 20) * 0.40;
+  if (y <= 395) {
+    const t = (y - 155) / (395 - 155);
+    return 826 + t * (872 - 826) - 54 * Math.sin(t * Math.PI);
+  }
+  return 872 - (y - 395) * 0.095;
+}
+function xEastRoad(y) { return xWestRoad(y) + 34; }
+function xOuterEast(y) {
+  if (y <= 395) return 892 + (y - 20) * 0.35;
+  return 1023 - (y - 395) * 0.115;
+}
+function yNorthSouthRoad(x) { return 946 - (x - 280) * 0.165; }
+function ySouthSouthRoad(x) { return yNorthSouthRoad(x) + 35; }
+
+function sampleCurve(fnX, y1, y2, steps=10) {
+  const pts = [];
+  for(let i=0; i<=steps; i++) pts.push([Number(fnX(y1 + (y2 - y1) * (i / steps)).toFixed(1)), Number((y1 + (y2 - y1) * (i / steps)).toFixed(1))]);
+  return pts;
+}
+
+function obtenerEstatus(id) {
+  if(vendidosCerrados.includes(id)) return "Vendido";
+  if(resSP.includes(id)) return "Reservado S/P";
+  if(vendMS.includes(id)) return "Vendido M.S.";
+  return "Disponible";
+}
+
+function registrarLote(id, pts, cTop, cBot, cLeft, cRight, customPath="") {
+  const m2 = areas[id] || 240;
+  const vrs2 = (m2 * 1.4184).toFixed(2);
+  const est = obtenerEstatus(id);
+  const rawDim = dims[id] || "12.1x20.1";
+  const [d1, d2] = rawDim.split('x');
+  const via = adoq.includes(id) ? "Calle Principal Adoquinada" : "Calle Interna Compactada (10m)";
+  const pData = tablaPrecios[id] || { contado: 13987, m12: 15070, m24: 16117, m36: 17210 };
+  
+  let sx = 0, sy = 0;
+  pts.forEach(p => { sx += p[0]; sy += p[1]; });
+  const esHorizontal = [13,14,15,16,17,42,43,44,45,46,47,48,49,70,71,94,95,96,97,113,114,115,116].includes(id);
+
+  lotes.push({
+    id, pts, customPath, cx: sx / pts.length, cy: sy / pts.length,
+    m2, vrs2, est, rawDim,
+    frente: (esHorizontal ? d2 : d1) + " m", fondo: (esHorizontal ? d1 : d2) + " m",
+    via, cTop, cBot, cLeft, cRight, precios: pData
+  });
+}
+
+function construirGeometriaBase() {
+  document.getElementById('capaCallesCompactadas').innerHTML = `
+    <path d="M 275,85 L 930,85 L 942,120 L 426,120 L 426,268 L 398,268 L 398,142 Q 398,120 370,120 L 275,120 Z" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
+    <polygon points="305,268 785,268 795,302 305,302" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
+    <polygon points="292,468 1014,468 1010,502 320,502 320,662 292,662" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
+    <polygon points="280,662 992,662 988,696 280,696" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
+    <polygon points="845,852 985,852 982,888 845,888" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
+  `;
+
+  const ptsParqueCentral = [...sampleCurve(xEastRoad, 222, 392, 16), [xOuterEast(392), 392], [xOuterEast(222), 222]].map(p => p.join(",")).join(" ");
+
+  document.getElementById('capaAreasVerdes').innerHTML = `
+    <polygon points="175,20 275,20 275,85 245,85" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
+    <circle cx="240" cy="44" r="14" fill="#fff" stroke="#1B4332" stroke-width="1"/>
+    <text x="240" y="44" font-size="4.5" font-weight="900" text-anchor="middle" fill="#1B4332">ÁREA VERDE 788 m²</text>
+
+    <path d="M 398,142 L 398,252 Q 338,197 398,142 Z" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
+    <circle cx="366" cy="138" r="12" fill="#fff" stroke="#1B4332" stroke-width="0.9"/>
+    <text x="366" y="140" font-size="4.1" font-weight="900" text-anchor="middle" fill="#1B4332">ÁREA 311 m²</text>
+
+    <polygon points="305,302 284,335 278,445 242,492 278,565 232,638 256,696 254,820 252,946 280,946 280,696 292,662 292,468 305,468 305,302" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
+    <circle cx="266" cy="462" r="14" fill="#fff" stroke="#1B4332" stroke-width="1"/>
+    <text x="266" y="464" font-size="4.5" font-weight="900" text-anchor="middle" fill="#1B4332">ÁREA 1309 m²</text>
+
+    <polygon points="${ptsParqueCentral}" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
+    <circle cx="898" cy="255" r="15" fill="#fff" stroke="#1B4332" stroke-width="1"/>
+    <text x="898" y="257" font-size="4.8" font-weight="900" text-anchor="middle" fill="#1B4332">ÁREA 594 m²</text>
+    <circle cx="918" cy="340" r="16" fill="#fff" stroke="#1B4332" stroke-width="1"/>
+    <text x="918" y="342" font-size="4.8" font-weight="900" text-anchor="middle" fill="#1B4332">ÁREA 1135 m²</text>
+
+    <polygon points="${sampleCurve(xEastRoad, 802, 852, 4).map(p=>p.join(',')).join(' ')} ${xOuterEast(852)},852 ${xOuterEast(802)},802" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.2"/>
+    <polygon points="856,888 ${xOuterEast(888)},888 ${xOuterEast(985)},985 856,992" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.2"/>
+  `;
+
+  const ptsCalleAdoq = [...sampleCurve(xWestRoad, 20, 855, 45), [280,946], [182,954], [182,980], [280,981], [856,888], ...sampleCurve(xEastRoad, 888, 20, 45)].map(p=>p.join(",")).join(" ");
+
+  document.getElementById('capaCalleAdoquinada').innerHTML = `
+    <polygon points="${ptsCalleAdoq}" fill="url(#adoquinGris)" stroke="#1E293B" stroke-width="1.5"/>
+    <text x="870" y="585" fill="#ffffff" font-size="7.2" font-weight="900" transform="rotate(-84.5 870,585)" text-anchor="middle">CALLE PRINCIPAL ADOQUINADA (10.0m)</text>
+    <text x="550" y="915" fill="#ffffff" font-size="7.2" font-weight="900" transform="rotate(-9.5 550,915)" text-anchor="middle">CALLE PRINCIPAL ADOQUINADA (11.0m)</text>
+  `;
+
+  document.getElementById('capaExterior').innerHTML = `
+    <g stroke="#64748B" stroke-width="0.85" fill="none" opacity="0.8">
+      <path d="M 110,15 L 222,98 L 328,144 Q 302,197 328,252 L 262,298 L 245,335 L 242,435 L 218,482 L 248,548 L 204,622 L 226,696 L 222,950"/>
+      <path d="M 126,15 L 236,94 L 342,142 Q 316,197 342,254 L 274,300 L 256,336 L 253,435 L 229,482 L 259,548 L 215,622 L 237,696 L 233,950" stroke-dasharray="6,4"/>
+    </g>
+    <path d="M 10,85 L 42,102 L 182,954 L 235,1042 L 960,1035 L 960,1055 L 212,1062 L 152,962 L 18,125 L 10,120 Z" stroke="#1E293B" stroke-width="1.3" fill="#F8FAFC"/>
+    <text x="15" y="72" font-size="7.5" font-weight="900" fill="#0F3D53">⬅ HACIA SAN JUAN DEL SUR</text>
+  `;
+
+  document.getElementById('capaRotulosViales').innerHTML = `
+    <g fill="#0F3D53" font-size="7.2" font-weight="900">
+      <text x="485" y="105" text-anchor="middle">CALLE COMPACTADA (10.0m)</text>
+      <text x="640" y="112" class="fase-watermark" text-anchor="middle">FASE 2B</text>
+      <text x="535" y="288" text-anchor="middle">CALLE COMPACTADA (10.0m)</text>
+      <text x="455" y="488" text-anchor="middle">CALLE COMPACTADA (10.0m)</text>
+      <text x="625" y="495" class="fase-watermark" text-anchor="middle">FASE 2A</text>
+      <text x="495" y="682" text-anchor="middle">CALLE COMPACTADA (10.1m)</text>
+    </g>
+  `;
+}
+
+function construirLotesUniformes() {
+  lotes.length = 0;
+  const wTop = (689 - 275) / 9;
+  for(let i=0; i<9; i++) {
+    const id = 125 - i, x1 = 275 + i*wTop, x2 = x1 + wTop;
+    registrarLote(id, [[x1,20],[x2,20],[x2,85],[x1,85]], "", id===125?"12.9":"12.0", i===0?"20.1":"", "20.1");
+  }
+  registrarLote(115, [[689,20], ...sampleCurve(xWestRoad, 20, 52, 4), [689,52]], "", "20.9", "10.0", "");
+  registrarLote(116, [[689,52], ...sampleCurve(xWestRoad, 52, 85, 4), [689,85]], "", "17.4", "10.1", "");
+  registrarLote(114, [...sampleCurve(xEastRoad, 20, 52, 4), [xOuterEast(52),52], [xOuterEast(20),20]], "", "21.4", "", "10.0");
+  registrarLote(113, [...sampleCurve(xEastRoad, 52, 85, 4), [xOuterEast(85),85], [xOuterEast(52),52]], "", "17.9", "", "10.0");
+  registrarLote(95,  [...sampleCurve(xEastRoad, 120, 170, 5), [xOuterEast(170),170], [xOuterEast(120),120]], "14.2", "21.4", "", "10.4");
+  registrarLote(94,  [...sampleCurve(xEastRoad, 170, 222, 6), [xOuterEast(222),222], [xOuterEast(170),170]], "", "24.2", "", "14.2");
+
+  const w2B = (734 - 426) / 7;
+  for(let i=0; i<7; i++) {
+    const id = 106 + i, x1 = 426 + i*w2B, x2 = x1 + w2B;
+    const path = id===106 ? `M ${x1+10},120 L ${x2},120 L ${x2},194 L ${x1},194 L ${x1},130 Q ${x1},120 ${x1+10},120 Z` : "";
+    registrarLote(id, [[x1,120],[x2,120],[x2,194],[x1,194]], id===106?"7.1":"12.1", "12.1", i===0?"19.9":"", "20.0", path);
+  }
+  registrarLote(96, [[734,120], ...sampleCurve(xWestRoad, 120, 157, 4), [734,157]], "12.1", "19.3", "", "9.0");
+  registrarLote(97, [[734,157], ...sampleCurve(xWestRoad, 157, 194, 4), [734,194]], "", "20.3", "10.1", "");
+
+  for(let i=0; i<7; i++) {
+    const id = 105 - i, x1 = 426 + i*w2B, x2 = x1 + w2B;
+    const path = id===105 ? `M ${x1},194 L ${x2},194 L ${x2},268 L ${x1+10},268 Q ${x1},268 ${x1},258 Z` : "";
+    registrarLote(id, [[x1,194],[x2,194],[x2,268],[x1,268]], "", id===105?"7.0":"12.1", i===0?"19.7":"", "20.1", path);
+  }
+  registrarLote(98, [[734,194], ...sampleCurve(xWestRoad, 194, 268, 8), [734,268]], "", "14.0", "20.1", "");
+
+  const w84 = (728 - 305) / 9;
+  for(let i=0; i<9; i++) {
+    const id = 84 + i, x1 = 305 + i*w84, x2 = x1 + w84;
+    registrarLote(id, [[x1,302],[x2,302],[x2,385],[x1,385]], "12.1", "12.1", i===0?"20.1":"", "20.1");
+  }
+  registrarLote(93, [[728,302], ...sampleCurve(xWestRoad, 302, 385, 8), [728,385]], "5.9", "12.1", "20.1", "");
+
+  const w83 = (809 - 292) / 11;
+  for(let i=0; i<11; i++) {
+    const id = 83 - i, x1 = 292 + i*w83, x2 = x1 + w83;
+    registrarLote(id, [[x1,385],[x2,385],[x2,468],[x1,468]], "", "12.1", i===0?"20.1":"", "20.1");
+  }
+  registrarLote(72, [[809,385], ...sampleCurve(xWestRoad, 385, 468, 8), [809,468]], "", "14.8", "20.1", "");
+  registrarLote(71, [...sampleCurve(xEastRoad, 392, 430, 4), [xOuterEast(430),430], [xOuterEast(392),392]], "", "22.7", "", "12.4");
+  registrarLote(70, [...sampleCurve(xEastRoad, 430, 468, 4), [xOuterEast(468),468], [xOuterEast(430),430]], "", "22.3", "", "12.2");
+
+  const w60 = (780 - 320) / 10;
+  for(let i=0; i<10; i++) {
+    const id = 60 + i, x1 = 320 + i*w60, x2 = x1 + w60;
+    const path = id===60 ? `M ${x1+10},502 L ${x2},502 L ${x2},582 L ${x1},582 L ${x1},512 Q ${x1},502 ${x1+10},502 Z` : "";
+    registrarLote(id, [[x1,502],[x2,502],[x2,582],[x1,582]], id===60?"7.2":"12.1", "12.1", i===0?"19.2":"", "20.1", path);
+  }
+  for(let i=0; i<10; i++) {
+    const id = 59 - i, x1 = 320 + i*w60, x2 = x1 + w60;
+    const path = id===59 ? `M ${x1},582 L ${x2},582 L ${x2},662 L ${x1+10},662 Q ${x1},662 ${x1},652 Z` : "";
+    registrarLote(id, [[x1,582],[x2,582],[x2,662],[x1,662]], "", id===59?"6.9":"12.1", i===0?"19.3":"", "20.1", path);
+  }
+
+  [46,47,48,49].forEach((id, idx) => {
+    const y1 = 502 + idx*40, y2 = y1 + 40;
+    registrarLote(id, [[780,y1], [xWestRoad(y1),y1], [xWestRoad(y2),y2], [780,y2]], idx===0?"17.2":"", ["22.0","21.9","21.5","20.4"][idx], "10.1", "");
+  });
+
+  [45,44,43,42].forEach((id, idx) => {
+    const y1 = 502 + idx*40, y2 = y1 + 40;
+    registrarLote(id, [[xEastRoad(y1),y1], [xOuterEast(y1),y1], [xOuterEast(y2),y2], [xEastRoad(y2),y2]], "", "23.0", "", id===45?"9.8":(id===42?"9.7":"10.0"));
+  });
+
+  const w30 = (772 - 280) / 12;
+  for(let i=0; i<12; i++) {
+    const idSup = 30 + i, idInf = 29 - i, x1 = 280 + i*w30, x2 = x1 + w30;
+    const ym1 = 818 - (x1 - 280) * 0.085, ym2 = 818 - (x2 - 280) * 0.085;
+    registrarLote(idSup, [[x1,696],[x2,696],[x2,ym2],[x1,ym1]], "11.0", "11.0", i===0?"28.7":"", "28.7");
+    registrarLote(idInf, [[x1,ym1],[x2,ym2],[x2,yNorthSouthRoad(x2)],[x1,yNorthSouthRoad(x1)]], "", "11.2", "", "24.5");
+  }
+
+  registrarLote(15, [[772,696], [xWestRoad(696),696], [xWestRoad(750),750], [772,750]], "12.9", "18.8", "11.7", "");
+  registrarLote(16, [[772,750], [xWestRoad(750),750], [xWestRoad(804),804], [772,804]], "", "18.4", "12.0", "");
+  registrarLote(17, [[772,804], [xWestRoad(804),804], [xWestRoad(850),850], [772,864]], "", "18.4", "12.4", "");
+  registrarLote(14, [[xEastRoad(696),696], [xOuterEast(696),696], [xOuterEast(750),750], [xEastRoad(750),750]], "18.3", "23.0", "", "13.0");
+  registrarLote(13, [[xEastRoad(750),750], [xOuterEast(750),750], [xOuterEast(802),802], [xEastRoad(802),802]], "", "23.0", "", "12.0");
+
+  const wSur = (856 - 304) / 12;
+  for(let i=0; i<12; i++) {
+    const id = i + 1, x1 = 304 + i*wSur, x2 = x1 + wSur;
+    registrarLote(id, [[x1,ySouthSouthRoad(x1)],[x2,ySouthSouthRoad(x2)],[x2,1036-(i+1)*3.5],[id===1?326:x1,1036-i*3.5]], id<=3?"12.1":"10.2", "", "", "24.0");
+  }
+}
+
+function renderizarMapa() {
+  const contenedor = document.getElementById('capaLotes');
+  contenedor.innerHTML = "";
+
+  lotes.forEach(l => {
+    l.est = obtenerEstatus(l.id);
+    const c = l.est === "Reservado S/P" ? "c-res" : (l.est === "Vendido M.S." ? "c-vend" : (l.est === "Vendido" ? "c-cerrado" : "c-disp"));
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.setAttribute("class", "lote" + (l.id == loteActualId ? " selected" : ""));
+    g.setAttribute("id", "lot-" + l.id);
+    g.setAttribute("data-est", l.est);
+    g.onclick = () => seleccionar(l.id);
+
+    const ptsStr = l.pts.map(p => p.join(",")).join(" ");
+    const shapeHTML = l.customPath ? `<path class="shape ${c}" d="${l.customPath}"/>` : `<polygon class="shape ${c}" points="${ptsStr}"/>`;
+
+    g.innerHTML = `
+      ${shapeHTML}
+      <text class="t-num" x="${l.cx}" y="${l.cy - 4.2}">LOT ${l.id}</text>
+      <text class="t-area" x="${l.cx}" y="${l.cy + 2.8}">${l.m2} m²</text>
+      <text class="t-dim" x="${l.cx}" y="${l.cy + 9.2}">(${l.rawDim}m)</text>
+    `;
+    contenedor.appendChild(g);
+  });
+}
+
+function estaDesbloqueado() {
+  return nombreClientePersistente.trim().length >= 3 && ciudadClientePersistente.trim().length >= 2;
+}
+
+function actualizarStepper() {
+  const node1 = document.getElementById('stepNode1');
+  const label1 = document.getElementById('stepLabel1');
+  const circ1 = document.getElementById('stepCircle1');
+  const node2 = document.getElementById('stepNode2');
+  const circ2 = document.getElementById('stepCircle2');
+  const node3 = document.getElementById('stepNode3');
+  const circ3 = document.getElementById('stepCircle3');
+
+  if(loteActualId) {
+    node1.className = "step-node completed";
+    label1.innerText = `Lote ${loteActualId} ✓`;
+    circ1.innerText = "✓";
+  }
+
+  if(estaDesbloqueado()) {
+    node2.className = "step-node completed";
+    circ2.innerText = "✓";
+    node3.className = "step-node active";
+    circ3.innerText = "3";
+  } else {
+    node2.className = "step-node active";
+    circ2.innerText = "2";
+    node3.className = "step-node";
+    circ3.innerText = "3";
+  }
+}
+
+function seleccionar(id) {
+  const l = lotes.find(x => x.id == id);
+  if(!l) return;
+  loteActualId = l.id;
+  document.querySelectorAll('.lote').forEach(e => e.classList.remove('selected'));
+  const el = document.getElementById('lot-' + id);
+  if(el) el.classList.add('selected');
+
+  const colorPill = l.est === "Disponible" ? "#2E7D32" : (l.est === "Reservado S/P" ? "#0288D1" : (l.est === "Vendido" ? "#8E24AA" : "#B8962E"));
+  const abierto = estaDesbloqueado();
+
+  let seccionCotizador = "";
+  if (l.est === "Disponible") {
+    seccionCotizador = `
+      <div class="calc-box">
+        <h4>🧮 Cotizador de tu Lote</h4>
+        <div class="calc-field">
+          <label for="clientName"><b>1. Nombre y Apellido:</b> <span style="color:#dc2626;">* (Requerido)</span></label>
+          <input type="text" id="clientName" value="${nombreClientePersistente}" placeholder="Ej. Carlos Mendoza..." oninput="manejarDesbloqueo(${l.id})">
+        </div>
+        <div class="calc-field">
+          <label for="clientCity"><b>2. Ciudad de Residencia:</b> <span style="color:#dc2626;">* (Requerido)</span></label>
+          <input type="text" id="clientCity" value="${ciudadClientePersistente}" placeholder="Ej. Managua, Rivas, Miami..." oninput="manejarDesbloqueo(${l.id})">
+          <div class="error-text" id="datosError">⚠️ Ingresa tu nombre, apellido y ciudad para ver las cuotas disponibles.</div>
+        </div>
+
+        <div id="avisoDesbloqueo" class="bloque-bloqueado" style="display:${abierto ? 'none' : 'block'};">
+          <b>🔒 Cotizador bloqueado</b>
+          Ingresa tus datos arriba para desplegar las opciones de pago de contado y cuotas mensuales a 12, 24 y 36 meses.
+        </div>
+
+        <div id="bloqueFinanciamiento" style="display:${abierto ? 'block' : 'none'};">
+          <div class="calc-field" style="margin-top:10px;">
+            <label><b>3. Modalidad de Pago para este Lote:</b></label>
+            <select id="planPago" onchange="calcularCuota(${l.id})">
+              <option value="contado">Pago de Contado: $${l.precios.contado.toLocaleString()} USD</option>
+              <option value="m12">Financiamiento a 12 Meses (1 Año)</option>
+              <option value="m24">Financiamiento a 24 Meses (2 Años)</option>
+              <option value="m36">Financiamiento a 36 Meses (3 Años)</option>
+            </select>
+          </div>
+          <div class="calc-results" id="calcResults"></div>
+          <div class="calc-note">
+            * Primas desde $2,000 USD. Aparta hoy tu lote con solo $250 USD (100% abonables a tu prima). La prima se puede ajustar con tu asesor.
+          </div>
+          <button class="btn" style="display:block;text-align:center;width:100%;padding:10px;font-size:12.5px;background:#00695c;color:#fff;" onclick="enviarCotizacionWhatsApp(${l.id})">
+            📲 Cotizar y Apartar Lote por WhatsApp
+          </button>
+        </div>
+      </div>
+    `;
+  } else {
+    seccionCotizador = `
+      <div style="background:#ffebee; border:1px solid #ffcdd2; color:#c62828; padding:10px; border-radius:6px; font-size:11.5px; margin-top:10px; text-align:center;">
+        <b>Lote no disponible para cotizar</b><br>Este lote se encuentra ${l.est}. Consulta con un asesor por lotes similares disponibles.
+      </div>
+    `;
+  }
+
+  document.getElementById('detalleLote').innerHTML = `
+    <div class="card-lote">
+      <div class="card-head">
+        <h2>LOTE ${l.id}</h2>
+        <span class="status-pill" style="background:${colorPill}">${l.est.toUpperCase()}</span>
+      </div>
+      <div class="card-body">
+        <div class="stats-grid">
+          <div class="stat"><small>Área de tu Lote (m²)</small><b>${l.m2}.00 m²</b></div>
+          <div class="stat"><small>Área de tu Lote (vrs²)</small><b>${l.vrs2} vrs²</b></div>
+          <div class="stat"><small>Ancho (Frente)</small><b>${l.frente}</b></div>
+          <div class="stat"><small>Largo (Fondo)</small><b>${l.fondo}</b></div>
+        </div>
+
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:9px;">
+          <span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🛣️ 700m Costanera</span>
+          <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 3 min Playa Remanso</span>
+          <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 7 min Centro SJDS</span>
+        </div>
+
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-left:3.5px solid #16a34a; padding:6px 9px; border-radius:6px; font-size:11px; color:#14532d; margin-bottom:8px; line-height:1.35;">
+          <b>✓ Certeza Jurídica:</b> Documentación y permisos al día. Traspaso formal mediante Escritura Pública debidamente inscrita en Registro.
+        </div>
+
+        <p style="font-size:11.8px;margin-bottom:3px;"><b>• Acceso Vial:</b> ${l.via}</p>
+        <p style="font-size:11.8px;margin-bottom:6px;"><b>• Entrega de Servicios:</b> Proyectada a 32 meses (Agua y Luz)</p>
+
+        ${seccionCotizador}
+      </div>
+    </div>
+  `;
+
+  actualizarStepper();
+
+  if (l.est === "Disponible" && abierto) {
+    calcularCuota(l.id);
+  }
+
+  document.getElementById('admLoteLbl').innerText = "Lote " + l.id;
+  document.getElementById('admSelect').value = l.est;
+}
+
+function manejarDesbloqueo(id) {
+  const inputNom = document.getElementById('clientName');
+  const inputCiu = document.getElementById('clientCity');
+  const errorText = document.getElementById('datosError');
+  const bloque = document.getElementById('bloqueFinanciamiento');
+  const aviso = document.getElementById('avisoDesbloqueo');
+  
+  nombreClientePersistente = inputNom ? inputNom.value : "";
+  ciudadClientePersistente = inputCiu ? inputCiu.value : "";
+
+  if (estaDesbloqueado()) {
+    if (inputNom) inputNom.classList.remove('input-error');
+    if (inputCiu) inputCiu.classList.remove('input-error');
+    if (errorText) errorText.style.display = 'none';
+    if (bloque) bloque.style.display = 'block';
+    if (aviso) aviso.style.display = 'none';
+    calcularCuota(id);
+  } else {
+    if (bloque) bloque.style.display = 'none';
+    if (aviso) aviso.style.display = 'block';
+  }
+  actualizarStepper();
+}
+
+function calcularCuota(id) {
+  const l = lotes.find(x => x.id == id);
+  const planEl = document.getElementById('planPago');
+  if (!planEl) return;
+  const plan = planEl.value;
+  const resDiv = document.getElementById('calcResults');
+
+  if (plan === 'contado') {
+    resDiv.innerHTML = `
+      <div><span>Modalidad:</span> <b>Pago Directo de Contado</b></div>
+      <div><span>Precio de Contado:</span> <b style="color:var(--azul); font-size:13px;">$${l.precios.contado.toLocaleString()} USD</b></div>
+      <div><span>Apartado Promocional:</span> <b style="color:#b45309;">$250 USD (abona al precio)</b></div>
+    `;
+  } else {
+    let precioTotal = l.precios[plan];
+    let meses = parseInt(plan.replace('m',''));
+    const prima15 = precioTotal * 0.15;
+    const saldo = precioTotal - prima15;
+    const cuota = saldo / meses;
+
+    resDiv.innerHTML = `
+      <div><span>Plan para tu Lote:</span> <b>Financiamiento a ${meses} Meses</b></div>
+      <div><span>Requisito Inicial:</span> <b>15% de Prima</b></div>
+      <div><span>Reserva Inmediata:</span> <b style="color:#b45309;">$250 USD (abona a tu prima)</b></div>
+      <div style="border-top:1px dashed #cbd5e1; padding-top:6px; margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-weight:700;">Cuota Mensual Estimada:</span>
+        <b style="color:#00695c; font-size:14px; font-weight:800;">$${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} / mes</b>
+      </div>
+    `;
+  }
+}
+
+function enviarCotizacionWhatsApp(id) {
+  const l = lotes.find(x => x.id == id);
+  const inputNom = document.getElementById('clientName');
+  const inputCiu = document.getElementById('clientCity');
+  const errorText = document.getElementById('datosError');
+  
+  const nombre = inputNom ? inputNom.value.trim() : "";
+  const ciudad = inputCiu ? inputCiu.value.trim() : "";
+  const plan = document.getElementById('planPago') ? document.getElementById('planPago').value : "contado";
+
+  if (!nombre || nombre.length < 3 || !ciudad || ciudad.length < 2) {
+    if (inputNom && (!nombre || nombre.length < 3)) inputNom.classList.add('input-error');
+    if (inputCiu && (!ciudad || ciudad.length < 2)) inputCiu.classList.add('input-error');
+    if (errorText) errorText.style.display = 'block';
+    return;
+  }
+
+  let mensaje = `Hola, mi nombre es *${nombre}* de la ciudad de *${ciudad}*. Estuve revisando los lotes en Mareas del Sur:\n\n` +
+                `📍 *Lote Seleccionado:* LOTE ${l.id} (${l.m2} m² - Medidas: ${l.rawDim}m)\n` +
+                `🗺️ *Ubicación:* 700m Costanera • 3 min Playa Remanso • 7 min Centro SJDS\n` +
+                `🏡 *Proyecto:* Lotes en Preventa de Alta Plusvalía (Servicios a 32 meses)\n`;
+
+  if (plan === 'contado') {
+    mensaje += `📋 *Modalidad:* Pago de Contado\n` +
+               `💲 *Precio de Contado:* $${l.precios.contado.toLocaleString()} USD\n`;
+  } else {
+    let meses = parseInt(plan.replace('m', ''));
+    const cuota = (l.precios[plan] * 0.85) / meses;
+    mensaje += `📋 *Modalidad:* Financiamiento a ${meses} Meses (${meses/12} ${meses === 12 ? 'Año' : 'Años'})\n` +
+               `📅 *Cuota Estimada:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mes\n` +
+               `💵 *Prima Requerida:* 15%\n`;
+  }
+
+  mensaje += `\n🔥 *Deseo apartar este lote con la reserva especial de $250 USD* (100% abonable a la prima). Por favor confirmen disponibilidad.`;
+
+  window.open(`https://wa.me/50576940400?text=${encodeURIComponent(mensaje)}`, '_blank');
+}
+
+function abrirGuia() {
+  document.getElementById('guideModal').classList.add('open');
+}
+function cerrarGuia() {
+  document.getElementById('guideModal').classList.remove('open');
+  localStorage.setItem('guia_vista', 'true');
+}
+
+function activarAdmin() {
+  const pin = prompt("Ingresa el PIN de Administrador de Mareas del Sur:");
+  if(pin === "2026") document.getElementById('adminBox').style.display = "block";
+  else if(pin !== null) alert("PIN incorrecto.");
+}
+
+function cambiarEstatusAdmin(nuevoEst) {
+  const id = loteActualId;
+  vendMS = vendMS.filter(x => x !== id);
+  resSP = resSP.filter(x => x !== id);
+  vendidosCerrados = vendidosCerrados.filter(x => x !== id);
+
+  if(nuevoEst === "Vendido M.S.") vendMS.push(id);
+  if(nuevoEst === "Reservado S/P") resSP.push(id);
+  if(nuevoEst === "Vendido") vendidosCerrados.push(id);
+
+  renderizarMapa();
+  seleccionar(id);
+}
+
+function exportarHTMLActualizado() {
+  document.getElementById('adminBox').style.display = "none";
+  let html = document.documentElement.outerHTML;
+  html = html.replace(/let vendMS = \[.*?\];/, `let vendMS = ${JSON.stringify(vendMS)};`);
+  html = html.replace(/let resSP = \[.*?\];/, `let resSP = ${JSON.stringify(resSP)};`);
+  html = html.replace(/let vendidosCerrados = \[.*?\];/, `let vendidosCerrados = ${JSON.stringify(vendidosCerrados)};`);
+  
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob(["<!DOCTYPE html>\n" + html], { type: "text/html;charset=utf-8" }));
+  a.download = "index.html";
+  a.click();
+  document.getElementById('adminBox').style.display = "block";
+}
+
+function filtrar(tipo) {
+  document.querySelectorAll('.lote').forEach(el => {
+    el.style.opacity = (tipo === 'todos' || el.getAttribute('data-est') === tipo) ? '1' : '0.18';
+  });
+}
+
+let z = 1;
+function cambiarZoom(f) {
+  z = Math.min(Math.max(z * f, 0.7), 2.8);
+  document.getElementById('mapaSvg').style.transform = `scale(${z})`;
+}
+function resetZoom() {
+  z = 1;
+  document.getElementById('mapaSvg').style.transform = `scale(1)`;
+}
+
+// INICIALIZACIÓN
+construirGeometriaBase();
+construirLotesUniformes();
+renderizarMapa();
+seleccionar(20);
+
+if(!localStorage.getItem('guia_vista')) {
+  setTimeout(abrirGuia, 400);
+}
+</script>
+</body>
+</html>
