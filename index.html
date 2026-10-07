@@ -6,9 +6,9 @@
 <title>Mareas del Sur — Lotes en Preventa en San Juan del Sur</title>
 
     <meta property="og:title" content="Mareas del Sur — Lotes en Preventa en San Juan del Sur">
-    <meta property="og:description" content="Asegura tu lote en preventa con alta plusvalía a 700m de la Costanera. Primas desde $2,000 USD y aparta hoy con solo $250 USD.">
-    <meta property="og:image" content="https://lotificacionmareasdelsur-masterplan.netlify.app/preview.jpg">
-    <meta property="og:url" content="https://lotificacionmareasdelsur-masterplan.netlify.app">
+    <meta property="og:description" content="Asegura tu lote en preventa con alta plusvalía a 700m de la Costanera. Primas desde $2,000 USD y aparta hoy con solo $250 USD. Tel: +505 7694-0400.">
+    <meta property="og:image" content="https://www.mareasdelsur.com/preview.jpg">
+    <meta property="og:url" content="https://www.mareasdelsur.com">
     <meta property="og:type" content="website">
 
 <style>
@@ -24,7 +24,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
   body { background: #e8ece9; color: var(--azul); overflow-x: hidden; }
 
-  /* CINTILLO SUPERIOR: DESTACANDO LOTES EN PREVENTA */
+  /* CINTILLO SUPERIOR */
   .promo-top-bar {
     background: linear-gradient(90deg, #9a3412 0%, #c2410c 50%, #9a3412 100%);
     color: #fff; padding: 7px 16px; text-align: center; font-size: 12px; font-weight: 700;
@@ -35,6 +35,8 @@
     background: #fef08a; color: #7c2d12; font-size: 10.5px; font-weight: 900;
     padding: 3px 8px; border-radius: 10px; text-transform: uppercase; animation: pulse 1.8s infinite;
   }
+  .promo-top-bar a { color: #fef08a; text-decoration: none; font-weight: 800; }
+  .promo-top-bar a:hover { text-decoration: underline; }
 
   header {
     background: var(--azul); color: #fff; padding: 10px 22px;
@@ -44,12 +46,15 @@
   .brand h1 { font-size: 18px; letter-spacing: 0.5px; font-weight: 900; }
   .brand h1 span { color: var(--dorado); }
   .brand p { font-size: 11.5px; color: var(--dorado); font-weight: 600; }
+  .brand-contact { font-size: 11px; color: #cbd5e1; margin-top: 2px; }
+  .brand-contact a { color: #ffffff; text-decoration: none; font-weight: 700; }
+  .brand-contact a:hover { color: var(--dorado); }
   
   .toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .btn {
     background: var(--dorado); color: var(--azul); border: none; padding: 7px 14px;
     border-radius: 18px; font-weight: 700; font-size: 12px; cursor: pointer; text-decoration: none;
-    transition: all 0.15s ease;
+    transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 4px;
   }
   .btn-outline { background: transparent; color: #fff; border: 1.5px solid var(--dorado); }
   .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
@@ -226,8 +231,10 @@
   }
   .admin-footer {
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 11px; color: #6c7a80; padding-top: 8px; border-top: 1px solid #dcd6c8;
+    font-size: 11px; color: #6c7a80; padding-top: 8px; border-top: 1px solid #dcd6c8; line-height: 1.4;
   }
+  .admin-footer a { color: var(--azul); text-decoration: none; font-weight: 700; }
+  .admin-footer a:hover { text-decoration: underline; }
   .lock-btn { background: none; border: none; cursor: pointer; font-size: 14px; opacity: 0.5; }
   .lock-btn:hover { opacity: 1; }
 
@@ -246,19 +253,24 @@
 </head>
 <body>
 
-<!-- CINTILLO SUPERIOR: ENFOCADO EN LOTES EN PREVENTA -->
+<!-- CINTILLO SUPERIOR -->
 <div class="promo-top-bar">
   <span class="promo-tag">🏡 LOTES EN PREVENTA</span>
-  <span>Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>32 meses</b> • Apartá hoy con solo <b>$250 USD</b></span>
+  <span>Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>32 meses</b> • Apartá con <b>$250 USD</b>[cite: 2] • Tel: <a href="tel:+50576940400">+505 7694-0400</a></span>
 </div>
 
 <header>
   <div class="brand">
     <h1>MAREAS DEL SUR — <span>LOTES EN PREVENTA</span></h1>
     <p>Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro SJDS</p>
+    <div class="brand-contact">
+      🌐 <a href="https://www.mareasdelsur.com" target="_blank">www.mareasdelsur.com</a> &nbsp;|&nbsp; 
+      📞 <a href="https://wa.me/50576940400" target="_blank">+505 7694-0400</a>
+    </div>
   </div>
   <div class="toolbar">
     <button class="btn btn-outline" onclick="abrirGuia()">💡 ¿Cómo usar?</button>
+    <a class="btn btn-outline" href="https://www.mareasdelsur.com" target="_blank">🌐 Web Oficial</a>
     <button class="btn btn-outline" onclick="filtrar('todos')">Todos (125)</button>
     <button class="btn btn-outline" onclick="filtrar('Disponible')">Disponibles</button>
     <button class="btn" onclick="window.print()">📄 Descargar PDF</button>
@@ -335,8 +347,8 @@
       <div class="reserva-box">
         <b>🏡 LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>
         • <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>
-        • <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 32 meses.<br>
-        • <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br>
+        • <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 32 meses[cite: 2].<br>
+        • <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%)[cite: 2].<br>
         <span style="font-size:10px; color:#92400e; display:block; margin-top:3px;">
           *Aplican restricciones. Reserva no reembolsable en caso de desistimiento.
         </span>
@@ -360,7 +372,10 @@
     </div>
 
     <div class="admin-footer">
-      <span>Mareas del Sur • Etapa 2A y 2B</span>
+      <div>
+        <span><b>Mareas del Sur</b> • <a href="https://www.mareasdelsur.com" target="_blank">www.mareasdelsur.com</a></span><br>
+        <span>📞 WhatsApp: <a href="https://wa.me/50576940400" target="_blank">+505 7694-0400</a></span>
+      </div>
       <button class="lock-btn" onclick="activarAdmin()" title="Acceso Administrador">🔒</button>
     </div>
   </div>
@@ -391,7 +406,7 @@
         <span class="guide-icon">📲</span>
         <div class="guide-text">
           <b>3. Cotizá y apartá tu lote</b>
-          <span>Conocé tu cuota mensual y apartá tu ubicación con solo $250 USD vía WhatsApp.</span>
+          <span>Conocé tu cuota mensual y apartá tu ubicación con solo $250 USD vía WhatsApp (+505 7694-0400)[cite: 2].</span>
         </div>
       </div>
     </div>
@@ -800,294 +815,4 @@ function estaDesbloqueado() {
 
 function actualizarStepper() {
   const node1 = document.getElementById('stepNode1');
-  const label1 = document.getElementById('stepLabel1');
-  const circ1 = document.getElementById('stepCircle1');
-  const node2 = document.getElementById('stepNode2');
-  const circ2 = document.getElementById('stepCircle2');
-  const node3 = document.getElementById('stepNode3');
-  const circ3 = document.getElementById('stepCircle3');
-
-  if(loteActualId) {
-    node1.className = "step-node completed";
-    label1.innerText = `Lote ${loteActualId} ✓`;
-    circ1.innerText = "✓";
-  }
-
-  if(estaDesbloqueado()) {
-    node2.className = "step-node completed";
-    circ2.innerText = "✓";
-    node3.className = "step-node active";
-    circ3.innerText = "3";
-  } else {
-    node2.className = "step-node active";
-    circ2.innerText = "2";
-    node3.className = "step-node";
-    circ3.innerText = "3";
-  }
-}
-
-function seleccionar(id) {
-  const l = lotes.find(x => x.id == id);
-  if(!l) return;
-  loteActualId = l.id;
-  document.querySelectorAll('.lote').forEach(e => e.classList.remove('selected'));
-  const el = document.getElementById('lot-' + id);
-  if(el) el.classList.add('selected');
-
-  const colorPill = l.est === "Disponible" ? "#2E7D32" : (l.est === "Reservado S/P" ? "#0288D1" : (l.est === "Vendido" ? "#8E24AA" : "#B8962E"));
-  const abierto = estaDesbloqueado();
-
-  let seccionCotizador = "";
-  if (l.est === "Disponible") {
-    seccionCotizador = `
-      <div class="calc-box">
-        <h4>🧮 Cotizador de tu Lote</h4>
-        <div class="calc-field">
-          <label for="clientName"><b>1. Nombre y Apellido:</b> <span style="color:#dc2626;">* (Requerido)</span></label>
-          <input type="text" id="clientName" value="${nombreClientePersistente}" placeholder="Ej. Carlos Mendoza..." oninput="manejarDesbloqueo(${l.id})">
-        </div>
-        <div class="calc-field">
-          <label for="clientCity"><b>2. Ciudad de Residencia:</b> <span style="color:#dc2626;">* (Requerido)</span></label>
-          <input type="text" id="clientCity" value="${ciudadClientePersistente}" placeholder="Ej. Managua, Rivas, Miami..." oninput="manejarDesbloqueo(${l.id})">
-          <div class="error-text" id="datosError">⚠️ Ingresa tu nombre, apellido y ciudad para ver las cuotas disponibles.</div>
-        </div>
-
-        <div id="avisoDesbloqueo" class="bloque-bloqueado" style="display:${abierto ? 'none' : 'block'};">
-          <b>🔒 Cotizador bloqueado</b>
-          Ingresa tus datos arriba para desplegar las opciones de pago de contado y cuotas mensuales a 12, 24 y 36 meses.
-        </div>
-
-        <div id="bloqueFinanciamiento" style="display:${abierto ? 'block' : 'none'};">
-          <div class="calc-field" style="margin-top:10px;">
-            <label><b>3. Modalidad de Pago para este Lote:</b></label>
-            <select id="planPago" onchange="calcularCuota(${l.id})">
-              <option value="contado">Pago de Contado: $${l.precios.contado.toLocaleString()} USD</option>
-              <option value="m12">Financiamiento a 12 Meses (1 Año)</option>
-              <option value="m24">Financiamiento a 24 Meses (2 Años)</option>
-              <option value="m36">Financiamiento a 36 Meses (3 Años)</option>
-            </select>
-          </div>
-          <div class="calc-results" id="calcResults"></div>
-          <div class="calc-note">
-            * Primas desde $2,000 USD. Aparta hoy tu lote con solo $250 USD (100% abonables a tu prima). La prima se puede ajustar con tu asesor.
-          </div>
-          <button class="btn" style="display:block;text-align:center;width:100%;padding:10px;font-size:12.5px;background:#00695c;color:#fff;" onclick="enviarCotizacionWhatsApp(${l.id})">
-            📲 Cotizar y Apartar Lote por WhatsApp
-          </button>
-        </div>
-      </div>
-    `;
-  } else {
-    seccionCotizador = `
-      <div style="background:#ffebee; border:1px solid #ffcdd2; color:#c62828; padding:10px; border-radius:6px; font-size:11.5px; margin-top:10px; text-align:center;">
-        <b>Lote no disponible para cotizar</b><br>Este lote se encuentra ${l.est}. Consulta con un asesor por lotes similares disponibles.
-      </div>
-    `;
-  }
-
-  document.getElementById('detalleLote').innerHTML = `
-    <div class="card-lote">
-      <div class="card-head">
-        <h2>LOTE ${l.id}</h2>
-        <span class="status-pill" style="background:${colorPill}">${l.est.toUpperCase()}</span>
-      </div>
-      <div class="card-body">
-        <div class="stats-grid">
-          <div class="stat"><small>Área de tu Lote (m²)</small><b>${l.m2}.00 m²</b></div>
-          <div class="stat"><small>Área de tu Lote (vrs²)</small><b>${l.vrs2} vrs²</b></div>
-          <div class="stat"><small>Ancho (Frente)</small><b>${l.frente}</b></div>
-          <div class="stat"><small>Largo (Fondo)</small><b>${l.fondo}</b></div>
-        </div>
-
-        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:9px;">
-          <span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🛣️ 700m Costanera</span>
-          <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 3 min Playa Remanso</span>
-          <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 7 min Centro SJDS</span>
-        </div>
-
-        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-left:3.5px solid #16a34a; padding:6px 9px; border-radius:6px; font-size:11px; color:#14532d; margin-bottom:8px; line-height:1.35;">
-          <b>✓ Certeza Jurídica:</b> Documentación y permisos al día. Traspaso formal mediante Escritura Pública debidamente inscrita en Registro.
-        </div>
-
-        <p style="font-size:11.8px;margin-bottom:3px;"><b>• Acceso Vial:</b> ${l.via}</p>
-        <p style="font-size:11.8px;margin-bottom:6px;"><b>• Entrega de Servicios:</b> Proyectada a 32 meses (Agua y Luz)</p>
-
-        ${seccionCotizador}
-      </div>
-    </div>
-  `;
-
-  actualizarStepper();
-
-  if (l.est === "Disponible" && abierto) {
-    calcularCuota(l.id);
-  }
-
-  document.getElementById('admLoteLbl').innerText = "Lote " + l.id;
-  document.getElementById('admSelect').value = l.est;
-}
-
-function manejarDesbloqueo(id) {
-  const inputNom = document.getElementById('clientName');
-  const inputCiu = document.getElementById('clientCity');
-  const errorText = document.getElementById('datosError');
-  const bloque = document.getElementById('bloqueFinanciamiento');
-  const aviso = document.getElementById('avisoDesbloqueo');
-  
-  nombreClientePersistente = inputNom ? inputNom.value : "";
-  ciudadClientePersistente = inputCiu ? inputCiu.value : "";
-
-  if (estaDesbloqueado()) {
-    if (inputNom) inputNom.classList.remove('input-error');
-    if (inputCiu) inputCiu.classList.remove('input-error');
-    if (errorText) errorText.style.display = 'none';
-    if (bloque) bloque.style.display = 'block';
-    if (aviso) aviso.style.display = 'none';
-    calcularCuota(id);
-  } else {
-    if (bloque) bloque.style.display = 'none';
-    if (aviso) aviso.style.display = 'block';
-  }
-  actualizarStepper();
-}
-
-function calcularCuota(id) {
-  const l = lotes.find(x => x.id == id);
-  const planEl = document.getElementById('planPago');
-  if (!planEl) return;
-  const plan = planEl.value;
-  const resDiv = document.getElementById('calcResults');
-
-  if (plan === 'contado') {
-    resDiv.innerHTML = `
-      <div><span>Modalidad:</span> <b>Pago Directo de Contado</b></div>
-      <div><span>Precio de Contado:</span> <b style="color:var(--azul); font-size:13px;">$${l.precios.contado.toLocaleString()} USD</b></div>
-      <div><span>Apartado Promocional:</span> <b style="color:#b45309;">$250 USD (abona al precio)</b></div>
-    `;
-  } else {
-    let precioTotal = l.precios[plan];
-    let meses = parseInt(plan.replace('m',''));
-    const prima15 = precioTotal * 0.15;
-    const saldo = precioTotal - prima15;
-    const cuota = saldo / meses;
-
-    resDiv.innerHTML = `
-      <div><span>Plan para tu Lote:</span> <b>Financiamiento a ${meses} Meses</b></div>
-      <div><span>Requisito Inicial:</span> <b>15% de Prima</b></div>
-      <div><span>Reserva Inmediata:</span> <b style="color:#b45309;">$250 USD (abona a tu prima)</b></div>
-      <div style="border-top:1px dashed #cbd5e1; padding-top:6px; margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-weight:700;">Cuota Mensual Estimada:</span>
-        <b style="color:#00695c; font-size:14px; font-weight:800;">$${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} / mes</b>
-      </div>
-    `;
-  }
-}
-
-function enviarCotizacionWhatsApp(id) {
-  const l = lotes.find(x => x.id == id);
-  const inputNom = document.getElementById('clientName');
-  const inputCiu = document.getElementById('clientCity');
-  const errorText = document.getElementById('datosError');
-  
-  const nombre = inputNom ? inputNom.value.trim() : "";
-  const ciudad = inputCiu ? inputCiu.value.trim() : "";
-  const plan = document.getElementById('planPago') ? document.getElementById('planPago').value : "contado";
-
-  if (!nombre || nombre.length < 3 || !ciudad || ciudad.length < 2) {
-    if (inputNom && (!nombre || nombre.length < 3)) inputNom.classList.add('input-error');
-    if (inputCiu && (!ciudad || ciudad.length < 2)) inputCiu.classList.add('input-error');
-    if (errorText) errorText.style.display = 'block';
-    return;
-  }
-
-  let mensaje = `Hola, mi nombre es *${nombre}* de la ciudad de *${ciudad}*. Estuve revisando los lotes en Mareas del Sur:\n\n` +
-                `📍 *Lote Seleccionado:* LOTE ${l.id} (${l.m2} m² - Medidas: ${l.rawDim}m)\n` +
-                `🗺️ *Ubicación:* 700m Costanera • 3 min Playa Remanso • 7 min Centro SJDS\n` +
-                `🏡 *Proyecto:* Lotes en Preventa de Alta Plusvalía (Servicios a 32 meses)\n`;
-
-  if (plan === 'contado') {
-    mensaje += `📋 *Modalidad:* Pago de Contado\n` +
-               `💲 *Precio de Contado:* $${l.precios.contado.toLocaleString()} USD\n`;
-  } else {
-    let meses = parseInt(plan.replace('m', ''));
-    const cuota = (l.precios[plan] * 0.85) / meses;
-    mensaje += `📋 *Modalidad:* Financiamiento a ${meses} Meses (${meses/12} ${meses === 12 ? 'Año' : 'Años'})\n` +
-               `📅 *Cuota Estimada:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mes\n` +
-               `💵 *Prima Requerida:* 15%\n`;
-  }
-
-  mensaje += `\n🔥 *Deseo apartar este lote con la reserva especial de $250 USD* (100% abonable a la prima). Por favor confirmen disponibilidad.`;
-
-  window.open(`https://wa.me/50576940400?text=${encodeURIComponent(mensaje)}`, '_blank');
-}
-
-function abrirGuia() {
-  document.getElementById('guideModal').classList.add('open');
-}
-function cerrarGuia() {
-  document.getElementById('guideModal').classList.remove('open');
-  localStorage.setItem('guia_vista', 'true');
-}
-
-function activarAdmin() {
-  const pin = prompt("Ingresa el PIN de Administrador de Mareas del Sur:");
-  if(pin === "2026") document.getElementById('adminBox').style.display = "block";
-  else if(pin !== null) alert("PIN incorrecto.");
-}
-
-function cambiarEstatusAdmin(nuevoEst) {
-  const id = loteActualId;
-  vendMS = vendMS.filter(x => x !== id);
-  resSP = resSP.filter(x => x !== id);
-  vendidosCerrados = vendidosCerrados.filter(x => x !== id);
-
-  if(nuevoEst === "Vendido M.S.") vendMS.push(id);
-  if(nuevoEst === "Reservado S/P") resSP.push(id);
-  if(nuevoEst === "Vendido") vendidosCerrados.push(id);
-
-  renderizarMapa();
-  seleccionar(id);
-}
-
-function exportarHTMLActualizado() {
-  document.getElementById('adminBox').style.display = "none";
-  let html = document.documentElement.outerHTML;
-  html = html.replace(/let vendMS = \[.*?\];/, `let vendMS = ${JSON.stringify(vendMS)};`);
-  html = html.replace(/let resSP = \[.*?\];/, `let resSP = ${JSON.stringify(resSP)};`);
-  html = html.replace(/let vendidosCerrados = \[.*?\];/, `let vendidosCerrados = ${JSON.stringify(vendidosCerrados)};`);
-  
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob(["<!DOCTYPE html>\n" + html], { type: "text/html;charset=utf-8" }));
-  a.download = "index.html";
-  a.click();
-  document.getElementById('adminBox').style.display = "block";
-}
-
-function filtrar(tipo) {
-  document.querySelectorAll('.lote').forEach(el => {
-    el.style.opacity = (tipo === 'todos' || el.getAttribute('data-est') === tipo) ? '1' : '0.18';
-  });
-}
-
-let z = 1;
-function cambiarZoom(f) {
-  z = Math.min(Math.max(z * f, 0.7), 2.8);
-  document.getElementById('mapaSvg').style.transform = `scale(${z})`;
-}
-function resetZoom() {
-  z = 1;
-  document.getElementById('mapaSvg').style.transform = `scale(1)`;
-}
-
-// INICIALIZACIÓN
-construirGeometriaBase();
-construirLotesUniformes();
-renderizarMapa();
-seleccionar(20);
-
-if(!localStorage.getItem('guia_vista')) {
-  setTimeout(abrirGuia, 400);
-}
-</script>
-</body>
-</html>
+  const label
