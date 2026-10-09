@@ -955,7 +955,6 @@ function seleccionar(id, hacerScroll=false) {
             * Primas desde $2,000 USD. Podés apartar y congelar el precio de este lote con solo $250 USD (100% abonables a tu prima).
           </div>
 
-          <!-- CASILLA DE AGENDAR VISITA (CON CALENDARIO Y HORARIOS 9AM - 2PM) -->
           <div class="cita-opt-box">
             <label class="cita-checkbox-label">
               <input type="checkbox" id="checkAgendarVisita" onchange="toggleCamposCita()">
@@ -980,7 +979,6 @@ function seleccionar(id, hacerScroll=false) {
             </div>
           </div>
 
-          <!-- BOTÓN PRINCIPAL UNIFICADO -->
           <button class="btn" style="display:block;text-align:center;width:100%;padding:11px;font-size:13px;background:#00695c;color:#fff;font-weight:800;border-radius:8px;" onclick="enviarCotizacionWhatsApp(${l.id})">
             📲 Consultar / Apartar por WhatsApp
           </button>
@@ -1036,7 +1034,6 @@ function seleccionar(id, hacerScroll=false) {
   document.getElementById('admLoteLbl').innerText = "Lote " + l.id;
   document.getElementById('admSelect').value = l.est;
 
-  // Auto-scroll en celulares para que vean el lote seleccionado
   if (hacerScroll && window.innerWidth < 960) {
     setTimeout(() => {
       document.getElementById('detalleLote').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1093,7 +1090,6 @@ function desbloquearYRegistrar(id) {
 
   if (errorText) errorText.style.display = 'none';
 
-  // Saneamos el teléfono para que Sheets jamás dé #ERROR!
   const telLimpio = telRaw.replace(/^[+=]/, '').trim();
 
   nombreClientePersistente = nom;
@@ -1113,7 +1109,9 @@ function desbloquearYRegistrar(id) {
     ciudad: ciu,
     lote: id,
     modalidad: "Desbloqueó Cotizador",
-    cuota: "Precio Contado: $" + (l ? l.precios.contado.toLocaleString() : "") + " USD"
+    cuota: "Precio Contado: $" + (l ? l.precios.contado.toLocaleString() : "") + " USD",
+    fechaCita: "",
+    horaCita: ""
   });
 
   seleccionar(id, false);
@@ -1178,20 +1176,15 @@ function enviarCotizacionWhatsApp(id) {
     precioOCuota = "$" + cuota.toFixed(2) + "/mes (" + meses + "m)";
   }
 
+  // La columna ACCIÓN queda limpia sin mezclar el texto de la cita
   let accionTexto = "Clic en WhatsApp (" + plan + ")";
   let textoCitaMensaje = "";
 
-  if (checkCita && checkCita.checked) {
-    if (fechaCita) {
-      accionTexto = "Clic WhatsApp + Cita (" + fechaCita + " - " + horaCita + ")";
-      textoCitaMensaje = `\n📅 *Solicitud de Visita al Terreno:* ${fechaCita} a las ${horaCita}\n`;
-    } else {
-      accionTexto = "Clic WhatsApp + Cita (" + horaCita + ")";
-      textoCitaMensaje = `\n📅 *Solicitud de Visita al Terreno:* Coordinar fecha (Horario preferido: ${horaCita})\n`;
-    }
+  if (checkCita && checkCita.checked && fechaCita) {
+    textoCitaMensaje = `\n📅 *Solicitud de Visita al Terreno:* ${fechaCita} a las ${horaCita}\n`;
   }
 
-  // Notificar a Google Sheets y Google Calendar
+  // Enviar a Google Sheets (columna F y columna H separadas) y a Google Calendar
   enviarAGoogleSheets({
     nombre: nombreClientePersistente,
     telefono: telefonoClientePersistente,
