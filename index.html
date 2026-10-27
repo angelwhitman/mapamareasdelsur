@@ -1257,7 +1257,7 @@ function cambiarEstatusAdminNube() {
   btn.innerText = "⏳ Guardando...";
   btn.disabled = true;
 
-  if (GOOGLE_SHEETS_URL && !GOOGLE_SHEETS_URL.includes("URL_DE_TU_NUEVO_APPS_SCRIPT_AQUI")) {
+  if (GOOGLE_SHEETS_URL && !GOOGLE_SHEETS_URL.includes("https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec")) {
     fetch(GOOGLE_SHEETS_URL, {
       method: "POST",
       mode: "no-cors",
