@@ -1212,7 +1212,7 @@ function enviarCotizacionWhatsApp(id) {
    NUEVA FUNCIÓN: CARGAR DATOS DESDE LA NUBE AL ENTRAR
 ============================================================== */
 function cargarDatosDesdeNube() {
-  if (!GOOGLE_SHEETS_URL || GOOGLE_SHEETS_URL.includes("URL_DE_TU_NUEVO_APPS_SCRIPT_AQUI")) return;
+  if (!GOOGLE_SHEETS_URL || GOOGLE_SHEETS_URL.includes("https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec")) return;
   
   fetch(GOOGLE_SHEETS_URL)
     .then(response => response.json())
