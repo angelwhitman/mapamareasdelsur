@@ -444,6 +444,7 @@
 
 <script>
 // ==================== VARIABLES Y CONFIGURACIÓN ====================
+// Enlace oficial de Apps Script ya incrustado correctamente sin fallas
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec";
 
 let ASESORES = {
@@ -816,7 +817,7 @@ function renderizarMapa() {
 }
 
 function enviarAGoogleSheets(datos) {
-  if (!GOOGLE_SHEETS_URL || GOOGLE_SHEETS_URL.includes("PEGA_AQUI")) return;
+  if (!GOOGLE_SHEETS_URL) return;
   fetch(GOOGLE_SHEETS_URL, {
     method: "POST",
     mode: "no-cors",
@@ -868,7 +869,7 @@ function mostrarPantallaInicial() {
       </p>
       <div style="display:flex; justify-content:center; gap:6px; flex-wrap:wrap;">
         <span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🛣️ 700m Costanera</span>
-        <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 3 min Playa Remanso</span>
+        <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 3 min Remanso</span>
         <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 7 min Centro SJDS</span>
       </div>
     </div>
@@ -1090,7 +1091,7 @@ function desbloquearYRegistrar(id) {
 
   const l = lotes.find(x => x.id == id);
   
-  if (GOOGLE_SHEETS_URL && !GOOGLE_SHEETS_URL.includes("URL_DE_TU_NUEVO_APPS_SCRIPT_AQUI")) {
+  if (GOOGLE_SHEETS_URL) {
     fetch(GOOGLE_SHEETS_URL, {
       method: "POST",
       mode: "no-cors",
@@ -1178,7 +1179,7 @@ function enviarCotizacionWhatsApp(id) {
     textoCitaMensaje = `\n📅 *Solicitud de Visita al Terreno:* ${fechaCita} a las ${horaCita}\n`;
   }
 
-  if (GOOGLE_SHEETS_URL && !GOOGLE_SHEETS_URL.includes("URL_DE_TU_NUEVO_APPS_SCRIPT_AQUI")) {
+  if (GOOGLE_SHEETS_URL) {
     fetch(GOOGLE_SHEETS_URL, {
       method: "POST",
       mode: "no-cors",
@@ -1209,20 +1210,18 @@ function enviarCotizacionWhatsApp(id) {
 }
 
 /* ==============================================================
-   NUEVA FUNCIÓN: CARGAR DATOS DESDE LA NUBE AL ENTRAR
+   CARGAR DATOS DESDE LA NUBE AL ENTRAR
 ============================================================== */
 function cargarDatosDesdeNube() {
-  if (!GOOGLE_SHEETS_URL || GOOGLE_SHEETS_URL.includes("https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec")) return;
+  if (!GOOGLE_SHEETS_URL) return;
   
   fetch(GOOGLE_SHEETS_URL)
     .then(response => response.json())
     .then(data => {
-      // 1. CARGAR ASESORES
       if(data.asesores) {
         ASESORES = Object.assign(ASESORES, data.asesores); 
         inicializarAsesor(); 
       }
-      // 2. CARGAR INVENTARIO
       if(data.inventario) {
         vendMS = data.inventario.vendMS || [];
         resSP = data.inventario.resSP || [];
@@ -1230,11 +1229,11 @@ function cargarDatosDesdeNube() {
         renderizarMapa();
       }
     })
-    .catch(err => console.log("Cargando offline"));
+    .catch(err => console.log("Cargando datos locales..."));
 }
 
 /* ==============================================================
-   NUEVA FUNCIÓN: GUARDAR EL CAMBIO DE ESTATUS EN LA NUBE
+   GUARDAR EL CAMBIO DE ESTATUS EN LA NUBE
 ============================================================== */
 function cambiarEstatusAdminNube() {
   const id = loteActualId;
@@ -1257,7 +1256,7 @@ function cambiarEstatusAdminNube() {
   btn.innerText = "⏳ Guardando...";
   btn.disabled = true;
 
-  if (GOOGLE_SHEETS_URL && !GOOGLE_SHEETS_URL.includes("https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec")) {
+  if (GOOGLE_SHEETS_URL) {
     fetch(GOOGLE_SHEETS_URL, {
       method: "POST",
       mode: "no-cors",
@@ -1269,17 +1268,17 @@ function cambiarEstatusAdminNube() {
       })
     }).then(() => {
       setTimeout(() => {
-        btn.innerText = "💾 Guardado ✓";
+        btn.innerText = "💾 Guardado en la nube ✓";
+        btn.disabled = false;
+        setTimeout(() => { btn.innerText = originalText; }, 3000);
+      }, 1000);
+    }).catch(err => {
+      setTimeout(() => {
+        btn.innerText = "❌ Error de conexión";
         btn.disabled = false;
         setTimeout(() => { btn.innerText = originalText; }, 3000);
       }, 1000);
     });
-  } else {
-    setTimeout(() => {
-      btn.innerText = "⚠️ Faltó URL Sheet";
-      btn.disabled = false;
-      setTimeout(() => { btn.innerText = originalText; }, 3000);
-    }, 1000);
   }
 }
 
@@ -1327,4 +1326,3 @@ try {
 </script>
 </body>
 </html>
-```[cite: 10]
