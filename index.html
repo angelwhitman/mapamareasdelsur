@@ -444,7 +444,6 @@
 
 <script>
 // ==================== VARIABLES Y CONFIGURACIÓN ====================
-// Enlace oficial de Apps Script ya incrustado correctamente sin fallas
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec";
 
 let ASESORES = {
@@ -481,7 +480,7 @@ function inicializarAsesor() {
       }
     }
 
-    // Actualizar todos los links y textos con el número del vendedor
+    // Actualizar todos los links y textos con el número del vendedor activo
     document.getElementById('top-phone-text').innerText = asesorActual.display;
     document.getElementById('top-phone-link').href = `tel:${asesorActual.tel}`;
     
@@ -640,11 +639,11 @@ function registrarLote(id, pts, cTop, cBot, cLeft, cRight, customPath="") {
 
 function construirGeometriaBase() {
   document.getElementById('capaCallesCompactadas').innerHTML = `
-    <path d="M 275,85 L 930,85 L 942,120 L 426,120 L 426,268 L 398,268 L 398,142 Q 398,120 370,120 L 275,120 Z" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
-    <polygon points="305,268 785,268 795,302 305,302" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
-    <polygon points="292,468 1014,468 1010,502 320,502 320,662 292,662" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
-    <polygon points="280,662 992,662 988,696 280,696" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
-    <polygon points="845,852 985,852 982,888 845,888" fill="url(#compactadaPatron)" stroke="#475569" stroke-width="1.1"/>
+    <path d="M 275,85 L 930,85 L 942,120 L 426,120 L 426,268 L 398,268 L 398,142 Q 398,120 370,120 L 275,120 Z" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
+    <polygon points="305,268 785,268 795,302 305,302" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
+    <polygon points="292,468 1014,468 1010,502 320,502 320,662 292,662" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
+    <polygon points="280,662 992,662 988,696 280,696" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
+    <polygon points="845,852 985,852 982,888 845,888" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
   `;
 
   const ptsParqueCentral = [...sampleCurve(xEastRoad, 222, 392, 16), [xOuterEast(392), 392], [xOuterEast(222), 222]].map(p => p.join(",")).join(" ");
@@ -1152,7 +1151,7 @@ function calcularCuota(id) {
 
 function enviarCotizacionWhatsApp(id) {
   const l = lotes.find(x => x.id == id);
-  const plan = document.getElementById('planPago') ? document.getElementById('planPago').value : "contado";
+  const plan = document.getElementById('planPago') ? document.getElementById('planPago'].value : "contado";
   const checkCita = document.getElementById('checkAgendarVisita');
   const fechaCita = document.getElementById('citaFecha') ? document.getElementById('citaFecha').value : "";
   const horaCita = document.getElementById('citaHora') ? document.getElementById('citaHora').value : "";
@@ -1206,7 +1205,8 @@ function enviarCotizacionWhatsApp(id) {
                 textoCitaMensaje +
                 `\n🔥 *Deseo consultar la disponibilidad y coordinar los detalles con un asesor.*`;
 
-  window.open(`https://wa.me/${asesorActual ? asesorActual.tel : '50576940400'}?text=${encodeURIComponent(mensaje)}`, '_blank');
+  // CORRECCIÓN AQUÍ: Se usa el teléfono dinámico del asesor actual en lugar de un número estático
+  window.open(`https://wa.me/${asesorActual.tel}?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
 /* ==============================================================
