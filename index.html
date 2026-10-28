@@ -216,25 +216,46 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
   }
 
-  /* MODAL GUÍA RÁPIDA */
+  /* MODAL GUÍA RÁPIDA (REDISEÑO DE LUJO CON IDIOMA ACOMODADO) */
   .modal-overlay {
-    position: fixed; inset: 0; background: rgba(15, 61, 83, 0.78); backdrop-filter: blur(3px);
+    position: fixed; inset: 0; background: rgba(15, 61, 83, 0.82); backdrop-filter: blur(5px);
     display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
   }
   .modal-overlay.open { display: flex; }
+  
   .guide-card {
-    background: #ffffff; border-radius: 14px; max-width: 440px; width: 100%; padding: 22px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25); border: 2px solid var(--dorado); text-align: center;
+    background: #ffffff; border-radius: 16px; max-width: 480px; width: 100%; overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); border: 2px solid var(--dorado); text-align: left;
+    animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .guide-card h3 { color: var(--azul); font-size: 18px; font-weight: 800; margin-bottom: 8px; }
-  .guide-card p { font-size: 12.5px; color: #475569; margin-bottom: 16px; line-height: 1.4; }
-  .guide-steps { display: flex; flex-direction: column; gap: 10px; text-align: left; margin-bottom: 18px; }
+  @keyframes modalPop {
+    0% { transform: scale(0.92); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .guide-header-banner {
+    background: linear-gradient(135deg, var(--azul) 0%, #164e63 100%);
+    color: #ffffff; padding: 22px 24px 18px 24px; text-align: center; border-bottom: 3px solid var(--dorado);
+  }
+  .guide-header-banner h3 {
+    font-size: 15px; font-weight: 900; letter-spacing: 0.8px; color: #ffffff; margin-bottom: 4px; text-transform: uppercase; line-height: 1.35;
+  }
+  .guide-header-banner p {
+    font-size: 11.5px; color: var(--dorado); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 12px;
+  }
+
+  .guide-body-content { padding: 22px 24px; background: #FAF8F5; }
+  
+  .guide-steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
   .guide-step-row {
-    display: flex; gap: 12px; align-items: center; background: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid #e2e8f0;
+    display: flex; gap: 14px; align-items: center; background: #ffffff; padding: 12px 14px; 
+    border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    transition: transform 0.15s ease;
   }
-  .guide-icon { font-size: 22px; line-height: 1; }
-  .guide-text b { display: block; font-size: 12.5px; color: var(--azul); }
-  .guide-text span { font-size: 11px; color: #64748b; }
+  .guide-step-row:hover { transform: translateY(-1px); border-color: var(--dorado); }
+  .guide-icon { font-size: 26px; line-height: 1; min-width: 32px; text-align: center; }
+  .guide-text b { display: block; font-size: 12.5px; color: var(--azul); font-weight: 800; margin-bottom: 2px; }
+  .guide-text span { font-size: 11.2px; color: #475569; line-height: 1.35; }
 
   .admin-box {
     display: none; background: #eef4f7; border: 2px dashed var(--azul);
@@ -407,42 +428,48 @@
   </div>
 </div>
 
-<!-- MODAL GUÍA RÁPIDA -->
+<!-- MODAL GUÍA RÁPIDA (DISEÑO ELEGANTE Y CENTRADO) -->
 <div class="modal-overlay open" id="guideModal">
   <div class="guide-card">
-    <div style="display: flex; justify-content: flex-end; margin-bottom: 8px;">
-      <button onclick="toggleIdiomaModal()" id="btnLangModal" style="background: var(--azul); color: #fef08a; border: 1.5px solid var(--dorado); padding: 4px 10px; border-radius: 12px; font-weight: 800; font-size: 11px; cursor: pointer;">🇬🇧 English</button>
+    <div class="guide-header-banner">
+      <h3 id="guideTitle">LOTES EN VENTA EN SAN JUAN DEL SUR</h3>
+      <p id="guideSub">PROYECTO MAREAS DEL SUR</p>
+      <div style="margin-top: 10px;">
+        <button onclick="toggleIdiomaModal()" id="btnLangModal" style="background: rgba(15,61,83,0.9); color: #fef08a; border: 1.5px solid var(--dorado); padding: 5px 14px; border-radius: 14px; font-weight: 800; font-size: 11.5px; cursor: pointer; backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.2);">🇬🇧 English</button>
+      </div>
     </div>
-    <h3 id="guideTitle">Lotes en Mareas del Sur</h3>
-    <p id="guideSub">Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:</p>
     
-    <div class="guide-steps">
-      <div class="guide-step-row">
-        <span class="guide-icon">🗺️</span>
-        <div class="guide-text">
-          <b id="g1t">1. Tocá tu lote en el mapa</b>
-          <span id="g1s">Seleccioná cualquier lote disponible (color crema) para ver medidas oficiales.</span>
+    <div class="guide-body-content">
+      <p style="font-size: 11.8px; color: #334155; margin-bottom: 14px; font-weight: 600; text-align: center;" id="guideDescMini">Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:</p>
+      
+      <div class="guide-steps">
+        <div class="guide-step-row">
+          <span class="guide-icon">🗺️</span>
+          <div class="guide-text">
+            <b id="g1t">1. Tocá tu lote en el mapa</b>
+            <span id="g1s">Seleccioná cualquier lote disponible (color crema) para ver medidas oficiales.</span>
+          </div>
+        </div>
+        <div class="guide-step-row">
+          <span class="guide-icon">✍️</span>
+          <div class="guide-text">
+            <b id="g2t">2. Ingresá tu Nombre, WhatsApp y Ciudad</b>
+            <span id="g2s">Conocé precios de preventa y calculá tus opciones de financiamiento.</span>
+          </div>
+        </div>
+        <div class="guide-step-row">
+          <span class="guide-icon">📲</span>
+          <div class="guide-text">
+            <b id="g3t">3. Cotizá o agendá tu visita</b>
+            <span id="g3s">Calculá tus cuotas mensuales y coordiná todo directamente por WhatsApp.</span>
+          </div>
         </div>
       </div>
-      <div class="guide-step-row">
-        <span class="guide-icon">✍️</span>
-        <div class="guide-text">
-          <b id="g2t">2. Ingresá tu Nombre, WhatsApp y Ciudad</b>
-          <span id="g2s">Conocé precios de preventa y calculá tus opciones de financiamiento.</span>
-        </div>
-      </div>
-      <div class="guide-step-row">
-        <span class="guide-icon">📲</span>
-        <div class="guide-text">
-          <b id="g3t">3. Cotizá o agendá tu visita</b>
-          <span id="g3s">Calculá tus cuotas mensuales y coordiná todo directamente por WhatsApp.</span>
-        </div>
-      </div>
-    </div>
 
-    <button class="btn" id="guideBtn" style="width:100%; padding:11px; font-size:13px; background:var(--azul); color:#fff;" onclick="cerrarGuia()">
-      ¡Ver Lotes Disponibles!
-    </button>
+      <button class="btn" id="guideBtn" style="width:100%; padding:12px; font-size:13.5px; background:var(--azul); color:#fff; justify-content:center; font-weight:900; box-shadow: 0 4px 12px rgba(15,61,83,0.25);" onclick="cerrarGuia()">
+        ¡Ver Lotes Disponibles! 🚀
+      </button>
+    </div>
   </div>
 </div>
 
@@ -450,8 +477,8 @@
 // ==================== CONFIGURACIÓN Y IDIOMA ====================
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec";
 
-// El idioma inicial por defecto es Español ('es')
-let idiomaActual = localStorage.getItem('idioma_mds') || 'es';
+// Idioma inicial por defecto: Español ('es')
+let idiomaActual = 'es';
 
 const textos = {
   es: {
@@ -483,10 +510,11 @@ const textos = {
     infoCard: "<b>LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>• <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>• <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 32 meses.<br>• <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Aplican restricciones. Reserva no reembolsable en caso de desistimiento.</span>",
     emptyCardTitle: "Paso 1: Seleccioná un lote en el mapa",
     emptyCardDesc: "Tocá cualquier lote disponible (color crema) en el mapa de arriba o escribí su número en el buscador para ver sus medidas oficiales y cotizar.",
-    guideBtnModal: "¡Ver Lotes Disponibles!",
+    guideBtnModal: "¡Ver Lotes Disponibles! 🚀",
     btnLangModal: "🇬🇧 English",
-    guideTitle: "Lotes en Mareas del Sur",
-    guideSub: "Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:",
+    guideTitle: "LOTES EN VENTA EN SAN JUAN DEL SUR",
+    guideSub: "PROYECTO MAREAS DEL SUR",
+    guideDescMini: "Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:",
     g1t: "1. Tocá tu lote en el mapa",
     g1s: "Seleccioná cualquier lote disponible (color crema) para ver medidas oficiales.",
     g2t: "2. Ingresá tu Nombre, WhatsApp y Ciudad",
@@ -523,10 +551,11 @@ const textos = {
     infoCard: "<b>PRE-SALE LOTS • SECURE INVESTMENT</b><br>• <b>Your lot in San Juan del Sur:</b> Secure your land with frozen pricing before appreciation.<br>• <b>Basic services (water & power):</b> Projected delivery in 32 months.<br>• <b>Promotional Reservation:</b> Only <b>$250 USD</b> (100% applicable to your 15% down payment).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Restrictions apply. Non-refundable reservation in case of withdrawal.</span>",
     emptyCardTitle: "Step 1: Select a lot on the map",
     emptyCardDesc: "Tap any available lot (cream color) on the map above or type its number in the search box to view official measurements and pricing.",
-    guideBtnModal: "View Available Lots!",
+    guideBtnModal: "View Available Lots! 🚀",
     btnLangModal: "🇪🇸 Español",
-    guideTitle: "Lots in Mareas del Sur",
-    guideSub: "Choosing and quoting your pre-sale lot is very easy. Follow these 3 steps:",
+    guideTitle: "LOTS FOR SALE IN SAN JUAN DEL SUR",
+    guideSub: "MAREAS DEL SUR PROJECT",
+    guideDescMini: "Choosing and quoting your pre-sale lot is very easy. Follow these 3 steps:",
     g1t: "1. Tap your lot on the map",
     g1s: "Select any available lot (cream color) to view official measurements.",
     g2t: "2. Enter your Name, WhatsApp and City",
@@ -542,7 +571,6 @@ function t(key) {
 
 function toggleIdioma() {
   idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
-  localStorage.setItem('idioma_mds', idiomaActual);
   actualizarTextosInterfaz();
   if (loteActualId) seleccionar(loteActualId, false);
 }
@@ -587,6 +615,7 @@ function actualizarTextosInterfaz() {
 
   document.getElementById('guideTitle').innerText = t('guideTitle');
   document.getElementById('guideSub').innerText = t('guideSub');
+  document.getElementById('guideDescMini').innerText = t('guideDescMini');
   document.getElementById('g1t').innerText = t('g1t');
   document.getElementById('g1s').innerText = t('g1s');
   document.getElementById('g2t').innerText = t('g2t');
