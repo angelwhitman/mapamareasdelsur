@@ -461,7 +461,7 @@ let ciudadClientePersistente = "";
 let usuarioDesbloqueado = false;
 let loteActualId = null;
 
-// ==================== FUNCIONES DE ASESORES ====================
+// ==================== FUNCIONES DE ASESORES Y RESPALDO LOCAL ====================
 function inicializarAsesor() {
   try {
     const urlParams = new URLSearchParams(window.location.search);
@@ -1151,7 +1151,7 @@ function calcularCuota(id) {
 
 function enviarCotizacionWhatsApp(id) {
   const l = lotes.find(x => x.id == id);
-  const plan = document.getElementById('planPago') ? document.getElementById('planPago'].value : "contado";
+  const plan = document.getElementById('planPago') ? document.getElementById('planPago').value : "contado";
   const checkCita = document.getElementById('checkAgendarVisita');
   const fechaCita = document.getElementById('citaFecha') ? document.getElementById('citaFecha').value : "";
   const horaCita = document.getElementById('citaHora') ? document.getElementById('citaHora').value : "";
@@ -1205,12 +1205,12 @@ function enviarCotizacionWhatsApp(id) {
                 textoCitaMensaje +
                 `\n🔥 *Deseo consultar la disponibilidad y coordinar los detalles con un asesor.*`;
 
-  // CORRECCIÓN AQUÍ: Se usa el teléfono dinámico del asesor actual en lugar de un número estático
+  // CORRECCIÓN EXACTA: El mensaje de WhatsApp se va dirigido dinámicamente al número del asesor activo
   window.open(`https://wa.me/${asesorActual.tel}?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
 /* ==============================================================
-   CARGAR DATOS DESDE LA NUBE AL ENTRAR
+   CARGAR DATOS DESDE LA NUBE AL ENTRAR (CON RESPALDO LOCAL SEGURO)
 ============================================================== */
 function cargarDatosDesdeNube() {
   if (!GOOGLE_SHEETS_URL) return;
@@ -1229,7 +1229,9 @@ function cargarDatosDesdeNube() {
         renderizarMapa();
       }
     })
-    .catch(err => console.log("Cargando datos locales..."));
+    .catch(err => {
+      console.log("Modo local seguro activo: cargando geometría base sin conexión cloud.");
+    });
 }
 
 /* ==============================================================
@@ -1311,7 +1313,7 @@ function resetZoom() {
   document.getElementById('mapaSvg').style.transform = `scale(1)`;
 }
 
-// ==================== INICIALIZACIÓN SECUENCIAL ====================
+// ==================== INICIALIZACIÓN SECUENCIAL (BLINDADA) ====================
 try {
   inicializarAsesor();
   construirGeometriaBase();
