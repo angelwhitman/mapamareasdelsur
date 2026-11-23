@@ -35,7 +35,6 @@
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
   body { background: #e8ece9; color: var(--azul); overflow-x: hidden; }
 
-  /* CINTILLO SUPERIOR */
   .promo-top-bar {
     background: linear-gradient(90deg, #9a3412 0%, #c2410c 50%, #9a3412 100%);
     color: #fff; padding: 7px 16px; text-align: center; font-size: 12px; font-weight: 700;
@@ -70,11 +69,22 @@
   .btn-outline { background: transparent; color: #fff; border: 1.5px solid var(--dorado); }
   .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
+  .btn-whatsapp-main {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 12px 14px; font-size: 13.5px; font-weight: 800;
+    background: linear-gradient(135deg, #25D366 0%, #16a34a 100%);
+    color: #ffffff; border: none; border-radius: 9px; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    transition: all 0.15s ease;
+  }
+  .btn-whatsapp-main:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
   .layout {
-    display: grid; grid-template-columns: 1fr 370px; height: calc(100vh - 90px);
+    display: grid; grid-template-columns: 1fr 375px; height: calc(100vh - 90px);
   }
   @media (max-width: 960px) {
     .layout { grid-template-columns: 1fr; height: auto; }
+    .side-panel { padding-bottom: 95px !important; }
   }
 
   .map-wrapper {
@@ -101,7 +111,7 @@
   .canvas-scroll {
     flex: 1; overflow: auto; padding: 14px; display: flex; justify-content: center; align-items: flex-start;
   }
-  svg {
+  svg#mapaSvg {
     width: 100%; max-width: 1160px; height: auto; background: #ffffff;
     border-radius: 10px; border: 2px solid var(--azul);
     box-shadow: 0 10px 30px rgba(15,61,83,0.16); transform-origin: top center; transition: transform 0.15s ease;
@@ -192,11 +202,32 @@
   .calc-box {
     background: #f4f8f6; border: 1.5px solid #b2dfdb; border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 12px;
   }
-  .calc-box h4 { color: #00695c; font-size: 13px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .calc-box h4 { color: #00695c; font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
   .calc-field { margin-bottom: 8px; }
   .calc-field label { display: block; font-weight: 700; color: #334155; margin-bottom: 3px; font-size: 11px; }
   .calc-field input, .calc-field select {
     width: 100%; padding: 8px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 12px; background: #fff; font-weight: 600;
+  }
+
+  /* 4 BOTONES INTERACTIVOS DE FINANCIAMIENTO */
+  .plan-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px;
+  }
+  .plan-btn {
+    position: relative; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px;
+    padding: 8px 4px; text-align: center; cursor: pointer; transition: all 0.15s ease;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .plan-btn b { font-size: 11.5px; color: var(--azul); line-height: 1.1; }
+  .plan-btn small { font-size: 9.5px; color: #64748b; margin-top: 2px; font-weight: 600; }
+  .plan-btn:hover { border-color: #00695c; background: #f0fdfa; }
+  .plan-btn.active {
+    background: #00695c; border-color: #00695c; box-shadow: 0 3px 8px rgba(0,105,92,0.25);
+  }
+  .plan-btn.active b, .plan-btn.active small { color: #ffffff; }
+  .pop-badge {
+    position: absolute; top: -7px; background: #d97706; color: #fff;
+    font-size: 8px; font-weight: 900; padding: 1px 5px; border-radius: 8px; text-transform: uppercase;
   }
 
   .input-error {
@@ -207,14 +238,18 @@
   }
 
   .calc-results {
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; margin: 10px 0; font-size: 11.5px;
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; margin: 8px 0; font-size: 11.5px;
   }
-  .calc-results div { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .calc-results div { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+  .calc-results div:last-child { margin-bottom: 0; }
   .calc-note {
-    font-size: 10px; color: #64748b; font-style: italic; line-height: 1.3; margin-bottom: 10px;
+    font-size: 10.5px; color: #475569; line-height: 1.38; margin-bottom: 10px;
+    background: #fffbeb; border-left: 3px solid #f59e0b; padding: 7px 9px; border-radius: 4px;
+  }
+  .wa-subnote {
+    text-align: center; font-size: 10.2px; color: #64748b; margin-top: 5px; font-weight: 600;
   }
 
-  /* CASILLA DE AGENDAR CITA OPCIONAL */
   .cita-opt-box {
     background: #f8fafc; border: 1.5px dashed #94a3b8; border-radius: 8px;
     padding: 10px; margin: 10px 0 12px 0; font-size: 11.5px;
@@ -227,7 +262,7 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
   }
 
-  /* MODAL GUÍA RÁPIDA (DISEÑO ELEGANTE Y CENTRADO) */
+  /* MODAL GUÍA RÁPIDA */
   .modal-overlay {
     position: fixed; inset: 0; background: rgba(15, 61, 83, 0.82); backdrop-filter: blur(5px);
     display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
@@ -256,14 +291,11 @@
   }
 
   .guide-body-content { padding: 22px 24px; background: #FAF8F5; }
-  
   .guide-steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
   .guide-step-row {
     display: flex; gap: 14px; align-items: center; background: #ffffff; padding: 12px 14px; 
     border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    transition: transform 0.15s ease;
   }
-  .guide-step-row:hover { transform: translateY(-1px); border-color: var(--dorado); }
   .guide-icon { font-size: 26px; line-height: 1; min-width: 32px; text-align: center; }
   .guide-text b { display: block; font-size: 12.5px; color: var(--azul); font-weight: 800; margin-bottom: 2px; }
   .guide-text span { font-size: 11.2px; color: #475569; line-height: 1.35; }
@@ -280,9 +312,102 @@
     font-size: 11px; color: #6c7a80; padding-top: 8px; border-top: 1px solid #dcd6c8; line-height: 1.4;
   }
   .admin-footer a { color: var(--azul); text-decoration: none; font-weight: 700; }
-  .admin-footer a:hover { text-decoration: underline; }
   .lock-btn { background: none; border: none; cursor: pointer; font-size: 14px; opacity: 0.5; }
   .lock-btn:hover { opacity: 1; }
+
+  /* BURBUJA DE PAULA — ESQUINA INFERIOR IZQUIERDA (AZUL MARINO) */
+  .paula-fab {
+    display: none; position: fixed; bottom: 20px; left: 20px; z-index: 900;
+    background: var(--azul);
+    color: #fff; border: 2px solid var(--dorado); border-radius: 40px;
+    padding: 6px 16px 6px 7px; font-weight: 800; font-size: 13px; cursor: pointer;
+    box-shadow: 0 10px 26px rgba(15,61,83,0.38); align-items: center; gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .paula-fab.intro-pulse { animation: paulaAttention 1.1s ease-in-out 3; }
+  @keyframes paulaAttention {
+    0%, 100% { transform: scale(1); box-shadow: 0 10px 26px rgba(15,61,83,0.38); }
+    50% { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(212,190,122,0.4); }
+  }
+  .paula-fab:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .paula-avatar-wrap {
+    position: relative; width: 38px; height: 38px; border-radius: 50%;
+    background: #fef3c7; border: 2px solid var(--dorado);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .paula-online-dot {
+    position: absolute; bottom: -1px; right: -1px; width: 11px; height: 11px;
+    background: #22c55e; border: 2px solid #0F3D53; border-radius: 50%;
+  }
+  .paula-fab-labels { text-align: left; line-height: 1.2; }
+  .paula-fab-labels b { display: block; font-size: 12.5px; color: #fff; }
+  .paula-fab-labels small { display: block; font-size: 10px; color: #fef08a; font-weight: 700; }
+
+  .paula-window {
+    display: none; position: fixed; bottom: 84px; left: 20px; z-index: 950;
+    width: 345px; max-width: calc(100vw - 28px); height: 450px; max-height: calc(100vh - 115px);
+    background: #fff; border-radius: 14px; border: 2px solid var(--dorado);
+    box-shadow: 0 18px 40px rgba(15,61,83,0.32); flex-direction: column; overflow: hidden;
+    animation: modalPop 0.25s ease;
+  }
+  .paula-window.open { display: flex; }
+
+  /* MÓVIL: PAULA COMPACTA SOLO AVATAR EN ESQUINA INFERIOR IZQUIERDA */
+  @media (max-width: 960px) {
+    .paula-fab {
+      padding: 4px; border-radius: 50%; bottom: 16px; left: 16px; gap: 0;
+    }
+    .paula-fab-labels { display: none; }
+    .paula-avatar-wrap { width: 44px; height: 44px; }
+    .paula-window {
+      left: 14px; right: 14px; width: auto; bottom: 74px;
+    }
+  }
+
+  .paula-header {
+    background: var(--azul); color: #fff; padding: 10px 14px;
+    display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--dorado);
+  }
+  .paula-header-left { display: flex; align-items: center; gap: 10px; }
+  .paula-header-info b { display: block; font-size: 13.5px; }
+  .paula-header-info small { font-size: 10.5px; color: var(--dorado); }
+  .paula-close {
+    background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; font-weight: bold;
+  }
+  .paula-messages {
+    flex: 1; padding: 12px; overflow-y: auto; background: #f8fafc;
+    display: flex; flex-direction: column; gap: 8px; font-size: 12.2px;
+  }
+  .msg-bubble {
+    max-width: 86%; padding: 8px 11px; border-radius: 12px; line-height: 1.38; word-wrap: break-word;
+  }
+  .msg-bot {
+    align-self: flex-start; background: #ffffff; color: #1e293b; border: 1px solid #e2e8f0; border-bottom-left-radius: 3px;
+  }
+  .msg-user {
+    align-self: flex-end; background: var(--azul); color: #ffffff; border-bottom-right-radius: 3px;
+  }
+  .paula-quick {
+    padding: 6px 10px; background: #f1f5f9; border-top: 1px solid #e2e8f0;
+    display: flex; gap: 6px; overflow-x: auto; white-space: nowrap;
+  }
+  .quick-chip {
+    background: #fff; border: 1px solid #cbd5e1; color: var(--azul); font-size: 10.5px;
+    font-weight: 700; padding: 5px 9px; border-radius: 14px; cursor: pointer;
+  }
+  .quick-chip:hover { background: var(--azul); color: #fff; }
+  .paula-input-area {
+    display: flex; gap: 6px; padding: 8px; background: #fff; border-top: 1px solid #e2e8f0;
+  }
+  .paula-input-area input {
+    flex: 1; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 18px; font-size: 12px; outline: none;
+  }
+  .paula-input-area input:focus { border-color: var(--azul); }
+  .paula-send {
+    background: #00695c; color: #fff; border: none; border-radius: 18px;
+    padding: 0 14px; font-weight: 800; font-size: 12px; cursor: pointer;
+  }
+  .paula-send:disabled { opacity: 0.5; cursor: not-allowed; }
 
   @keyframes pulse {
     0% { transform: scale(1); }
@@ -291,24 +416,23 @@
   }
 
   @media print {
-    .promo-top-bar, header .toolbar, .side-panel, .legend-bar button, .interactive-hint-bar, .modal-overlay { display: none !important; }
+    .promo-top-bar, header .toolbar, .side-panel, .legend-bar button, .interactive-hint-bar, .modal-overlay, .paula-fab, .paula-window { display: none !important; }
     .layout { display: block; height: auto; }
-    svg { max-width: 100%; border: none; box-shadow: none; }
+    svg#mapaSvg { max-width: 100%; border: none; box-shadow: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- CINTILLO SUPERIOR DINÁMICO -->
 <div class="promo-top-bar">
   <span class="promo-tag" id="topTag">LOTES EN PREVENTA</span>
-  <span id="topText">Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>32 meses</b> • Apartá con <b>$250 USD</b> • Tel: <a href="tel:+50576940400" id="top-phone-link" style="color:#fef08a;"><span id="top-phone-text">+505 7694-0400</span></a></span>
+  <span id="topText">Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>31 meses</b> • Apartá con <b>$250 USD</b> • Tel: <a href="tel:+50576940400" id="top-phone-link" style="color:#fef08a;"><span id="top-phone-text">+505 7694-0400</span></a></span>
 </div>
 
 <header>
   <div class="brand">
     <h1 id="brandTitle">MAREAS DEL SUR — <span>LOTES EN PREVENTA</span></h1>
-    <p id="brandSubtitle">Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro SJDS</p>
+    <p id="brandSubtitle">Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro de San Juan del Sur</p>
     <div class="brand-contact">
       🌐 <a href="https://www.mareasdelsur.com" target="_blank">www.mareasdelsur.com</a>  |  
       📞 <a href="https://wa.me/50576940400" target="_blank" id="header-wa-link"><span id="header-phone-text">+505 7694-0400</span></a>
@@ -383,14 +507,12 @@
     <div>
       <input type="number" class="search-input" id="searchBox" min="1" max="125" placeholder="Escribí un número de lote..." oninput="seleccionar(this.value, false)">
 
-      <!-- STEPPER DINÁMICO -->
       <div class="stepper-box">
         <div class="step-node active" id="stepNode1"><span class="step-circle" id="stepCircle1">1</span> <span id="stepLabel1">Elegí Lote</span></div>
         <div class="step-node" id="stepNode2"><span class="step-circle" id="stepCircle2">2</span> <span id="stepLabel2">Tus Datos</span></div>
         <div class="step-node" id="stepNode3"><span class="step-circle" id="stepCircle3">3</span> <span id="stepLabel3">Tu Cuota</span></div>
       </div>
 
-      <!-- BANNER DE ASESOR ASIGNADO -->
       <div id="asesorBanner" style="display:none; background:#e0f2fe; border:1px solid #7dd3fc; padding:8px 12px; border-radius:6px; margin-bottom:10px; align-items:center; gap:10px;">
         <span style="font-size:20px;">👤</span>
         <div>
@@ -399,21 +521,18 @@
         </div>
       </div>
 
-      <!-- TARJETA INFORMATIVA -->
       <div class="reserva-box" id="infoCardText">
         <b>LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>
         • <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>
-        • <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 32 meses.<br>
+        • <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 31 meses.<br>
         • <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br>
         <span style="font-size:10px; color:#92400e; display:block; margin-top:3px;">
           *Aplican restricciones. Reserva no reembolsable en caso de desistimiento.
         </span>
       </div>
 
-      <!-- DETALLE DEL LOTE -->
       <div id="detalleLote"></div>
 
-      <!-- PANEL DE ADMINISTRADOR EN LA NUBE -->
       <div class="admin-box" id="adminBox">
         <strong style="color:var(--azul);display:block;margin-bottom:4px;" id="admTitle">ADMIN (GUARDADO EN LA NUBE)</strong>
         <span id="admSub">Cambiar estatus del <b id="admLoteLbl">Lote</b>:</span>
@@ -439,14 +558,66 @@
   </div>
 </div>
 
-<!-- MODAL GUÍA RÁPIDA (DISEÑO ELEGANTE Y CENTRADO) -->
+<!-- BURBUJA Y VENTANA DE CHAT DE PAULA (IZQUIERDA, AZUL MARINO, COMPACTA EN MÓVIL) -->
+<button id="paulaFab" class="paula-fab" onclick="togglePaulaChat()" title="Preguntale a Paula">
+  <div class="paula-avatar-wrap">
+    <svg viewBox="0 0 64 64" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="30" fill="#fef3c7"/>
+      <path d="M16 54c1-11 8-17 16-17s15 6 16 17" fill="#0F3D53"/>
+      <path d="M26 38l6 7 6-7" fill="#ffffff"/>
+      <path d="M19 28c0-10 6-16 13-16s13 6 13 16c0 4-1 8-3 10l-1-6c-2-5-6-7-9-7s-7 2-9 7l-1 6c-2-2-3-6-3-10z" fill="#3b2314"/>
+      <circle cx="32" cy="27" r="9.5" fill="#f3c6a5"/>
+      <circle cx="28.5" cy="26.5" r="1.2" fill="#1e293b"/>
+      <circle cx="35.5" cy="26.5" r="1.2" fill="#1e293b"/>
+      <path d="M29 31.2c1.8 1.5 4.2 1.5 6 0" stroke="#9a3412" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="paula-online-dot"></span>
+  </div>
+  <div class="paula-fab-labels">
+    <b id="paulaFabText">¿Tenés dudas rápidas?</b>
+    <small id="paulaFabSub">Preguntale a Paula • Respuestas al instante</small>
+  </div>
+</button>
+
+<div id="paulaWindow" class="paula-window">
+  <div class="paula-header">
+    <div class="paula-header-left">
+      <div class="paula-avatar-wrap" style="width:34px; height:34px;">
+        <svg viewBox="0 0 64 64" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="30" fill="#fef3c7"/>
+          <path d="M16 54c1-11 8-17 16-17s15 6 16 17" fill="#0F3D53"/>
+          <path d="M26 38l6 7 6-7" fill="#ffffff"/>
+          <path d="M19 28c0-10 6-16 13-16s13 6 13 16c0 4-1 8-3 10l-1-6c-2-5-6-7-9-7s-7 2-9 7l-1 6c-2-2-3-6-3-10z" fill="#3b2314"/>
+          <circle cx="32" cy="27" r="9.5" fill="#f3c6a5"/>
+          <circle cx="28.5" cy="26.5" r="1.2" fill="#1e293b"/>
+          <circle cx="35.5" cy="26.5" r="1.2" fill="#1e293b"/>
+          <path d="M29 31.2c1.8 1.5 4.2 1.5 6 0" stroke="#9a3412" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="paula-online-dot" style="width:9px; height:9px;"></span>
+      </div>
+      <div class="paula-header-info">
+        <b>Paula • Mareas del Sur</b>
+        <small id="paulaSubLbl">Respuestas al instante (2ª Etapa)</small>
+      </div>
+    </div>
+    <button class="paula-close" onclick="togglePaulaChat()">✕</button>
+  </div>
+  <div id="paulaMessages" class="paula-messages"></div>
+  <div id="paulaQuick" class="paula-quick"></div>
+  <div class="paula-input-area">
+    <input type="text" id="paulaInput" maxlength="250" placeholder="Escribí tu duda aquí..." onkeydown="if(event.key==='Enter') enviarMensajePaula()">
+    <button id="paulaSendBtn" class="paula-send" onclick="enviarMensajePaula()">Enviar</button>
+  </div>
+</div>
+
+<!-- MODAL GUÍA RÁPIDA -->
 <div class="modal-overlay open" id="guideModal">
   <div class="guide-card">
     <div class="guide-header-banner">
       <h3 id="guideTitle">LOTES EN VENTA EN SAN JUAN DEL SUR</h3>
       <p id="guideSub">PROYECTO MAREAS DEL SUR</p>
       <div style="margin-top: 10px;">
-        <button onclick="toggleIdiomaModal()" id="btnLangModal" style="background: rgba(15,61,83,0.9); color: #fef08a; border: 1.5px solid var(--dorado); padding: 5px 14px; border-radius: 14px; font-weight: 800; font-size: 11.5px; cursor: pointer; backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.2);">🇬🇧 English</button>
+        <button onclick="toggleIdiomaModal()" id="btnLangModal" style="background: rgba(15,61,83,0.9); color: #fef08a; border: 1.5px solid var(--dorado); padding: 5px 14px; border-radius: 14px; font-weight: 800; font-size: 11.5px; cursor: pointer;">🇬🇧 English</button>
       </div>
     </div>
     
@@ -488,16 +659,18 @@
 // ==================== CONFIGURACIÓN Y IDIOMA ====================
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec";
 
-// Idioma inicial por defecto: Español ('es')
+const WA_ICON_SVG = `<svg viewBox="0 0 32 32" width="19" height="19" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;"><path d="M16.002 2.667C8.636 2.667 2.667 8.636 2.667 16c0 2.353.614 4.65 1.78 6.674L2.56 29.333l6.827-1.79A13.27 13.27 0 0 0 16.002 29.333C23.367 29.333 29.333 23.364 29.333 16S23.367 2.667 16.002 2.667zm0 24.426a11.06 11.06 0 0 1-5.643-1.547l-.405-.24-4.051 1.063 1.082-3.95-.264-.42A11.036 11.036 0 0 1 4.91 16c0-6.115 4.976-11.09 11.092-11.09 2.963 0 5.747 1.154 7.841 3.25a11.018 11.018 0 0 1 3.25 7.84c0 6.116-4.976 11.093-11.091 11.093zm6.085-8.306c-.334-.167-1.974-.974-2.28-1.085-.306-.112-.528-.167-.751.167-.222.334-.862 1.085-1.057 1.308-.195.223-.39.25-.723.084-.334-.167-1.409-.52-2.683-1.656-.991-.884-1.66-1.976-1.855-2.31-.195-.334-.021-.514.146-.68.15-.15.334-.39.5-.585.167-.195.223-.334.334-.556.111-.223.056-.418-.028-.585-.083-.167-.751-1.81-1.029-2.478-.271-.65-.546-.562-.751-.573-.195-.01-.418-.012-.64-.012-.222 0-.584.084-.89.418-.306.334-1.168 1.141-1.168 2.783 0 1.642 1.196 3.229 1.363 3.452.167.223 2.354 3.594 5.702 5.04.796.344 1.418.549 1.902.703.8.254 1.527.218 2.102.132.641-.096 1.974-.807 2.252-1.586.278-.78.278-1.448.195-1.587-.083-.139-.306-.222-.64-.39z"/></svg>`;
+
 let idiomaActual = 'es';
+let planSeleccionado = 'm36'; // Abre por defecto en 36 meses
 
 const textos = {
   es: {
     pageTitle: "Mareas del Sur — Lotes en Preventa en San Juan del Sur",
     topTag: "LOTES EN PREVENTA",
-    topText: "Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>32 meses</b> • Apartá con <b>$250 USD</b> • Tel:",
+    topText: "Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>31 meses</b> • Apartá con <b>$250 USD</b> • Tel:",
     brandTitle: "MAREAS DEL SUR — <span>LOTES EN PREVENTA</span>",
-    brandSubtitle: "Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro SJDS",
+    brandSubtitle: "Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro de San Juan del Sur",
     btnLang: "🇬🇧 English",
     btnGuide: "¿Cómo usar?",
     btnWeb: "Web Oficial",
@@ -518,7 +691,7 @@ const textos = {
     step2: "Tus Datos",
     step3: "Tu Cuota",
     agentTitle: "Asesor Asignado",
-    infoCard: "<b>LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>• <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>• <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 32 meses.<br>• <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Aplican restricciones. Reserva no reembolsable en caso de desistimiento.</span>",
+    infoCard: "<b>LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>• <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>• <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 31 meses.<br>• <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Aplican restricciones. Reserva no reembolsable en caso de desistimiento.</span>",
     emptyCardTitle: "Paso 1: Seleccioná un lote en el mapa",
     emptyCardDesc: "Tocá cualquier lote disponible (color crema) en el mapa de arriba o escribí su número en el buscador para ver sus medidas oficiales y cotizar.",
     guideBtnModal: "¡Ver Lotes Disponibles! 🚀",
@@ -531,14 +704,19 @@ const textos = {
     g2t: "2. Ingresá tu Nombre, WhatsApp y Ciudad",
     g2s: "Conocé precios de preventa y calculá tus opciones de financiamiento.",
     g3t: "3. Cotizá o agendá tu visita",
-    g3s: "Calculá tus cuotas mensuales y coordiná todo directamente por WhatsApp."
+    g3s: "Calculá tus cuotas mensuales y coordiná todo directamente por WhatsApp.",
+    paulaFab: "¿Tenés dudas rápidas?",
+    paulaFabSub: "Preguntale a Paula • Respuestas al instante",
+    paulaSub: "Respuestas al instante (2ª Etapa)",
+    paulaPH: "Escribí tu duda aquí...",
+    paulaSend: "Enviar"
   },
   en: {
     pageTitle: "Mareas del Sur — Pre-sale Lots in San Juan del Sur",
     topTag: "PRE-SALE LOTS",
-    topText: "Your investment lot in San Juan del Sur • Down payments from <b>$2,000 USD</b> • Services in <b>32 months</b> • Reserve with <b>$250 USD</b> • Tel:",
+    topText: "Your investment lot in San Juan del Sur • Down payments from <b>$2,000 USD</b> • Services in <b>31 months</b> • Reserve with <b>$250 USD</b> • Tel:",
     brandTitle: "MAREAS DEL SUR — <span>PRE-SALE LOTS</span>",
-    brandSubtitle: "Lots 700m from Coastal Hwy • 3 min Remanso Beach • 7 min SJDS Center",
+    brandSubtitle: "Lots 700m from Coastal Hwy • 3 min Remanso Beach • 7 min San Juan del Sur Center",
     btnLang: "🇪🇸 Español",
     btnGuide: "How to use?",
     btnWeb: "Official Web",
@@ -559,7 +737,7 @@ const textos = {
     step2: "Your Info",
     step3: "Your Plan",
     agentTitle: "Assigned Agent",
-    infoCard: "<b>PRE-SALE LOTS • SECURE INVESTMENT</b><br>• <b>Your lot in San Juan del Sur:</b> Secure your land with frozen pricing before appreciation.<br>• <b>Basic services (water & power):</b> Projected delivery in 32 months.<br>• <b>Promotional Reservation:</b> Only <b>$250 USD</b> (100% applicable to your 15% down payment).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Restrictions apply. Non-refundable reservation in case of withdrawal.</span>",
+    infoCard: "<b>PRE-SALE LOTS • SECURE INVESTMENT</b><br>• <b>Your lot in San Juan del Sur:</b> Secure your land with frozen pricing before appreciation.<br>• <b>Basic services (water & power):</b> Projected delivery in 31 months.<br>• <b>Promotional Reservation:</b> Only <b>$250 USD</b> (100% applicable to your 15% down payment).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Restrictions apply. Non-refundable reservation in case of withdrawal.</span>",
     emptyCardTitle: "Step 1: Select a lot on the map",
     emptyCardDesc: "Tap any available lot (cream color) on the map above or type its number in the search box to view official measurements and pricing.",
     guideBtnModal: "View Available Lots! 🚀",
@@ -572,28 +750,28 @@ const textos = {
     g2t: "2. Enter your Name, WhatsApp and City",
     g2s: "Explore pre-sale pricing and calculate your financing options.",
     g3t: "3. Quote or schedule your visit",
-    g3s: "Calculate monthly payments and coordinate directly via WhatsApp."
+    g3s: "Calculate monthly payments and coordinate directly via WhatsApp.",
+    paulaFab: "Quick questions?",
+    paulaFabSub: "Ask Paula • Instant answers",
+    paulaSub: "Instant answers (Stage 2)",
+    paulaPH: "Type your question here...",
+    paulaSend: "Send"
   }
 };
 
-function t(key) {
-  return textos[idiomaActual][key] || key;
-}
+function t(key) { return textos[idiomaActual][key] || key; }
 
 function toggleIdioma() {
   idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
   actualizarTextosInterfaz();
   if (loteActualId) seleccionar(loteActualId, false);
 }
-
-function toggleIdiomaModal() {
-  toggleIdioma();
-}
+function toggleIdiomaModal() { toggleIdioma(); }
 
 function actualizarTextosInterfaz() {
   document.getElementById('pageTitle').innerText = t('pageTitle');
   document.getElementById('topTag').innerText = t('topTag');
-  document.getElementById('topText').innerHTML = t('topText') + ` <a href="tel:+50576940400" id="top-phone-link" style="color:#fef08a;"><span id="top-phone-text">${asesorActual.display}</span></a>`;
+  document.getElementById('topText').innerHTML = t('topText') + ` <a href="tel:${asesorActual.tel}" id="top-phone-link" style="color:#fef08a;"><span id="top-phone-text">${asesorActual.display}</span></a>`;
   document.getElementById('brandTitle').innerHTML = t('brandTitle');
   document.getElementById('brandSubtitle').innerText = t('brandSubtitle');
   document.getElementById('btnLang').innerText = t('btnLang');
@@ -620,9 +798,12 @@ function actualizarTextosInterfaz() {
   document.getElementById('agentTitleLbl').innerText = t('agentTitle');
   document.getElementById('infoCardText').innerHTML = t('infoCard');
 
-  document.getElementById('admTitle').innerText = t('admTitle') || "ADMIN (GUARDADO EN LA NUBE)";
-  document.getElementById('admSub').innerHTML = `${idiomaActual==='es'?'Cambiar estatus del':'Change status of'} <b id="admLoteLbl">Lote</b>:`;
-  document.getElementById('btnGuardarAdmin').innerText = idiomaActual==='es' ? "Guardar en la Nube" : "Save to Cloud";
+  document.getElementById('paulaFabText').innerText = t('paulaFab');
+  document.getElementById('paulaFabSub').innerText = t('paulaFabSub');
+  document.getElementById('paulaSubLbl').innerText = t('paulaSub');
+  document.getElementById('paulaInput').placeholder = t('paulaPH');
+  document.getElementById('paulaSendBtn').innerText = t('paulaSend');
+  renderQuickReplies();
 
   document.getElementById('guideTitle').innerText = t('guideTitle');
   document.getElementById('guideSub').innerText = t('guideSub');
@@ -636,9 +817,7 @@ function actualizarTextosInterfaz() {
   document.getElementById('guideBtn').innerText = t('guideBtnModal');
   document.getElementById('btnLangModal').innerText = t('btnLangModal');
 
-  if(!loteActualId) {
-    mostrarPantallaInicial();
-  }
+  if(!loteActualId) mostrarPantallaInicial();
 }
 
 let ASESORES = {
@@ -656,16 +835,13 @@ let ciudadClientePersistente = "";
 let usuarioDesbloqueado = false;
 let loteActualId = null;
 
-// ==================== FUNCIONES DE ASESORES ====================
 function inicializarAsesor() {
   try {
     const urlParams = new URLSearchParams(window.location.search);
     const asesorParam = urlParams.get('asesor');
-    
     if (asesorParam && ASESORES[asesorParam.toLowerCase()]) {
       localStorage.setItem('asesor_mds', asesorParam.toLowerCase());
     }
-
     const asesorGuardado = localStorage.getItem('asesor_mds');
     if (asesorGuardado && ASESORES[asesorGuardado]) {
       asesorActual = ASESORES[asesorGuardado];
@@ -674,19 +850,16 @@ function inicializarAsesor() {
         document.getElementById('asesorNombreDisplay').innerText = asesorActual.nombre;
       }
     }
-
     document.getElementById('top-phone-text').innerText = asesorActual.display;
     document.getElementById('top-phone-link').href = `tel:${asesorActual.tel}`;
     document.getElementById('header-phone-text').innerText = asesorActual.display;
     document.getElementById('header-wa-link').href = `https://wa.me/${asesorActual.tel}`;
     document.getElementById('footer-phone-text').innerText = asesorActual.display;
     document.getElementById('footer-wa-link').href = `https://wa.me/${asesorActual.tel}`;
-  } catch(e) {
-    console.log("Modo offline o incognito");
-  }
+  } catch(e) {}
 }
 
-// ==================== GEOMETRÍA DEL MAPA ====================
+// ==================== GEOMETRÍA Y DATOS ====================
 const tablaPrecios = {
   1: { contado: 17987, m12: 19380, m24: 20727, m36: 22131 }, 2: { contado: 17987, m12: 19380, m24: 20727, m36: 22131 },
   3: { contado: 18619, m12: 20061, m24: 21455, m36: 22909 }, 4: { contado: 18619, m12: 20061, m24: 21455, m36: 22909 },
@@ -984,7 +1157,6 @@ function construirLotesUniformes() {
 function renderizarMapa() {
   const contenedor = document.getElementById('capaLotes');
   contenedor.innerHTML = "";
-
   lotes.forEach(l => {
     l.est = obtenerEstatus(l.id);
     const c = l.est === "Reservado S/P" || l.est === "Reserved S/P" ? "c-res" : ((l.est === "Vendido M.S." || l.est === "Sold M.S.") ? "c-vend" : ((l.est === "Vendido" || l.est === "Sold") ? "c-cerrado" : "c-disp"));
@@ -1007,24 +1179,10 @@ function renderizarMapa() {
   });
 }
 
-function enviarAGoogleSheets(datos) {
-  if (!GOOGLE_SHEETS_URL) return;
-  fetch(GOOGLE_SHEETS_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify(datos)
-  }).catch(err => console.error(err));
-}
-
 function actualizarStepper() {
-  const node1 = document.getElementById('stepNode1');
-  const label1 = document.getElementById('stepLabel1');
-  const circ1 = document.getElementById('stepCircle1');
-  const node2 = document.getElementById('stepNode2');
-  const circ2 = document.getElementById('stepCircle2');
-  const node3 = document.getElementById('stepNode3');
-  const circ3 = document.getElementById('stepCircle3');
+  const node1 = document.getElementById('stepNode1'), label1 = document.getElementById('stepLabel1'), circ1 = document.getElementById('stepCircle1');
+  const node2 = document.getElementById('stepNode2'), circ2 = document.getElementById('stepCircle2');
+  const node3 = document.getElementById('stepNode3'), circ3 = document.getElementById('stepCircle3');
 
   if(loteActualId) {
     node1.className = "step-node completed";
@@ -1032,20 +1190,16 @@ function actualizarStepper() {
     circ1.innerText = "✓";
   } else {
     node1.className = "step-node active";
-    label1.innerText = idiomaActual==='es' ? "Elegí Lote" : "Choose Lot";
+    label1.innerText = t('step1');
     circ1.innerText = "1";
   }
 
   if(usuarioDesbloqueado) {
-    node2.className = "step-node completed";
-    circ2.innerText = "✓";
-    node3.className = "step-node active";
-    circ3.innerText = "3";
+    node2.className = "step-node completed"; circ2.innerText = "✓";
+    node3.className = "step-node active"; circ3.innerText = "3";
   } else {
-    node2.className = loteActualId ? "step-node active" : "step-node";
-    circ2.innerText = "2";
-    node3.className = "step-node";
-    circ3.innerText = "3";
+    node2.className = loteActualId ? "step-node active" : "step-node"; circ2.innerText = "2";
+    node3.className = "step-node"; circ3.innerText = "3";
   }
 }
 
@@ -1059,18 +1213,14 @@ function mostrarPantallaInicial() {
       <div style="display:flex; justify-content:center; gap:6px; flex-wrap:wrap;">
         <span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🛣️ ${idiomaActual==='es'?'700m Costanera':'700m Coastal Hwy'}</span>
         <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 ${idiomaActual==='es'?'3 min Remanso':'3 min Remanso Beach'}</span>
-        <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 ${idiomaActual==='es'?'7 min Centro SJDS':'7 min SJDS Center'}</span>
+        <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 ${idiomaActual==='es'?'7 min Centro de San Juan del Sur':'7 min San Juan del Sur Center'}</span>
       </div>
     </div>
   `;
 }
 
 function seleccionar(id, hacerScroll=false) {
-  if(!id) {
-    loteActualId = null;
-    mostrarPantallaInicial();
-    return;
-  }
+  if(!id) { loteActualId = null; mostrarPantallaInicial(); return; }
   const l = lotes.find(x => x.id == id);
   if(!l) return;
   loteActualId = l.id;
@@ -1087,7 +1237,7 @@ function seleccionar(id, hacerScroll=false) {
         <div class="calc-box">
           <h4>📋 ${idiomaActual==='es'?'Cotizador de Lotes en Preventa':'Pre-sale Lot Estimator'}</h4>
           <p style="font-size:11px; color:#556b75; margin-bottom:10px; line-height:1.35;">
-            ${idiomaActual==='es'?'Ingresá tus datos para ver el precio oficial de preventa y calcular las opciones de financiamiento del':'Enter your details to view official pre-sale pricing and calculate financing options for'} <b>Lote ${l.id}</b>:
+            ${idiomaActual==='es'?'Ingresá tus datos para ver precios, planes de financiamiento y activar el chat rápido para el':'Enter your details to view pricing, financing plans and activate quick chat for'} <b>Lote ${l.id}</b>:
           </p>
           <div class="calc-field">
             <label for="clientName"><b>${idiomaActual==='es'?'1. Nombre y Apellido:':'1. Full Name:'}</b> <span style="color:#dc2626;">*</span></label>
@@ -1116,19 +1266,33 @@ function seleccionar(id, hacerScroll=false) {
             <a href="javascript:void(0)" onclick="editarDatos()" style="color:#0369a1; font-weight:700; text-decoration:none;">${idiomaActual==='es'?'Editar':'Edit'}</a>
           </div>
 
-          <h4>🧮 ${idiomaActual==='es'?'Opciones de Pago para Lote':'Payment Options for Lot'} ${l.id}</h4>
-          <div class="calc-field">
-            <label><b>${idiomaActual==='es'?'Modalidad de Pago:':'Payment Plan:'}</b></label>
-            <select id="planPago" onchange="calcularCuota(${l.id})">
-              <option value="contado">${idiomaActual==='es'?'Pago de Contado':'Cash Payment'}: $${l.precios.contado.toLocaleString()} USD</option>
-              <option value="m12">${idiomaActual==='es'?'Financiamiento a 12 Meses (1 Año)':'12-Month Financing (1 Year)'}</option>
-              <option value="m24">${idiomaActual==='es'?'Financiamiento a 24 Meses (2 Años)':'24-Month Financing (2 Years)'}</option>
-              <option value="m36">${idiomaActual==='es'?'Financiamiento a 36 Meses (3 Años)':'36-Month Financing (3 Years)'}</option>
-            </select>
+          <h4>🧮 ${idiomaActual==='es'?'Elegí tu Plan para Lote':'Choose your Plan for Lot'} ${l.id}</h4>
+          
+          <div class="plan-grid">
+            <button type="button" class="plan-btn ${planSeleccionado==='m36'?'active':''}" id="btnPlan-m36" onclick="seleccionarPlan('m36', ${l.id})">
+              <span class="pop-badge">${idiomaActual==='es'?'Popular':'Popular'}</span>
+              <b>36 ${idiomaActual==='es'?'Meses':'Mo'}</b>
+              <small>${idiomaActual==='es'?'3 Años':'3 Yrs'}</small>
+            </button>
+            <button type="button" class="plan-btn ${planSeleccionado==='m24'?'active':''}" id="btnPlan-m24" onclick="seleccionarPlan('m24', ${l.id})">
+              <b>24 ${idiomaActual==='es'?'Meses':'Mo'}</b>
+              <small>${idiomaActual==='es'?'2 Años':'2 Yrs'}</small>
+            </button>
+            <button type="button" class="plan-btn ${planSeleccionado==='m12'?'active':''}" id="btnPlan-m12" onclick="seleccionarPlan('m12', ${l.id})">
+              <b>12 ${idiomaActual==='es'?'Meses':'Mo'}</b>
+              <small>${idiomaActual==='es'?'1 Año':'1 Yr'}</small>
+            </button>
+            <button type="button" class="plan-btn ${planSeleccionado==='contado'?'active':''}" id="btnPlan-contado" onclick="seleccionarPlan('contado', ${l.id})">
+              <b>${idiomaActual==='es'?'Contado':'Cash'}</b>
+              <small>${idiomaActual==='es'?'Directo':'Direct'}</small>
+            </button>
           </div>
+
           <div class="calc-results" id="calcResults"></div>
           <div class="calc-note">
-            ${idiomaActual==='es'?'* Primas desde $2,000 USD. Podés apartar y congelar el precio de este lote con solo $250 USD (100% abonables a tu prima).':'* Down payment from $2,000 USD. Reserve and lock in this lot with only $250 USD (100% applicable to down payment).'}
+            ${idiomaActual==='es'
+              ? 'Financiamiento directo sin bancos. El valor se ajusta según el plazo elegido para brindarte cuotas más cómodas. ¿Contás con una prima menor al 15%? <b>Consultalo con tu asesor.</b>'
+              : 'Direct financing without banks. Pricing adjusts by term to offer you more comfortable monthly payments. Have less than 15% down? <b>Ask your advisor.</b>'}
           </div>
 
           <div class="cita-opt-box">
@@ -1155,9 +1319,11 @@ function seleccionar(id, hacerScroll=false) {
             </div>
           </div>
 
-          <button class="btn" style="display:block;text-align:center;width:100%;padding:11px;font-size:13px;background:#00695c;color:#fff;font-weight:800;border-radius:8px;" onclick="enviarCotizacionWhatsApp(${l.id})">
-            📲 ${idiomaActual==='es'?'Consultar / Apartar por WhatsApp':'Inquire / Reserve via WhatsApp'}
+          <button class="btn-whatsapp-main" onclick="enviarCotizacionWhatsApp(${l.id})">
+            ${WA_ICON_SVG}
+            <span>${idiomaActual==='es'?'Consultar este lote por WhatsApp':'Inquire about this lot on WhatsApp'}</span>
           </button>
+          <div class="wa-subnote">${idiomaActual==='es'?'Sin compromiso de compra • Te enviamos el plan detallado':'No obligation • We send you the detailed plan'}</div>
         </div>
       `;
     }
@@ -1186,7 +1352,7 @@ function seleccionar(id, hacerScroll=false) {
         <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:9px;">
           <span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🛣️ ${idiomaActual==='es'?'700m Costanera':'700m Coastal Hwy'}</span>
           <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 ${idiomaActual==='es'?'3 min Remanso':'3 min Remanso Beach'}</span>
-          <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 ${idiomaActual==='es'?'7 min Centro SJDS':'7 min SJDS Center'}</span>
+          <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 ${idiomaActual==='es'?'7 min Centro de San Juan del Sur':'7 min San Juan del Sur Center'}</span>
         </div>
 
         <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-left:3.5px solid #16a34a; padding:6px 9px; border-radius:6px; font-size:11px; color:#14532d; margin-bottom:8px; line-height:1.35;">
@@ -1194,7 +1360,7 @@ function seleccionar(id, hacerScroll=false) {
         </div>
 
         <p style="font-size:11.8px;margin-bottom:3px;"><b>• ${idiomaActual==='es'?'Acceso Vial:':'Road Access:'}</b> ${l.via}</p>
-        <p style="font-size:11.8px;margin-bottom:6px;"><b>• ${idiomaActual==='es'?'Entrega de Servicios:':'Services Delivery:'}</b> ${idiomaActual==='es'?'Proyectada a 32 meses (Agua y Luz)':'Projected in 32 months (Water & Power)'}</p>
+        <p style="font-size:11.8px;margin-bottom:6px;"><b>• ${idiomaActual==='es'?'Entrega de Servicios:':'Services Delivery:'}</b> ${idiomaActual==='es'?'Proyectada a 31 meses (Agua y Luz)':'Projected in 31 months (Water & Power)'}</p>
 
         ${seccionCotizador}
       </div>
@@ -1217,12 +1383,19 @@ function seleccionar(id, hacerScroll=false) {
   }
 }
 
+function seleccionarPlan(plan, id) {
+  planSeleccionado = plan;
+  ['m36','m24','m12','contado'].forEach(p => {
+    const b = document.getElementById('btnPlan-' + p);
+    if (b) b.classList.toggle('active', p === plan);
+  });
+  calcularCuota(id);
+}
+
 function toggleCamposCita() {
   const check = document.getElementById('checkAgendarVisita');
   const box = document.getElementById('citaCampos');
-  if (box && check) {
-    box.style.display = check.checked ? 'grid' : 'none';
-  }
+  if (box && check) box.style.display = check.checked ? 'grid' : 'none';
 }
 
 function desbloquearYRegistrar(id) {
@@ -1237,49 +1410,23 @@ function desbloquearYRegistrar(id) {
   const ciu = inputCiu ? inputCiu.value.trim() : "";
 
   let valido = true;
-  if (nom.length < 3) {
-    if (inputNom) inputNom.classList.add('input-error');
-    valido = false;
-  } else {
-    if (inputNom) inputNom.classList.remove('input-error');
-  }
-
+  if (nom.length < 3) { if (inputNom) inputNom.classList.add('input-error'); valido = false; } else if (inputNom) inputNom.classList.remove('input-error');
   const digitos = telRaw.replace(/\D/g, '');
-  if (digitos.length < 8) {
-    if (inputTel) inputTel.classList.add('input-error');
-    valido = false;
-  } else {
-    if (inputTel) inputTel.classList.remove('input-error');
-  }
+  if (digitos.length < 8) { if (inputTel) inputTel.classList.add('input-error'); valido = false; } else if (inputTel) inputTel.classList.remove('input-error');
+  if (ciu.length < 2) { if (inputCiu) inputCiu.classList.add('input-error'); valido = false; } else if (inputCiu) inputCiu.classList.remove('input-error');
 
-  if (ciu.length < 2) {
-    if (inputCiu) inputCiu.classList.add('input-error');
-    valido = false;
-  } else {
-    if (inputCiu) inputCiu.classList.remove('input-error');
-  }
-
-  if (!valido) {
-    if (errorText) errorText.style.display = 'block';
-    return;
-  }
-
+  if (!valido) { if (errorText) errorText.style.display = 'block'; return; }
   if (errorText) errorText.style.display = 'none';
 
   const telLimpio = telRaw.replace(/^[+=]/, '').trim();
-
   nombreClientePersistente = nom;
   telefonoClientePersistente = telLimpio;
   ciudadClientePersistente = ciu;
   usuarioDesbloqueado = true;
 
-  if (btn) {
-    btn.innerText = idiomaActual==='es' ? "⏳ Desbloqueando..." : "⏳ Unlocking...";
-    btn.disabled = true;
-  }
+  if (btn) { btn.innerText = idiomaActual==='es' ? "⏳ Desbloqueando..." : "⏳ Unlocking..."; btn.disabled = true; }
 
   const l = lotes.find(x => x.id == id);
-  
   if (GOOGLE_SHEETS_URL) {
     fetch(GOOGLE_SHEETS_URL, {
       method: "POST",
@@ -1299,6 +1446,7 @@ function desbloquearYRegistrar(id) {
     });
   }
 
+  activarPaulaUI();
   seleccionar(id, false);
 }
 
@@ -1309,39 +1457,39 @@ function editarDatos() {
 
 function calcularCuota(id) {
   const l = lotes.find(x => x.id == id);
-  const planEl = document.getElementById('planPago');
-  if (!planEl) return;
-  const plan = planEl.value;
   const resDiv = document.getElementById('calcResults');
+  if (!resDiv || !l) return;
 
-  if (plan === 'contado') {
+  if (planSeleccionado === 'contado') {
     resDiv.innerHTML = `
       <div><span>${idiomaActual==='es'?'Modalidad:':'Plan:'}</span> <b>${idiomaActual==='es'?'Pago Directo de Contado':'Direct Cash Payment'}</b></div>
-      <div><span>${idiomaActual==='es'?'Precio de Contado:':'Cash Price:'}</span> <b style="color:var(--azul); font-size:13px;">$${l.precios.contado.toLocaleString()} USD</b></div>
-      <div><span>${idiomaActual==='es'?'Apartado Promocional:':'Promotional Hold:'}</span> <b style="color:#b45309;">$250 USD (${idiomaActual==='es'?'abona al precio':'applies to price'})</b></div>
+      <div><span>${idiomaActual==='es'?'Precio de Contado:':'Cash Price:'}</span> <b style="color:var(--azul); font-size:15px;">$${l.precios.contado.toLocaleString()} USD</b></div>
+      <div style="border-top:1px dashed #cbd5e1; padding-top:6px; margin-top:4px;">
+        <span>${idiomaActual==='es'?'Reserva para congelar lote:':'Reservation to lock lot:'}</span>
+        <b style="color:#b45309;">$250 USD (${idiomaActual==='es'?'abona al precio':'applies to price'})</b>
+      </div>
     `;
   } else {
-    let precioTotal = l.precios[plan];
-    let meses = parseInt(plan.replace('m',''));
+    let precioTotal = l.precios[planSeleccionado];
+    let meses = parseInt(planSeleccionado.replace('m',''));
     const prima15 = precioTotal * 0.15;
     const saldo = precioTotal - prima15;
     const cuota = saldo / meses;
 
     resDiv.innerHTML = `
-      <div><span>${idiomaActual==='es'?'Plan para tu Lote:':'Lot Plan:'}</span> <b>${idiomaActual==='es'?'Financiamiento a':'Financing for'} ${meses} ${idiomaActual==='es'?'Meses':'Months'}</b></div>
-      <div><span>${idiomaActual==='es'?'Requisito Inicial:':'Initial Requirement:'}</span> <b>15% ${idiomaActual==='es'?'de Prima':'Down Payment'}</b></div>
-      <div><span>${idiomaActual==='es'?'Reserva Inmediata:':'Immediate Hold:'}</span> <b style="color:#b45309;">$250 USD (${idiomaActual==='es'?'abona a tu prima':'applies to down payment'})</b></div>
-      <div style="border-top:1px dashed #cbd5e1; padding-top:6px; margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-weight:700;">${idiomaActual==='es'?'Cuota Mensual Estimada:':'Estimated Monthly Payment:'}</span>
-        <b style="color:#00695c; font-size:14px; font-weight:800;">$${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} / ${idiomaActual==='es'?'mes':'mo'}</b>
+      <div style="padding-bottom:6px; border-bottom:1px dashed #cbd5e1; margin-bottom:6px;">
+        <span style="font-weight:700; color:var(--azul);">${idiomaActual==='es'?'Cuota Mensual ('+meses+'m):':'Monthly Payment ('+meses+'m):'}</span>
+        <b style="color:#00695c; font-size:16px; font-weight:900;">$${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} / ${idiomaActual==='es'?'mes':'mo'}</b>
       </div>
+      <div><span>${idiomaActual==='es'?'Prima Estándar (15%):':'Standard Down Payment (15%):'}</span> <b>$${prima15.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} USD</b></div>
+      <div><span>${idiomaActual==='es'?'Reserva para congelar lote:':'Reservation to lock lot:'}</span> <b style="color:#b45309;">$250 USD (${idiomaActual==='es'?'abona a tu prima':'applies to down'})</b></div>
     `;
   }
 }
 
 function enviarCotizacionWhatsApp(id) {
   const l = lotes.find(x => x.id == id);
-  const plan = document.getElementById('planPago') ? document.getElementById('planPago').value : "contado";
+  const plan = planSeleccionado || "m36";
   const checkCita = document.getElementById('checkAgendarVisita');
   const fechaCita = document.getElementById('citaFecha') ? document.getElementById('citaFecha').value : "";
   const horaCita = document.getElementById('citaHora') ? document.getElementById('citaHora').value : "";
@@ -1358,14 +1506,12 @@ function enviarCotizacionWhatsApp(id) {
     let meses = parseInt(plan.replace('m', ''));
     const cuota = (l.precios[plan] * 0.85) / meses;
     detallePlan = idiomaActual === 'es' ?
-      `*Modalidad:* Financiamiento a ${meses} Meses\n*Cuota Estimada:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mes\n*Prima Requerida:* 15%\n` :
-      `*Plan:* ${meses}-Month Financing\n*Estimated Payment:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mo\n*Down Payment:* 15%\n`;
+      `*Modalidad:* Financiamiento a ${meses} Meses\n*Cuota Estimada:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mes\n*Prima Estándar:* 15%\n` :
+      `*Plan:* ${meses}-Month Financing\n*Estimated Payment:* $${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}/mo\n*Standard Down Payment:* 15%\n`;
     precioOCuota = "$" + cuota.toFixed(2) + "/mes (" + meses + "m)";
   }
 
-  let accionTexto = "WhatsApp (" + plan + ")";
   let textoCitaMensaje = "";
-
   if (checkCita && checkCita.checked && fechaCita) {
     textoCitaMensaje = idiomaActual === 'es' ?
       `\n*Solicitud de Visita:* ${fechaCita} a las ${horaCita}\n` :
@@ -1383,7 +1529,7 @@ function enviarCotizacionWhatsApp(id) {
         ciudad: ciudadClientePersistente,
         lote: id,
         asesor: asesorActual ? asesorActual.nombre : 'Oficina Central',
-        modalidad: accionTexto,
+        modalidad: "WhatsApp (" + plan + ")",
         cuota: precioOCuota,
         fechaCita: (checkCita && checkCita.checked) ? fechaCita : "",
         horaCita: (checkCita && checkCita.checked) ? horaCita : ""
@@ -1394,48 +1540,170 @@ function enviarCotizacionWhatsApp(id) {
   let mensaje = idiomaActual === 'es' ?
     `Hola, mi nombre es *${nombreClientePersistente}* de *${ciudadClientePersistente}*. Estuve revisando los lotes en Mareas del Sur (https://mareas-del-sur.vercel.app/):\n\n` +
     `*Lote Seleccionado:* LOTE ${l.id} (${l.m2} m² - ${l.rawDim}m)\n` +
-    `*Ubicación:* 700m Costanera • 3 min Playa Remanso • 7 min Centro SJDS\n` +
+    `*Ubicación:* 700m Costanera • 3 min Playa Remanso • 7 min Centro de San Juan del Sur\n` +
     detallePlan +
     textoCitaMensaje +
-    `\nDeseo consultar disponibilidad y coordinar los detalles con un asesor.` :
+    `\nMe gustaría consultar este lote y revisar las opciones disponibles.` :
     `Hello, my name is *${nombreClientePersistente}* from *${ciudadClientePersistente}*. I was reviewing the lots at Mareas del Sur (https://mareas-del-sur.vercel.app/):\n\n` +
     `*Selected Lot:* LOT ${l.id} (${l.m2} m² - ${l.rawDim}m)\n` +
-    `*Location:* 700m Coastal Hwy • 3 min Remanso Beach • 7 min SJDS Center\n` +
+    `*Location:* 700m Coastal Hwy • 3 min Remanso Beach • 7 min San Juan del Sur Center\n` +
     detallePlan +
     textoCitaMensaje +
-    `\nI would like to check availability and coordinate details with an agent.`;
+    `\nI would like to inquire about this lot and review the available options.`;
 
   window.open(`https://wa.me/${asesorActual.tel}?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
-/* ==============================================================
-   CARGAR DATOS DESDE LA NUBE AL ENTRAR
-============================================================== */
+// ==================== CHAT DE PAULA (IA + 4 FILTROS ANTI-BASURA) ====================
+let paulaInicializada = false;
+let paulaHistorial = [];
+let paulaUltimoEnvio = 0;
+
+function activarPaulaUI() {
+  const fab = document.getElementById('paulaFab');
+  if (fab) {
+    fab.style.display = 'flex';
+    fab.classList.add('intro-pulse');
+    setTimeout(() => fab.classList.remove('intro-pulse'), 3500);
+  }
+  if (!paulaInicializada) {
+    paulaInicializada = true;
+    const saludo = idiomaActual === 'es'
+      ? `¡Hola ${nombreClientePersistente}! 👋 Soy Paula, de Mareas del Sur. Ya tenés acceso a precios y planes. ¿Tenés alguna duda rápida sobre este lote o el financiamiento?`
+      : `Hi ${nombreClientePersistente}! 👋 I'm Paula, from Mareas del Sur. You now have access to prices and plans. Any quick questions about this lot or financing?`;
+    agregarBurbujaPaula(saludo, 'bot');
+    renderQuickReplies();
+  }
+}
+
+function togglePaulaChat() {
+  document.getElementById('paulaWindow').classList.toggle('open');
+}
+
+function renderQuickReplies() {
+  const box = document.getElementById('paulaQuick');
+  if (!box) return;
+  const chips = idiomaActual === 'es'
+    ? ["¿Cómo es el financiamiento?", "¿Cuándo entregan agua y luz?", "¿Dónde están ubicados?", "Tengo menos del 15% de prima"]
+    : ["How does financing work?", "When are utilities delivered?", "Where are you located?", "Lower down payment?"];
+  box.innerHTML = chips.map(c => `<button class="quick-chip" onclick="enviarMensajePaula('${c}')">${c}</button>`).join('');
+}
+
+function agregarBurbujaPaula(texto, tipo) {
+  const cont = document.getElementById('paulaMessages');
+  const div = document.createElement('div');
+  div.className = 'msg-bubble ' + (tipo === 'user' ? 'msg-user' : 'msg-bot');
+  div.innerText = texto;
+  cont.appendChild(div);
+  cont.scrollTop = cont.scrollHeight;
+  return div;
+}
+
+function obtenerConteoDiarioPaula() {
+  const hoy = new Date().toISOString().split('T')[0];
+  const key = 'paula_count_' + hoy;
+  return parseInt(localStorage.getItem(key) || '0', 10);
+}
+
+function incrementarConteoDiarioPaula() {
+  const hoy = new Date().toISOString().split('T')[0];
+  const key = 'paula_count_' + hoy;
+  localStorage.setItem(key, (obtenerConteoDiarioPaula() + 1).toString());
+}
+
+function enviarMensajePaula(textoChip) {
+  const input = document.getElementById('paulaInput');
+  const sendBtn = document.getElementById('paulaSendBtn');
+  const msg = (textoChip || input.value).trim();
+  if (!msg) return;
+
+  if (obtenerConteoDiarioPaula() >= 8) {
+    agregarBurbujaPaula(
+      idiomaActual === 'es'
+        ? "Para seguir atendiendo tus consultas a detalle, tocá el botón verde 'Consultar este lote por WhatsApp' aquí en la página 🙌."
+        : "To continue assisting you in detail, please tap the green 'Inquire about this lot on WhatsApp' button on this page 🙌.",
+      'bot'
+    );
+    return;
+  }
+
+  const ahora = Date.now();
+  if (ahora - paulaUltimoEnvio < 5000) {
+    agregarBurbujaPaula(
+      idiomaActual === 'es' ? "Esperá un par de segundos antes de enviar otro mensaje 👍." : "Please wait a few seconds before sending another message 👍.",
+      'bot'
+    );
+    return;
+  }
+
+  const soloLetras = msg.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]/g, '');
+  if (soloLetras.length < 4 || msg.length > 250 || /(.)\1{4,}/.test(msg)) {
+    agregarBurbujaPaula(
+      idiomaActual === 'es'
+        ? "Escribime una consulta clara sobre los lotes, precios o financiamiento de Mareas del Sur para poder ayudarte mejor 😄."
+        : "Please write a clear question about Mareas del Sur lots, pricing, or financing so I can help you better 😄.",
+      'bot'
+    );
+    if (!textoChip) input.value = "";
+    return;
+  }
+
+  if (!textoChip) input.value = "";
+  paulaUltimoEnvio = ahora;
+  agregarBurbujaPaula(msg, 'user');
+  const typingEl = agregarBurbujaPaula(idiomaActual === 'es' ? "Paula está escribiendo..." : "Paula is typing...", 'bot');
+  sendBtn.disabled = true;
+
+  const loteObj = lotes.find(x => x.id == loteActualId);
+  const dispIds = lotes.filter(x => x.est === "Disponible" || x.est === "Available").map(x => x.id);
+
+  fetch(GOOGLE_SHEETS_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({
+      action: "chat_paula",
+      mensaje: msg,
+      idioma: idiomaActual,
+      historial: paulaHistorial,
+      cliente: { nombre: nombreClientePersistente, ciudad: ciudadClientePersistente },
+      loteActual: loteObj ? { id: loteObj.id, m2: loteObj.m2, est: loteObj.est, via: loteObj.via, precios: loteObj.precios } : null,
+      disponiblesResumen: dispIds.length + " lotes disponibles (ej. " + dispIds.slice(0, 12).join(", ") + "...)"
+    })
+  })
+  .then(r => r.json())
+  .then(data => {
+    const reply = (data && data.reply) ? data.reply : (idiomaActual === 'es' ? "Tocá el botón verde 'Consultar este lote por WhatsApp' para hablar directo con tu asesor 👍." : "Tap the green 'Inquire about this lot on WhatsApp' button to talk directly with your advisor 👍.");
+    typingEl.innerText = reply;
+    paulaHistorial.push({ role: "user", text: msg });
+    paulaHistorial.push({ role: "model", text: reply });
+    incrementarConteoDiarioPaula();
+  })
+  .catch(() => {
+    typingEl.innerText = idiomaActual === 'es'
+      ? "Hubo un problema de conexión. Tocá el botón verde 'Consultar este lote por WhatsApp' para atenderte de inmediato."
+      : "Connection issue. Tap the green 'Inquire about this lot on WhatsApp' button so we can assist you right away.";
+  })
+  .finally(() => {
+    sendBtn.disabled = false;
+  });
+}
+
+// ==================== NUBE Y ADMIN ====================
 function cargarDatosDesdeNube() {
   if (!GOOGLE_SHEETS_URL) return;
-  
   fetch(GOOGLE_SHEETS_URL)
     .then(response => response.json())
     .then(data => {
-      if(data.asesores) {
-        ASESORES = Object.assign(ASESORES, data.asesores); 
-        inicializarAsesor(); 
-      }
+      if(data.asesores) { ASESORES = Object.assign(ASESORES, data.asesores); inicializarAsesor(); }
       if(data.inventario) {
         vendMS = data.inventario.vendMS || [];
         resSP = data.inventario.resSP || [];
         vendidosCerrados = data.inventario.vendidosCerrados || [];
         renderizarMapa();
       }
-    })
-    .catch(err => {
-      console.log("Modo local seguro activo");
-    });
+    }).catch(() => {});
 }
 
-/* ==============================================================
-   GUARDAR EL CAMBIO DE ESTATUS EN LA NUBE
-============================================================== */
 function cambiarEstatusAdminNube() {
   const id = loteActualId;
   const nuevoEst = document.getElementById('admSelect').value;
@@ -1454,63 +1722,37 @@ function cambiarEstatusAdminNube() {
 
   const btn = document.getElementById('btnGuardarAdmin');
   const originalText = btn.innerText;
-  btn.innerText = "⏳ Guardando...";
-  btn.disabled = true;
+  btn.innerText = "⏳ Guardando..."; btn.disabled = true;
 
   if (GOOGLE_SHEETS_URL) {
     fetch(GOOGLE_SHEETS_URL, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({
-        action: "update_status",
-        lote: id,
-        estado: nuevoEst
-      })
+      body: JSON.stringify({ action: "update_status", lote: id, estado: nuevoEst })
     }).then(() => {
-      setTimeout(() => {
-        btn.innerText = "💾 Guardado en la nube ✓";
-        btn.disabled = false;
-        setTimeout(() => { btn.innerText = originalText; }, 3000);
-      }, 1000);
-    }).catch(err => {
-      setTimeout(() => {
-        btn.innerText = "❌ Error";
-        btn.disabled = false;
-        setTimeout(() => { btn.innerText = originalText; }, 3000);
-      }, 1000);
+      setTimeout(() => { btn.innerText = "💾 Guardado en la nube ✓"; btn.disabled = false; setTimeout(() => { btn.innerText = originalText; }, 3000); }, 1000);
+    }).catch(() => {
+      setTimeout(() => { btn.innerText = "❌ Error"; btn.disabled = false; setTimeout(() => { btn.innerText = originalText; }, 3000); }, 1000);
     });
   }
 }
 
-function abrirGuia() {
-  document.getElementById('guideModal').classList.add('open');
-}
-function cerrarGuia() {
-  document.getElementById('guideModal').classList.remove('open');
-}
-
+function abrirGuia() { document.getElementById('guideModal').classList.add('open'); }
+function cerrarGuia() { document.getElementById('guideModal').classList.remove('open'); }
 function activarAdmin() {
   const pin = prompt(idiomaActual==='es' ? "Ingresa el PIN de Administrador:" : "Enter Admin PIN:");
   if(pin === "2026") document.getElementById('adminBox').style.display = "block";
   else if(pin !== null) alert(idiomaActual==='es' ? "PIN incorrecto." : "Incorrect PIN.");
 }
-
 function filtrar(tipo) {
   document.querySelectorAll('.lote').forEach(el => {
     el.style.opacity = (tipo === 'todos' || el.getAttribute('data-est').includes(tipo)) ? '1' : '0.18';
   });
 }
-
 let z = 1;
-function cambiarZoom(f) {
-  z = Math.min(Math.max(z * f, 0.7), 2.8);
-  document.getElementById('mapaSvg').style.transform = `scale(${z})`;
-}
-function resetZoom() {
-  z = 1;
-  document.getElementById('mapaSvg').style.transform = `scale(1)`;
-}
+function cambiarZoom(f) { z = Math.min(Math.max(z * f, 0.7), 2.8); document.getElementById('mapaSvg').style.transform = `scale(${z})`; }
+function resetZoom() { z = 1; document.getElementById('mapaSvg').style.transform = `scale(1)`; }
 
 // ==================== INICIALIZACIÓN ====================
 try {
