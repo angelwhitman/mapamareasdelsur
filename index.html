@@ -375,7 +375,7 @@
     background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; font-weight: bold;
   }
   .paula-messages {
-    flex: 1; padding: 12px; overflow-y: auto; background: #f8fafc;
+    flex: 1; padding: 12px 12px 18px 12px; overflow-y: auto; background: #f8fafc;
     display: flex; flex-direction: column; gap: 8px; font-size: 12.2px;
   }
   .msg-bubble {
@@ -1559,6 +1559,14 @@ let paulaInicializada = false;
 let paulaHistorial = [];
 let paulaUltimoEnvio = 0;
 
+function scrollPaulaAlFinal() {
+  const cont = document.getElementById('paulaMessages');
+  if (!cont) return;
+  requestAnimationFrame(() => {
+    cont.scrollTop = cont.scrollHeight;
+  });
+}
+
 function activarPaulaUI() {
   const fab = document.getElementById('paulaFab');
   if (fab) {
@@ -1577,7 +1585,9 @@ function activarPaulaUI() {
 }
 
 function togglePaulaChat() {
-  document.getElementById('paulaWindow').classList.toggle('open');
+  const win = document.getElementById('paulaWindow');
+  win.classList.toggle('open');
+  if (win.classList.contains('open')) scrollPaulaAlFinal();
 }
 
 function renderQuickReplies() {
@@ -1595,7 +1605,7 @@ function agregarBurbujaPaula(texto, tipo) {
   div.className = 'msg-bubble ' + (tipo === 'user' ? 'msg-user' : 'msg-bot');
   div.innerText = texto;
   cont.appendChild(div);
-  cont.scrollTop = cont.scrollHeight;
+  scrollPaulaAlFinal();
   return div;
 }
 
@@ -1674,6 +1684,7 @@ function enviarMensajePaula(textoChip) {
   .then(data => {
     const reply = (data && data.reply) ? data.reply : (idiomaActual === 'es' ? "Tocá el botón verde 'Consultar este lote por WhatsApp' para hablar directo con tu asesor 👍." : "Tap the green 'Inquire about this lot on WhatsApp' button to talk directly with your advisor 👍.");
     typingEl.innerText = reply;
+    scrollPaulaAlFinal();
     paulaHistorial.push({ role: "user", text: msg });
     paulaHistorial.push({ role: "model", text: reply });
     incrementarConteoDiarioPaula();
@@ -1682,6 +1693,7 @@ function enviarMensajePaula(textoChip) {
     typingEl.innerText = idiomaActual === 'es'
       ? "Hubo un problema de conexión. Tocá el botón verde 'Consultar este lote por WhatsApp' para atenderte de inmediato."
       : "Connection issue. Tap the green 'Inquire about this lot on WhatsApp' button so we can assist you right away.";
+    scrollPaulaAlFinal();
   })
   .finally(() => {
     sendBtn.disabled = false;
