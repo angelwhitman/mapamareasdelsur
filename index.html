@@ -1627,7 +1627,8 @@ function enviarMensajePaula(textoChip) {
   const msg = (textoChip || input.value).trim();
   if (!msg) return;
 
-  if (obtenerConteoDiarioPaula() >= 8) {
+  // Filtro 1: Límite diario (12 mensajes/día)
+  if (obtenerConteoDiarioPaula() >= 12) {
     agregarBurbujaPaula(
       idiomaActual === 'es'
         ? "Para seguir atendiendo tus consultas a detalle, tocá el botón verde 'Consultar este lote por WhatsApp' aquí en la página 🙌."
@@ -1637,6 +1638,7 @@ function enviarMensajePaula(textoChip) {
     return;
   }
 
+  // Filtro 2: Pausa anti-spam de 5 segundos
   const ahora = Date.now();
   if (ahora - paulaUltimoEnvio < 5000) {
     agregarBurbujaPaula(
@@ -1646,6 +1648,7 @@ function enviarMensajePaula(textoChip) {
     return;
   }
 
+  // Filtro 3: Anti-basura local (0 consumo de API)
   const soloLetras = msg.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]/g, '');
   if (soloLetras.length < 4 || msg.length > 250 || /(.)\1{4,}/.test(msg)) {
     agregarBurbujaPaula(
@@ -1667,8 +1670,12 @@ function enviarMensajePaula(textoChip) {
   const loteObj = lotes.find(x => x.id == loteActualId);
   const dispIds = lotes.filter(x => x.est === "Disponible" || x.est === "Available").map(x => x.id);
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 9000);
+
   fetch(GOOGLE_SHEETS_URL, {
     method: "POST",
+    signal: controller.signal,
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify({
       action: "chat_paula",
@@ -1696,6 +1703,7 @@ function enviarMensajePaula(textoChip) {
     scrollPaulaAlFinal();
   })
   .finally(() => {
+    clearTimeout(timeoutId);
     sendBtn.disabled = false;
   });
 }
