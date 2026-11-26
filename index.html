@@ -7,7 +7,7 @@
 
     <!-- METADATOS OPEN GRAPH CON TU ARCHIVO LOCAL PREVIEW.JPG -->
     <meta property="og:site_name" content="Mareas del Sur">
-    <meta property="og:title" content="🌴 Mareas del Sur | Lotes en Preventa — San Juan del Sur">
+    <meta property="og:title" content="Mareas del Sur | Lotes en Preventa — San Juan del Sur">
     <meta property="og:description" content="Asegura tu lote de inversión a 700m de la Costanera y 3 min de Playa Remanso. Certeza jurídica, primas desde $2,000 USD y reserva con $250 USD. ¡Toca para ver el mapa interactivo y cotizar!">
     <meta property="og:image" content="https://mareas-del-sur.vercel.app/preview.jpg">
     <meta property="og:image:secure_url" content="https://mareas-del-sur.vercel.app/preview.jpg">
@@ -18,69 +18,85 @@
     <meta property="og:url" content="https://mareas-del-sur.vercel.app/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🌴 Mareas del Sur | Lotes en Preventa — San Juan del Sur">
+    <meta name="twitter:title" content="Mareas del Sur | Lotes en Preventa — San Juan del Sur">
     <meta name="twitter:description" content="Asegura tu lote de inversión a 700m de la Costanera y 3 min de Playa Remanso. Primas desde $2,000 USD y reserva con $250 USD.">
     <meta name="twitter:image" content="https://mareas-del-sur.vercel.app/preview.jpg">
 
 <style>
   :root {
     --azul: #0F3D53;
+    --azul-oscuro: #0B2D3E;
+    --azul-suave: #1E495E;
     --dorado: #D4BE7A;
-    --crema: #FAF8F5;
-    --turquesa: #29B6F6;
-    --verde: #2E7D32;
-    --morado-vend: #8E24AA;
-    --gris-adoquin: #32363A;
+    --dorado-suave: #F4EFE1;
+    --dorado-texto: #7C652B;
+    --crema: #F9F7F3;
+    --blanco: #FFFFFF;
+    --borde: #E5E0D5;
+    --texto: #1A3A4A;
+    --texto-sec: #526772;
+    --verde-wa: #1B7A4E;
+    --verde-wa-hover: #15623E;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-  body { background: #e8ece9; color: var(--azul); overflow-x: hidden; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
+  body { background: var(--crema); color: var(--texto); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
+  .ico { width: 15px; height: 15px; display: inline-block; vertical-align: -2px; flex-shrink: 0; }
+  .ico-sm { width: 13px; height: 13px; display: inline-block; vertical-align: -2px; flex-shrink: 0; }
+  .ico-lg { width: 22px; height: 22px; display: inline-block; flex-shrink: 0; }
+
+  /* BARRA SUPERIOR SOBRIA (SIN ANIMACIONES PARPADENTES) */
   .promo-top-bar {
-    background: linear-gradient(90deg, #9a3412 0%, #c2410c 50%, #9a3412 100%);
-    color: #fff; padding: 7px 16px; text-align: center; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.3px; border-bottom: 2px solid var(--dorado); display: flex;
-    justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
+    background: var(--azul);
+    color: #E2E8F0; padding: 7px 18px; text-align: center; font-size: 11.8px; font-weight: 500;
+    letter-spacing: 0.2px; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;
   }
   .promo-tag {
-    background: #fef08a; color: #7c2d12; font-size: 10.5px; font-weight: 900;
-    padding: 3px 8px; border-radius: 10px; text-transform: uppercase; animation: pulse 1.8s infinite;
+    background: var(--dorado); color: var(--azul-oscuro); font-size: 10px; font-weight: 800;
+    padding: 2px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.6px;
   }
-  .promo-top-bar a { color: #fef08a; text-decoration: none; font-weight: 800; }
+  .promo-top-bar b { color: #FFFFFF; font-weight: 700; }
+  .promo-top-bar a { color: var(--dorado); text-decoration: none; font-weight: 700; }
   .promo-top-bar a:hover { text-decoration: underline; }
 
+  /* ENCABEZADO BLANCO OFICIAL AL ESTILO MAREASDELSUR.COM */
   header {
-    background: var(--azul); color: #fff; padding: 10px 22px;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-    border-bottom: 3px solid var(--dorado); position: sticky; top: 0; z-index: 100;
+    background: var(--blanco); color: var(--azul); padding: 11px 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    border-bottom: 1px solid var(--borde); position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(15, 61, 83, 0.05);
   }
-  .brand h1 { font-size: 18px; letter-spacing: 0.5px; font-weight: 900; }
-  .brand h1 span { color: var(--dorado); }
-  .brand p { font-size: 11.5px; color: var(--dorado); font-weight: 600; }
-  .brand-contact { font-size: 11px; color: #cbd5e1; margin-top: 2px; }
-  .brand-contact a { color: #ffffff; text-decoration: none; font-weight: 700; }
-  .brand-contact a:hover { color: var(--dorado); }
-  
-  .toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .brand-wrap { display: flex; align-items: center; gap: 12px; }
+  .brand-logo-svg { width: 42px; height: 42px; flex-shrink: 0; }
+  .brand h1 { font-size: 16.5px; letter-spacing: 0.7px; font-weight: 900; color: var(--azul); line-height: 1.15; }
+  .brand h1 span { color: var(--dorado-texto); font-weight: 700; font-size: 13px; letter-spacing: 0.4px; }
+  .brand p { font-size: 11.3px; color: var(--texto-sec); font-weight: 500; margin-top: 2px; }
+  .brand-contact { font-size: 11px; color: var(--texto-sec); margin-top: 2px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .brand-contact a { color: var(--azul); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+  .brand-contact a:hover { color: var(--dorado-texto); }
+
+  .toolbar { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; }
   .btn {
-    background: var(--dorado); color: var(--azul); border: none; padding: 7px 14px;
-    border-radius: 18px; font-weight: 700; font-size: 12px; cursor: pointer; text-decoration: none;
-    transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 4px;
+    background: var(--azul); color: #FFFFFF; border: 1.5px solid var(--azul); padding: 7px 14px;
+    border-radius: 999px; font-weight: 700; font-size: 12px; cursor: pointer; text-decoration: none;
+    transition: all 0.16s ease; display: inline-flex; align-items: center; gap: 6px;
   }
-  .btn-outline { background: transparent; color: #fff; border: 1.5px solid var(--dorado); }
-  .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .btn:hover { background: var(--azul-oscuro); border-color: var(--azul-oscuro); transform: translateY(-1px); }
+  .btn-outline { background: var(--blanco); color: var(--azul); border: 1.5px solid #CBD5DF; }
+  .btn-outline:hover { background: var(--dorado-suave); border-color: var(--azul); color: var(--azul); }
+  .btn-sand { background: var(--dorado); color: var(--azul-oscuro); border: 1.5px solid var(--dorado); }
+  .btn-sand:hover { background: #C9B26B; border-color: #C9B26B; }
 
   .btn-whatsapp-main {
     display: flex; align-items: center; justify-content: center; gap: 8px;
-    width: 100%; padding: 12px 14px; font-size: 13.5px; font-weight: 800;
-    background: linear-gradient(135deg, #25D366 0%, #16a34a 100%);
-    color: #ffffff; border: none; border-radius: 9px; cursor: pointer;
-    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
-    transition: all 0.15s ease;
+    width: 100%; padding: 12px 16px; font-size: 13.5px; font-weight: 700;
+    background: var(--verde-wa); color: #FFFFFF; border: none; border-radius: 999px; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(27, 122, 78, 0.22); transition: all 0.16s ease;
   }
-  .btn-whatsapp-main:hover { filter: brightness(1.05); transform: translateY(-1px); }
+  .btn-whatsapp-main:hover { background: var(--verde-wa-hover); transform: translateY(-1px); }
 
   .layout {
-    display: grid; grid-template-columns: 1fr 375px; height: calc(100vh - 90px);
+    display: grid; grid-template-columns: 1fr 385px; height: calc(100vh - 96px);
   }
   @media (max-width: 960px) {
     .layout { grid-template-columns: 1fr; height: auto; }
@@ -88,332 +104,350 @@
   }
 
   .map-wrapper {
-    position: relative; overflow: auto; background: #dfe5e0; display: flex; flex-direction: column;
+    position: relative; overflow: auto; background: #EFECE6; display: flex; flex-direction: column;
   }
   .interactive-hint-bar {
-    background: #0F3D53; color: #fff; padding: 7px 16px; font-size: 12px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center; gap: 8px; border-bottom: 1.5px solid var(--dorado);
+    background: var(--dorado-suave); color: var(--azul); padding: 7px 16px; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center; gap: 8px; border-bottom: 1px solid var(--borde);
   }
   .hint-badge {
-    background: #d97706; color: #fff; padding: 3px 8px; border-radius: 12px; font-size: 10.5px; font-weight: 800; animation: pulse 2s infinite;
+    background: var(--azul); color: #FFFFFF; padding: 2px 9px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: 0.4px;
   }
 
   .legend-bar {
-    background: rgba(15,61,83,0.97); color: #fff; padding: 8px 16px;
+    background: var(--blanco); color: var(--texto); padding: 8px 16px;
     display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
     font-size: 11.5px; position: sticky; top: 0; left: 0; z-index: 20;
-    border-bottom: 1px solid rgba(212,190,122,0.35);
+    border-bottom: 1px solid var(--borde);
   }
-  .leg-group { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .leg-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-  .box-color { width: 13px; height: 13px; border-radius: 3px; border: 1px solid #fff; }
+  .leg-group { display: flex; gap: 13px; flex-wrap: wrap; align-items: center; }
+  .leg-item { display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 600; color: var(--texto); }
+  .leg-item:hover { color: var(--dorado-texto); }
+  .box-color { width: 13px; height: 13px; border-radius: 3px; border: 1px solid rgba(15,61,83,0.35); }
+
+  .zoom-btn {
+    background: var(--crema); color: var(--azul); border: 1px solid #CBD5DF; padding: 4px 10px;
+    border-radius: 999px; font-weight: 700; font-size: 11.5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+    transition: all 0.15s ease;
+  }
+  .zoom-btn:hover { background: var(--azul); color: #fff; border-color: var(--azul); }
 
   .canvas-scroll {
     flex: 1; overflow: auto; padding: 14px; display: flex; justify-content: center; align-items: flex-start;
   }
   svg#mapaSvg {
-    width: 100%; max-width: 1160px; height: auto; background: #ffffff;
-    border-radius: 10px; border: 2px solid var(--azul);
-    box-shadow: 0 10px 30px rgba(15,61,83,0.16); transform-origin: top center; transition: transform 0.15s ease;
+    width: 100%; max-width: 1160px; height: auto; background: #FFFFFF;
+    border-radius: 14px; border: 1.5px solid #D6CFC2;
+    box-shadow: 0 10px 28px rgba(15,61,83,0.09); transform-origin: top center; transition: transform 0.15s ease;
   }
 
+  /* COLORES REFINADOS DEL MAPA (SIN TOCAR GEOMETRÍA) */
   .lote { cursor: pointer; transition: opacity 0.2s; }
-  .lote .shape { stroke: #1E293B; stroke-width: 0.9; transition: all 0.15s; }
+  .lote .shape { stroke: #334E5E; stroke-width: 0.85; transition: all 0.15s; }
   .lote:hover .shape, .lote.selected .shape {
-    stroke: #00E5FF; stroke-width: 3; filter: brightness(1.08);
+    stroke: #B8963E; stroke-width: 3; filter: brightness(0.97);
   }
-  
+
   .c-disp { fill: #FAF8F5; }
-  .c-vend { fill: #E5CD78; }
-  .c-res { fill: #29B6F6; }
-  .c-cerrado { fill: #8E24AA; }
+  .c-vend { fill: #E6D6A8; }
+  .c-res { fill: #9BC1D1; }
+  .c-cerrado { fill: #1E495E; }
 
   .t-num { font-size: 6.7px; font-weight: 900; fill: #0F3D53; text-anchor: middle; font-style: italic; pointer-events: none; }
-  .t-area { font-size: 6.2px; font-weight: 800; fill: #1B5E20; text-anchor: middle; font-style: italic; pointer-events: none; }
-  .t-dim { font-size: 5.0px; font-weight: 700; fill: #475569; text-anchor: middle; pointer-events: none; }
-  .cota { font-size: 4.8px; font-weight: 700; fill: #334155; text-anchor: middle; pointer-events: none; }
-  .c-cerrado ~ text { fill: #ffffff !important; }
+  .t-area { font-size: 6.2px; font-weight: 800; fill: #2E5B42; text-anchor: middle; font-style: italic; pointer-events: none; }
+  .t-dim { font-size: 5.0px; font-weight: 700; fill: #526772; text-anchor: middle; pointer-events: none; }
+  .cota { font-size: 4.8px; font-weight: 700; fill: #475569; text-anchor: middle; pointer-events: none; }
+  .c-cerrado ~ text { fill: #F8FAFC !important; }
 
   .fase-watermark {
-    font-size: 26px; font-weight: 900; fill: #64748B; fill-opacity: 0.28;
-    font-style: italic; letter-spacing: 3px; pointer-events: none; stroke: #0F3D53; stroke-width: 0.4;
+    font-size: 26px; font-weight: 900; fill: #64748B; fill-opacity: 0.22;
+    font-style: italic; letter-spacing: 3px; pointer-events: none; stroke: #0F3D53; stroke-width: 0.35;
   }
 
+  /* PANEL LATERAL LIMPIO */
   .side-panel {
-    background: var(--crema); border-left: 2px solid var(--dorado);
+    background: var(--crema); border-left: 1px solid var(--borde);
     padding: 16px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
   }
+  .search-wrap { position: relative; margin-bottom: 10px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--texto-sec); pointer-events: none; }
   .search-input {
-    width: 100%; padding: 10px 12px; border-radius: 8px; border: 2px solid var(--azul);
-    font-size: 13px; font-weight: 600; margin-bottom: 8px; background: #fff;
+    width: 100%; padding: 10px 12px 10px 36px; border-radius: 10px; border: 1.5px solid #CBD5DF;
+    font-size: 13px; font-weight: 600; background: var(--blanco); color: var(--azul); outline: none;
+    transition: border-color 0.15s ease;
   }
+  .search-input:focus { border-color: var(--azul); }
 
   .stepper-box {
-    display: flex; justify-content: space-between; background: #ffffff;
-    border: 1px solid #e2e8f0; border-radius: 8px; padding: 7px 10px; margin-bottom: 10px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    display: flex; justify-content: space-between; background: var(--blanco);
+    border: 1px solid var(--borde); border-radius: 10px; padding: 8px 11px; margin-bottom: 10px;
   }
   .step-node {
-    display: flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 700; color: #94a3b8;
-    transition: all 0.25s ease;
+    display: flex; align-items: center; gap: 5px; font-size: 10.8px; font-weight: 700; color: #94A3B8;
+    transition: all 0.2s ease;
   }
   .step-circle {
-    width: 19px; height: 19px; border-radius: 50%; background: #e2e8f0; color: #64748b;
+    width: 19px; height: 19px; border-radius: 50%; background: #E9E5DC; color: #64748B;
     display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800;
   }
   .step-node.active { color: var(--azul); }
-  .step-node.active .step-circle { background: var(--azul); color: #fff; }
-  .step-node.completed { color: #16a34a; }
-  .step-node.completed .step-circle { background: #16a34a; color: #fff; }
+  .step-node.active .step-circle { background: var(--azul); color: #FFFFFF; }
+  .step-node.completed { color: var(--verde-wa); }
+  .step-node.completed .step-circle { background: var(--verde-wa); color: #FFFFFF; }
 
   .reserva-box {
-    background: #fffbeb; border: 1.5px solid #f59e0b; border-left: 4px solid #b45309;
-    padding: 9px 11px; border-radius: 6px; font-size: 11.5px; margin-bottom: 10px; line-height: 1.38;
+    background: var(--blanco); border: 1px solid var(--borde); border-left: 3.5px solid var(--dorado);
+    padding: 10px 12px; border-radius: 10px; font-size: 11.4px; margin-bottom: 10px; line-height: 1.45; color: var(--texto-sec);
   }
-  .reserva-box b { color: #78350f; }
+  .reserva-box b { color: var(--azul); }
 
   .empty-pick-card {
-    background: #ffffff; border: 2px dashed #0F3D53; border-radius: 10px; padding: 22px 14px;
-    text-align: center; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: var(--blanco); border: 1.5px dashed #C7BFA9; border-radius: 14px; padding: 24px 16px;
+    text-align: center; margin-bottom: 10px;
+  }
+  .empty-icon-circle {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--dorado-suave); color: var(--azul);
+    display: inline-flex; align-items: center; justify-content: center; margin-bottom: 10px;
   }
   .empty-pick-card h3 { font-size: 15px; color: var(--azul); margin-bottom: 6px; font-weight: 800; }
-  .empty-pick-card p { font-size: 11.8px; color: #475569; line-height: 1.4; margin-bottom: 10px; }
+  .empty-pick-card p { font-size: 12px; color: var(--texto-sec); line-height: 1.45; margin-bottom: 12px; }
+
+  .chip-info {
+    background: var(--dorado-suave); color: var(--azul); padding: 4px 10px; border-radius: 999px;
+    font-size: 10.5px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;
+  }
 
   .card-lote {
-    background: #fff; border-radius: 10px; border: 1px solid #ded8c8; overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    background: var(--blanco); border-radius: 14px; border: 1px solid var(--borde); overflow: hidden;
+    box-shadow: 0 4px 18px rgba(15,61,83,0.06);
   }
   .card-head {
-    background: var(--azul); color: #fff; padding: 12px 14px;
+    background: var(--azul); color: #FFFFFF; padding: 13px 16px;
     display: flex; justify-content: space-between; align-items: center;
   }
-  .card-head h2 { font-size: 20px; font-weight: 800; }
+  .card-head h2 { font-size: 19px; font-weight: 800; letter-spacing: 0.4px; }
   .status-pill {
-    padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; color: #fff;
+    padding: 4px 11px; border-radius: 999px; font-size: 10.5px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.3px;
   }
-  .card-body { padding: 14px; }
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .card-body { padding: 15px; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 11px; }
   .stat {
-    background: var(--crema); padding: 9px; border-radius: 6px; border-left: 3px solid var(--dorado);
+    background: var(--crema); padding: 9px 10px; border-radius: 8px; border: 1px solid var(--borde);
   }
-  .stat small { display: block; font-size: 10.5px; color: #556b75; }
+  .stat small { display: block; font-size: 10.5px; color: var(--texto-sec); margin-bottom: 2px; }
   .stat b { font-size: 13.5px; color: var(--azul); }
 
+  .cert-box {
+    background: #F4F8F5; border: 1px solid #D3E4D8; border-left: 3.5px solid var(--verde-wa);
+    padding: 8px 10px; border-radius: 8px; font-size: 11px; color: #244B38; margin-bottom: 10px; line-height: 1.4;
+  }
+
   .calc-box {
-    background: #f4f8f6; border: 1.5px solid #b2dfdb; border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 12px;
+    background: var(--crema); border: 1px solid var(--borde); border-radius: 12px; padding: 13px; margin-top: 11px; font-size: 12px;
   }
-  .calc-box h4 { color: #00695c; font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-  .calc-field { margin-bottom: 8px; }
-  .calc-field label { display: block; font-weight: 700; color: #334155; margin-bottom: 3px; font-size: 11px; }
+  .calc-box h4 { color: var(--azul); font-size: 13px; margin-bottom: 9px; display: flex; align-items: center; gap: 6px; font-weight: 800; }
+  .calc-field { margin-bottom: 9px; }
+  .calc-field label { display: block; font-weight: 700; color: var(--texto); margin-bottom: 4px; font-size: 11px; }
   .calc-field input, .calc-field select {
-    width: 100%; padding: 8px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 12px; background: #fff; font-weight: 600;
+    width: 100%; padding: 9px 10px; border-radius: 8px; border: 1.5px solid #CBD5DF; font-size: 12.2px;
+    background: var(--blanco); font-weight: 600; color: var(--azul); outline: none;
   }
+  .calc-field input:focus, .calc-field select:focus { border-color: var(--azul); }
 
   /* 4 BOTONES INTERACTIVOS DE FINANCIAMIENTO */
   .plan-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px;
   }
   .plan-btn {
-    position: relative; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px;
-    padding: 8px 4px; text-align: center; cursor: pointer; transition: all 0.15s ease;
+    position: relative; background: var(--blanco); border: 1.5px solid #CBD5DF; border-radius: 9px;
+    padding: 9px 4px; text-align: center; cursor: pointer; transition: all 0.15s ease;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
   }
   .plan-btn b { font-size: 11.5px; color: var(--azul); line-height: 1.1; }
-  .plan-btn small { font-size: 9.5px; color: #64748b; margin-top: 2px; font-weight: 600; }
-  .plan-btn:hover { border-color: #00695c; background: #f0fdfa; }
+  .plan-btn small { font-size: 9.5px; color: var(--texto-sec); margin-top: 2px; font-weight: 600; }
+  .plan-btn:hover { border-color: var(--azul); background: var(--dorado-suave); }
   .plan-btn.active {
-    background: #00695c; border-color: #00695c; box-shadow: 0 3px 8px rgba(0,105,92,0.25);
+    background: var(--azul); border-color: var(--azul); box-shadow: 0 3px 10px rgba(15,61,83,0.18);
   }
-  .plan-btn.active b, .plan-btn.active small { color: #ffffff; }
+  .plan-btn.active b { color: #FFFFFF; }
+  .plan-btn.active small { color: var(--dorado); }
   .pop-badge {
-    position: absolute; top: -7px; background: #d97706; color: #fff;
-    font-size: 8px; font-weight: 900; padding: 1px 5px; border-radius: 8px; text-transform: uppercase;
+    position: absolute; top: -8px; background: var(--dorado); color: var(--azul-oscuro);
+    font-size: 8px; font-weight: 900; padding: 1px 6px; border-radius: 999px; text-transform: uppercase;
   }
 
   .input-error {
-    border-color: #dc2626 !important; background-color: #fef2f2 !important; box-shadow: 0 0 0 2px rgba(220,38,38,0.2) !important;
+    border-color: #B91C1C !important; background-color: #FEF2F2 !important;
   }
   .error-text {
-    color: #dc2626; font-size: 10.5px; font-weight: 700; margin-top: 3px; display: none;
+    color: #B91C1C; font-size: 10.8px; font-weight: 700; margin-top: 3px; display: none;
   }
 
   .calc-results {
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; margin: 8px 0; font-size: 11.5px;
+    background: var(--blanco); border: 1px solid var(--borde); border-radius: 9px; padding: 11px; margin: 9px 0; font-size: 11.6px;
   }
-  .calc-results div { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+  .calc-results div { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
   .calc-results div:last-child { margin-bottom: 0; }
   .calc-note {
-    font-size: 10.5px; color: #475569; line-height: 1.38; margin-bottom: 10px;
-    background: #fffbeb; border-left: 3px solid #f59e0b; padding: 7px 9px; border-radius: 4px;
+    font-size: 10.8px; color: var(--texto-sec); line-height: 1.4; margin-bottom: 10px;
+    background: var(--dorado-suave); border-left: 3px solid var(--dorado); padding: 8px 10px; border-radius: 6px;
   }
   .wa-subnote {
-    text-align: center; font-size: 10.2px; color: #64748b; margin-top: 5px; font-weight: 600;
+    text-align: center; font-size: 10.5px; color: var(--texto-sec); margin-top: 6px; font-weight: 600;
   }
 
   .cita-opt-box {
-    background: #f8fafc; border: 1.5px dashed #94a3b8; border-radius: 8px;
+    background: var(--blanco); border: 1px dashed #B8C4CC; border-radius: 9px;
     padding: 10px; margin: 10px 0 12px 0; font-size: 11.5px;
   }
   .cita-checkbox-label {
-    display: flex; align-items: center; gap: 8px; font-weight: 700; color: #1e3a8a; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--azul); cursor: pointer;
   }
-  .cita-checkbox-label input { width: 16px; height: 16px; cursor: pointer; }
+  .cita-checkbox-label input { width: 15px; height: 15px; cursor: pointer; accent-color: var(--azul); }
   .cita-dropdowns {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 9px;
   }
 
-  /* MODAL GUÍA RÁPIDA */
+  /* MODAL GUÍA RÁPIDA AL ESTILO MAREASDELSUR.COM */
   .modal-overlay {
-    position: fixed; inset: 0; background: rgba(15, 61, 83, 0.82); backdrop-filter: blur(5px);
+    position: fixed; inset: 0; background: rgba(11, 45, 62, 0.72); backdrop-filter: blur(4px);
     display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
   }
   .modal-overlay.open { display: flex; }
-  
   .guide-card {
-    background: #ffffff; border-radius: 16px; max-width: 480px; width: 100%; overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); border: 2px solid var(--dorado); text-align: left;
-    animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--blanco); border-radius: 18px; max-width: 470px; width: 100%; overflow: hidden;
+    box-shadow: 0 24px 48px rgba(11, 45, 62, 0.28); border: 1px solid var(--borde); text-align: left;
+    animation: modalPop 0.25s ease-out;
   }
   @keyframes modalPop {
-    0% { transform: scale(0.92); opacity: 0; }
+    0% { transform: scale(0.95); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
   }
-
   .guide-header-banner {
-    background: linear-gradient(135deg, var(--azul) 0%, #164e63 100%);
-    color: #ffffff; padding: 22px 24px 18px 24px; text-align: center; border-bottom: 3px solid var(--dorado);
+    background: var(--azul); color: #FFFFFF; padding: 22px 24px 18px 24px; text-align: center;
+    border-bottom: 3px solid var(--dorado);
   }
+  .guide-logo-wrap { display: inline-flex; align-items: center; justify-content: center; margin-bottom: 10px; }
   .guide-header-banner h3 {
-    font-size: 15px; font-weight: 900; letter-spacing: 0.8px; color: #ffffff; margin-bottom: 4px; text-transform: uppercase; line-height: 1.35;
+    font-size: 15.5px; font-weight: 800; letter-spacing: 0.6px; color: #FFFFFF; margin-bottom: 4px; text-transform: uppercase; line-height: 1.35;
   }
   .guide-header-banner p {
-    font-size: 11.5px; color: var(--dorado); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 12px;
+    font-size: 11.5px; color: var(--dorado); font-weight: 700; letter-spacing: 0.8px; margin-bottom: 12px;
   }
-
-  .guide-body-content { padding: 22px 24px; background: #FAF8F5; }
-  .guide-steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+  .guide-body-content { padding: 22px 24px; background: var(--crema); }
+  .guide-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
   .guide-step-row {
-    display: flex; gap: 14px; align-items: center; background: #ffffff; padding: 12px 14px; 
-    border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    display: flex; gap: 13px; align-items: center; background: var(--blanco); padding: 12px 14px;
+    border-radius: 12px; border: 1px solid var(--borde);
   }
-  .guide-icon { font-size: 26px; line-height: 1; min-width: 32px; text-align: center; }
+  .guide-icon-box {
+    width: 38px; height: 38px; border-radius: 10px; background: var(--dorado-suave); color: var(--azul);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
   .guide-text b { display: block; font-size: 12.5px; color: var(--azul); font-weight: 800; margin-bottom: 2px; }
-  .guide-text span { font-size: 11.2px; color: #475569; line-height: 1.35; }
+  .guide-text span { font-size: 11.4px; color: var(--texto-sec); line-height: 1.38; }
 
   .admin-box {
-    display: none; background: #eef4f7; border: 2px dashed var(--azul);
-    padding: 12px; border-radius: 8px; margin-top: 12px; font-size: 12px;
+    display: none; background: var(--blanco); border: 1.5px dashed var(--azul);
+    padding: 12px; border-radius: 10px; margin-top: 12px; font-size: 12px;
   }
   .admin-box select {
-    width: 100%; padding: 7px; margin: 6px 0 10px 0; border-radius: 6px; border: 1px solid var(--azul); font-weight: bold;
+    width: 100%; padding: 8px; margin: 6px 0 10px 0; border-radius: 8px; border: 1px solid #CBD5DF; font-weight: 700; color: var(--azul);
   }
   .admin-footer {
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 11px; color: #6c7a80; padding-top: 8px; border-top: 1px solid #dcd6c8; line-height: 1.4;
+    font-size: 11px; color: var(--texto-sec); padding-top: 10px; border-top: 1px solid var(--borde); line-height: 1.45;
   }
   .admin-footer a { color: var(--azul); text-decoration: none; font-weight: 700; }
-  .lock-btn { background: none; border: none; cursor: pointer; font-size: 14px; opacity: 0.5; }
-  .lock-btn:hover { opacity: 1; }
+  .lock-btn {
+    background: none; border: none; cursor: pointer; color: var(--texto-sec); opacity: 0.55; padding: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .lock-btn:hover { opacity: 1; color: var(--azul); }
 
-  /* BURBUJA DE PAULA — ESQUINA INFERIOR IZQUIERDA (AZUL MARINO) */
+  /* BURBUJA DE PAULA — SOBRIA Y ELEGANTE */
   .paula-fab {
     display: none; position: fixed; bottom: 20px; left: 20px; z-index: 900;
-    background: var(--azul);
-    color: #fff; border: 2px solid var(--dorado); border-radius: 40px;
-    padding: 6px 16px 6px 7px; font-weight: 800; font-size: 13px; cursor: pointer;
-    box-shadow: 0 10px 26px rgba(15,61,83,0.38); align-items: center; gap: 10px;
+    background: var(--azul); color: #FFFFFF; border: 1.5px solid var(--dorado); border-radius: 999px;
+    padding: 6px 16px 6px 7px; font-weight: 700; font-size: 12.8px; cursor: pointer;
+    box-shadow: 0 10px 26px rgba(15,61,83,0.28); align-items: center; gap: 10px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .paula-fab.intro-pulse { animation: paulaAttention 1.1s ease-in-out 3; }
-  @keyframes paulaAttention {
-    0%, 100% { transform: scale(1); box-shadow: 0 10px 26px rgba(15,61,83,0.38); }
-    50% { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(212,190,122,0.4); }
-  }
-  .paula-fab:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .paula-fab:hover { transform: translateY(-2px); background: var(--azul-oscuro); }
   .paula-avatar-wrap {
     position: relative; width: 38px; height: 38px; border-radius: 50%;
-    background: #fef3c7; border: 2px solid var(--dorado);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    background: var(--dorado-suave); border: 1.5px solid var(--dorado);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--azul);
   }
   .paula-online-dot {
-    position: absolute; bottom: -1px; right: -1px; width: 11px; height: 11px;
-    background: #22c55e; border: 2px solid #0F3D53; border-radius: 50%;
+    position: absolute; bottom: 0; right: 0; width: 10px; height: 10px;
+    background: #22C55E; border: 2px solid var(--azul); border-radius: 50%;
   }
-  .paula-fab-labels { text-align: left; line-height: 1.2; }
-  .paula-fab-labels b { display: block; font-size: 12.5px; color: #fff; }
-  .paula-fab-labels small { display: block; font-size: 10px; color: #fef08a; font-weight: 700; }
+  .paula-fab-labels { text-align: left; line-height: 1.25; }
+  .paula-fab-labels b { display: block; font-size: 12.5px; color: #FFFFFF; }
+  .paula-fab-labels small { display: block; font-size: 10px; color: var(--dorado); font-weight: 600; }
 
   .paula-window {
-    display: none; position: fixed; bottom: 84px; left: 20px; z-index: 950;
-    width: 345px; max-width: calc(100vw - 28px); height: 450px; max-height: calc(100vh - 115px);
-    background: #fff; border-radius: 14px; border: 2px solid var(--dorado);
-    box-shadow: 0 18px 40px rgba(15,61,83,0.32); flex-direction: column; overflow: hidden;
-    animation: modalPop 0.25s ease;
+    display: none; position: fixed; bottom: 82px; left: 20px; z-index: 950;
+    width: 345px; max-width: calc(100vw - 28px); height: 455px; max-height: calc(100vh - 115px);
+    background: var(--blanco); border-radius: 16px; border: 1.5px solid var(--borde);
+    box-shadow: 0 18px 42px rgba(15,61,83,0.24); flex-direction: column; overflow: hidden;
+    animation: modalPop 0.22s ease;
   }
   .paula-window.open { display: flex; }
 
-  /* MÓVIL: PAULA COMPACTA SOLO AVATAR EN ESQUINA INFERIOR IZQUIERDA */
   @media (max-width: 960px) {
-    .paula-fab {
-      padding: 4px; border-radius: 50%; bottom: 16px; left: 16px; gap: 0;
-    }
+    .paula-fab { padding: 4px; border-radius: 50%; bottom: 16px; left: 16px; gap: 0; }
     .paula-fab-labels { display: none; }
     .paula-avatar-wrap { width: 44px; height: 44px; }
-    .paula-window {
-      left: 14px; right: 14px; width: auto; bottom: 74px;
-    }
+    .paula-window { left: 14px; right: 14px; width: auto; bottom: 74px; }
   }
 
   .paula-header {
-    background: var(--azul); color: #fff; padding: 10px 14px;
+    background: var(--azul); color: #FFFFFF; padding: 11px 14px;
     display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--dorado);
   }
   .paula-header-left { display: flex; align-items: center; gap: 10px; }
   .paula-header-info b { display: block; font-size: 13.5px; }
   .paula-header-info small { font-size: 10.5px; color: var(--dorado); }
   .paula-close {
-    background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; font-weight: bold;
+    background: none; border: none; color: #FFFFFF; font-size: 18px; cursor: pointer; line-height: 1; padding: 2px 6px;
   }
   .paula-messages {
-    flex: 1; padding: 12px 12px 18px 12px; overflow-y: auto; background: #f8fafc;
+    flex: 1; padding: 12px 12px 18px 12px; overflow-y: auto; background: var(--crema);
     display: flex; flex-direction: column; gap: 8px; font-size: 12.2px;
   }
   .msg-bubble {
-    max-width: 86%; padding: 8px 11px; border-radius: 12px; line-height: 1.38; word-wrap: break-word;
+    max-width: 86%; padding: 9px 12px; border-radius: 12px; line-height: 1.42; word-wrap: break-word;
   }
   .msg-bot {
-    align-self: flex-start; background: #ffffff; color: #1e293b; border: 1px solid #e2e8f0; border-bottom-left-radius: 3px;
+    align-self: flex-start; background: var(--blanco); color: var(--texto); border: 1px solid var(--borde); border-bottom-left-radius: 3px;
   }
   .msg-user {
-    align-self: flex-end; background: var(--azul); color: #ffffff; border-bottom-right-radius: 3px;
+    align-self: flex-end; background: var(--azul); color: #FFFFFF; border-bottom-right-radius: 3px;
   }
   .paula-quick {
-    padding: 6px 10px; background: #f1f5f9; border-top: 1px solid #e2e8f0;
+    padding: 7px 10px; background: var(--blanco); border-top: 1px solid var(--borde);
     display: flex; gap: 6px; overflow-x: auto; white-space: nowrap;
   }
   .quick-chip {
-    background: #fff; border: 1px solid #cbd5e1; color: var(--azul); font-size: 10.5px;
-    font-weight: 700; padding: 5px 9px; border-radius: 14px; cursor: pointer;
+    background: var(--crema); border: 1px solid #CBD5DF; color: var(--azul); font-size: 10.6px;
+    font-weight: 700; padding: 5px 10px; border-radius: 999px; cursor: pointer; transition: all 0.15s ease;
   }
-  .quick-chip:hover { background: var(--azul); color: #fff; }
+  .quick-chip:hover { background: var(--azul); color: #FFFFFF; border-color: var(--azul); }
   .paula-input-area {
-    display: flex; gap: 6px; padding: 8px; background: #fff; border-top: 1px solid #e2e8f0;
+    display: flex; gap: 6px; padding: 9px; background: var(--blanco); border-top: 1px solid var(--borde);
   }
   .paula-input-area input {
-    flex: 1; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 18px; font-size: 12px; outline: none;
+    flex: 1; padding: 8px 12px; border: 1.5px solid #CBD5DF; border-radius: 999px; font-size: 12px; outline: none; color: var(--azul);
   }
   .paula-input-area input:focus { border-color: var(--azul); }
   .paula-send {
-    background: #00695c; color: #fff; border: none; border-radius: 18px;
-    padding: 0 14px; font-weight: 800; font-size: 12px; cursor: pointer;
+    background: var(--azul); color: #FFFFFF; border: none; border-radius: 999px;
+    padding: 0 15px; font-weight: 700; font-size: 12px; cursor: pointer;
   }
+  .paula-send:hover { background: var(--azul-oscuro); }
   .paula-send:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
 
   @media print {
     .promo-top-bar, header .toolbar, .side-panel, .legend-bar button, .interactive-hint-bar, .modal-overlay, .paula-fab, .paula-window { display: none !important; }
@@ -425,26 +459,63 @@
 <body>
 
 <div class="promo-top-bar">
-  <span class="promo-tag" id="topTag">LOTES EN PREVENTA</span>
-  <span id="topText">Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>31 meses</b> • Apartá con <b>$250 USD</b> • Tel: <a href="tel:+50576940400" id="top-phone-link" style="color:#fef08a;"><span id="top-phone-text">+505 7694-0400</span></a></span>
+  <span class="promo-tag" id="topTag">PREVENTA 2ª ETAPA</span>
+  <span id="topText">Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>31 meses</b> • Apartá con <b>$250 USD</b> • Tel: <a href="tel:+50576940400" id="top-phone-link"><span id="top-phone-text">+505 7694-0400</span></a></span>
 </div>
 
 <header>
-  <div class="brand">
-    <h1 id="brandTitle">MAREAS DEL SUR — <span>LOTES EN PREVENTA</span></h1>
-    <p id="brandSubtitle">Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro de San Juan del Sur</p>
-    <div class="brand-contact">
-      🌐 <a href="https://www.mareasdelsur.com" target="_blank">www.mareasdelsur.com</a>  |  
-      📞 <a href="https://wa.me/50576940400" target="_blank" id="header-wa-link"><span id="header-phone-text">+505 7694-0400</span></a>
+  <div class="brand-wrap">
+    <!-- LOGOTIPO MAREAS DEL SUR -->
+    <svg class="brand-logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Mareas del Sur">
+      <circle cx="32" cy="32" r="30" fill="#FAF8F5" stroke="#E5E0D5" stroke-width="1.2"/>
+      <!-- Rayos del sol -->
+      <g stroke="#D4BE7A" stroke-width="2" stroke-linecap="round">
+        <line x1="32" y1="8" x2="32" y2="14"/>
+        <line x1="21" y1="11" x2="24" y2="16"/>
+        <line x1="43" y1="11" x2="40" y2="16"/>
+        <line x1="13" y1="19" x2="18" y2="22"/>
+        <line x1="51" y1="19" x2="46" y2="22"/>
+      </g>
+      <!-- Sol arena -->
+      <circle cx="32" cy="28" r="9.5" fill="#D4BE7A"/>
+      <!-- Olas / colinas en azul petróleo -->
+      <clipPath id="logoClip">
+        <circle cx="32" cy="32" r="28"/>
+      </clipPath>
+      <g clip-path="url(#logoClip)">
+        <path d="M2 35 Q16 26 30 35 T62 34 L62 64 L2 64 Z" fill="#0F3D53"/>
+        <path d="M2 43 Q18 35 34 44 T62 42" fill="none" stroke="#FAF8F5" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M4 51 Q20 44 36 52 T62 50" fill="none" stroke="#FAF8F5" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <div class="brand">
+      <h1 id="brandTitle">MAREAS DEL SUR <span>• LOTES EN PREVENTA</span></h1>
+      <p id="brandSubtitle">A 700m de la Costanera • 3 min Playa Remanso • 7 min Centro de San Juan del Sur</p>
+      <div class="brand-contact">
+        <a href="https://www.mareasdelsur.com" target="_blank">
+          <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          www.mareasdelsur.com
+        </a>
+        <span>|</span>
+        <a href="https://wa.me/50576940400" target="_blank" id="header-wa-link">
+          <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span id="header-phone-text">+505 7694-0400</span>
+        </a>
+      </div>
     </div>
   </div>
+
   <div class="toolbar">
-    <button class="btn btn-outline" id="btnLang" onclick="toggleIdioma()" style="background:#0f3d53; color:#fef08a; border-color:#fef08a;">🇬🇧 English</button>
+    <button class="btn btn-outline" id="btnLang" onclick="toggleIdioma()">EN / ES</button>
     <button class="btn btn-outline" onclick="abrirGuia()" id="btnGuide">¿Cómo usar?</button>
     <a class="btn btn-outline" href="https://www.mareasdelsur.com" target="_blank" id="btnWeb">Web Oficial</a>
     <button class="btn btn-outline" onclick="filtrar('todos')" id="btnAll">Todos (125)</button>
     <button class="btn btn-outline" onclick="filtrar('Disponible')" id="btnAvail">Disponibles</button>
-    <button class="btn" onclick="window.print()" id="btnPdf">Descargar PDF</button>
+    <button class="btn btn-sand" onclick="window.print()" id="btnPdf">
+      <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Descargar PDF</span>
+    </button>
   </div>
 </header>
 
@@ -458,17 +529,21 @@
     <div class="legend-bar">
       <div class="leg-group">
         <div class="leg-item" onclick="filtrar('Disponible')"><span class="box-color" style="background:#FAF8F5"></span> <span id="leg1">Lote Disponible</span></div>
-        <div class="leg-item" onclick="filtrar('Vendido M.S.')"><span class="box-color" style="background:#E5CD78"></span> <span id="leg2">Vendidos M. S.</span></div>
-        <div class="leg-item" onclick="filtrar('Reservado S/P')"><span class="box-color" style="background:#29B6F6"></span> <span id="leg3">Reservado S/P</span></div>
-        <div class="leg-item" onclick="filtrar('Vendido')"><span class="box-color" style="background:#8E24AA"></span> <span id="leg4">Vendidos</span></div>
-        <div class="leg-item"><span class="box-color" style="background:#32363A"></span> <span id="leg5">Adoquinada</span></div>
-        <div class="leg-item"><span class="box-color" style="background:#E2E8F0"></span> <span id="leg6">Compactada</span></div>
-        <div class="leg-item"><span class="box-color" style="background:#4CAF50"></span> <span id="leg7">Área Verde</span></div>
+        <div class="leg-item" onclick="filtrar('Vendido M.S.')"><span class="box-color" style="background:#E6D6A8"></span> <span id="leg2">Vendidos M. S.</span></div>
+        <div class="leg-item" onclick="filtrar('Reservado S/P')"><span class="box-color" style="background:#9BC1D1"></span> <span id="leg3">Reservado S/P</span></div>
+        <div class="leg-item" onclick="filtrar('Vendido')"><span class="box-color" style="background:#1E495E"></span> <span id="leg4">Vendidos</span></div>
+        <div class="leg-item"><span class="box-color" style="background:#3B434A"></span> <span id="leg5">Adoquinada</span></div>
+        <div class="leg-item"><span class="box-color" style="background:#ECEAE4"></span> <span id="leg6">Compactada</span></div>
+        <div class="leg-item"><span class="box-color" style="background:#74966A"></span> <span id="leg7">Área Verde</span></div>
       </div>
-      <div>
-        <button class="btn" style="padding:4px 10px" onclick="cambiarZoom(1.2)">🔍 +</button>
-        <button class="btn" style="padding:4px 10px" onclick="cambiarZoom(0.85)">🔍 −</button>
-        <button class="btn btn-outline" style="padding:4px 10px" onclick="resetZoom()">100%</button>
+      <div style="display:flex; gap:5px; align-items:center;">
+        <button class="zoom-btn" onclick="cambiarZoom(1.2)" title="Acercar">
+          <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </button>
+        <button class="zoom-btn" onclick="cambiarZoom(0.85)" title="Alejar">
+          <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </button>
+        <button class="zoom-btn" onclick="resetZoom()">100%</button>
       </div>
     </div>
 
@@ -476,20 +551,20 @@
       <svg id="mapaSvg" viewBox="0 0 1080 1070" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="adoquinGris" width="8" height="8" patternUnits="userSpaceOnUse">
-            <rect width="8" height="8" fill="#32363A"/>
-            <path d="M0 4 H8 M4 0 V4 M0 8 V4" stroke="#474C52" stroke-width="0.8" fill="none"/>
+            <rect width="8" height="8" fill="#3B434A"/>
+            <path d="M0 4 H8 M4 0 V4 M0 8 V4" stroke="#505A63" stroke-width="0.8" fill="none"/>
           </pattern>
           <pattern id="compactadaPatron" width="12" height="12" patternUnits="userSpaceOnUse">
-            <rect width="12" height="12" fill="#E6ECF2"/>
-            <circle cx="3" cy="4" r="0.6" fill="#94A3B8" opacity="0.45"/>
-            <circle cx="9" cy="9" r="0.6" fill="#94A3B8" opacity="0.45"/>
+            <rect width="12" height="12" fill="#ECEAE4"/>
+            <circle cx="3" cy="4" r="0.6" fill="#A69F91" opacity="0.45"/>
+            <circle cx="9" cy="9" r="0.6" fill="#A69F91" opacity="0.45"/>
           </pattern>
           <pattern id="bosquePlano" width="28" height="28" patternUnits="userSpaceOnUse">
-            <rect width="28" height="28" fill="#55A630"/>
-            <circle cx="9" cy="9" r="7.5" fill="#2B9348" stroke="#1B4332" stroke-width="0.6"/>
-            <circle cx="21" cy="8" r="5.5" fill="#80B918" stroke="#1B4332" stroke-width="0.5"/>
-            <circle cx="19" cy="20" r="7.5" fill="#2B9348" stroke="#1B4332" stroke-width="0.6"/>
-            <circle cx="7" cy="21" r="5" fill="#AACC00" stroke="#1B4332" stroke-width="0.5"/>
+            <rect width="28" height="28" fill="#769A6B"/>
+            <circle cx="9" cy="9" r="7.5" fill="#5D8254" stroke="#3E5C38" stroke-width="0.6"/>
+            <circle cx="21" cy="8" r="5.5" fill="#8DAD80" stroke="#3E5C38" stroke-width="0.5"/>
+            <circle cx="19" cy="20" r="7.5" fill="#5D8254" stroke="#3E5C38" stroke-width="0.6"/>
+            <circle cx="7" cy="21" r="5" fill="#9BB88E" stroke="#3E5C38" stroke-width="0.5"/>
           </pattern>
         </defs>
 
@@ -505,7 +580,10 @@
 
   <div class="side-panel">
     <div>
-      <input type="number" class="search-input" id="searchBox" min="1" max="125" placeholder="Escribí un número de lote..." oninput="seleccionar(this.value, false)">
+      <div class="search-wrap">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="number" class="search-input" id="searchBox" min="1" max="125" placeholder="Escribí un número de lote..." oninput="seleccionar(this.value, false)">
+      </div>
 
       <div class="stepper-box">
         <div class="step-node active" id="stepNode1"><span class="step-circle" id="stepCircle1">1</span> <span id="stepLabel1">Elegí Lote</span></div>
@@ -513,10 +591,12 @@
         <div class="step-node" id="stepNode3"><span class="step-circle" id="stepCircle3">3</span> <span id="stepLabel3">Tu Cuota</span></div>
       </div>
 
-      <div id="asesorBanner" style="display:none; background:#e0f2fe; border:1px solid #7dd3fc; padding:8px 12px; border-radius:6px; margin-bottom:10px; align-items:center; gap:10px;">
-        <span style="font-size:20px;">👤</span>
+      <div id="asesorBanner" style="display:none; background:#FFFFFF; border:1px solid #E5E0D5; border-left:3.5px solid #0F3D53; padding:8px 12px; border-radius:10px; margin-bottom:10px; align-items:center; gap:10px;">
+        <div style="width:32px; height:32px; border-radius:50%; background:#F4EFE1; color:#0F3D53; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
         <div>
-          <b style="display:block; font-size:10px; color:#0284c7; text-transform:uppercase; letter-spacing:0.5px;" id="agentTitleLbl">Asesor Asignado</b>
+          <b style="display:block; font-size:10px; color:#7C652B; text-transform:uppercase; letter-spacing:0.5px;" id="agentTitleLbl">Asesor Asignado</b>
           <strong id="asesorNombreDisplay" style="font-size:13px; color:#0F3D53;">Oficina Central</strong>
         </div>
       </div>
@@ -526,7 +606,7 @@
         • <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>
         • <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 31 meses.<br>
         • <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br>
-        <span style="font-size:10px; color:#92400e; display:block; margin-top:3px;">
+        <span style="font-size:10px; color:#7C652B; display:block; margin-top:4px;">
           *Aplican restricciones. Reserva no reembolsable en caso de desistimiento.
         </span>
       </div>
@@ -538,11 +618,11 @@
         <span id="admSub">Cambiar estatus del <b id="admLoteLbl">Lote</b>:</span>
         <select id="admSelect">
           <option value="Disponible">Disponible a la Venta</option>
-          <option value="Reservado S/P">Reservado S/P (Celeste)</option>
-          <option value="Vendido M.S.">Vendido M.S. (Dorado)</option>
-          <option value="Vendido">Vendido (Morado)</option>
+          <option value="Reservado S/P">Reservado S/P (Azul Costero)</option>
+          <option value="Vendido M.S.">Vendido M.S. (Arena)</option>
+          <option value="Vendido">Vendido (Azul Petróleo)</option>
         </select>
-        <button id="btnGuardarAdmin" class="btn" style="width:100%;background:var(--azul);color:#fff;" onclick="cambiarEstatusAdminNube()">
+        <button id="btnGuardarAdmin" class="btn" style="width:100%; justify-content:center;" onclick="cambiarEstatusAdminNube()">
           Guardar en la Nube
         </button>
       </div>
@@ -553,23 +633,18 @@
         <span><b>Mareas del Sur</b> • <a href="https://www.mareasdelsur.com" target="_blank">www.mareasdelsur.com</a></span><br>
         <span>WhatsApp: <a href="https://wa.me/50576940400" target="_blank" id="footer-wa-link"><span id="footer-phone-text">+505 7694-0400</span></a></span>
       </div>
-      <button class="lock-btn" onclick="activarAdmin()" title="Acceso Administrador">🔒</button>
+      <button class="lock-btn" onclick="activarAdmin()" title="Acceso Administrador">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- BURBUJA Y VENTANA DE CHAT DE PAULA (IZQUIERDA, AZUL MARINO, COMPACTA EN MÓVIL) -->
+<!-- BURBUJA Y VENTANA DE CHAT DE PAULA -->
 <button id="paulaFab" class="paula-fab" onclick="togglePaulaChat()" title="Preguntale a Paula">
   <div class="paula-avatar-wrap">
-    <svg viewBox="0 0 64 64" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="32" r="30" fill="#fef3c7"/>
-      <path d="M16 54c1-11 8-17 16-17s15 6 16 17" fill="#0F3D53"/>
-      <path d="M26 38l6 7 6-7" fill="#ffffff"/>
-      <path d="M19 28c0-10 6-16 13-16s13 6 13 16c0 4-1 8-3 10l-1-6c-2-5-6-7-9-7s-7 2-9 7l-1 6c-2-2-3-6-3-10z" fill="#3b2314"/>
-      <circle cx="32" cy="27" r="9.5" fill="#f3c6a5"/>
-      <circle cx="28.5" cy="26.5" r="1.2" fill="#1e293b"/>
-      <circle cx="35.5" cy="26.5" r="1.2" fill="#1e293b"/>
-      <path d="M29 31.2c1.8 1.5 4.2 1.5 6 0" stroke="#9a3412" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
     </svg>
     <span class="paula-online-dot"></span>
   </div>
@@ -583,15 +658,9 @@
   <div class="paula-header">
     <div class="paula-header-left">
       <div class="paula-avatar-wrap" style="width:34px; height:34px;">
-        <svg viewBox="0 0 64 64" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="32" cy="32" r="30" fill="#fef3c7"/>
-          <path d="M16 54c1-11 8-17 16-17s15 6 16 17" fill="#0F3D53"/>
-          <path d="M26 38l6 7 6-7" fill="#ffffff"/>
-          <path d="M19 28c0-10 6-16 13-16s13 6 13 16c0 4-1 8-3 10l-1-6c-2-5-6-7-9-7s-7 2-9 7l-1 6c-2-2-3-6-3-10z" fill="#3b2314"/>
-          <circle cx="32" cy="27" r="9.5" fill="#f3c6a5"/>
-          <circle cx="28.5" cy="26.5" r="1.2" fill="#1e293b"/>
-          <circle cx="35.5" cy="26.5" r="1.2" fill="#1e293b"/>
-          <path d="M29 31.2c1.8 1.5 4.2 1.5 6 0" stroke="#9a3412" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
         </svg>
         <span class="paula-online-dot" style="width:9px; height:9px;"></span>
       </div>
@@ -600,7 +669,9 @@
         <small id="paulaSubLbl">Respuestas al instante (2ª Etapa)</small>
       </div>
     </div>
-    <button class="paula-close" onclick="togglePaulaChat()">✕</button>
+    <button class="paula-close" onclick="togglePaulaChat()" aria-label="Cerrar">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
   <div id="paulaMessages" class="paula-messages"></div>
   <div id="paulaQuick" class="paula-quick"></div>
@@ -614,33 +685,58 @@
 <div class="modal-overlay open" id="guideModal">
   <div class="guide-card">
     <div class="guide-header-banner">
+      <div class="guide-logo-wrap">
+        <svg width="46" height="46" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="30" fill="#FAF8F5"/>
+          <g stroke="#D4BE7A" stroke-width="2" stroke-linecap="round">
+            <line x1="32" y1="8" x2="32" y2="14"/>
+            <line x1="21" y1="11" x2="24" y2="16"/>
+            <line x1="43" y1="11" x2="40" y2="16"/>
+            <line x1="13" y1="19" x2="18" y2="22"/>
+            <line x1="51" y1="19" x2="46" y2="22"/>
+          </g>
+          <circle cx="32" cy="28" r="9.5" fill="#D4BE7A"/>
+          <clipPath id="guideLogoClip"><circle cx="32" cy="32" r="28"/></clipPath>
+          <g clip-path="url(#guideLogoClip)">
+            <path d="M2 35 Q16 26 30 35 T62 34 L62 64 L2 64 Z" fill="#0F3D53"/>
+            <path d="M2 43 Q18 35 34 44 T62 42" fill="none" stroke="#FAF8F5" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M4 51 Q20 44 36 52 T62 50" fill="none" stroke="#FAF8F5" stroke-width="2.2" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
       <h3 id="guideTitle">LOTES EN VENTA EN SAN JUAN DEL SUR</h3>
       <p id="guideSub">PROYECTO MAREAS DEL SUR</p>
-      <div style="margin-top: 10px;">
-        <button onclick="toggleIdiomaModal()" id="btnLangModal" style="background: rgba(15,61,83,0.9); color: #fef08a; border: 1.5px solid var(--dorado); padding: 5px 14px; border-radius: 14px; font-weight: 800; font-size: 11.5px; cursor: pointer;">🇬🇧 English</button>
+      <div style="margin-top: 8px;">
+        <button onclick="toggleIdiomaModal()" id="btnLangModal" style="background: rgba(255,255,255,0.1); color: #F4EFE1; border: 1px solid rgba(212,190,122,0.7); padding: 5px 14px; border-radius: 999px; font-weight: 700; font-size: 11.5px; cursor: pointer;">English</button>
       </div>
     </div>
     
     <div class="guide-body-content">
-      <p style="font-size: 11.8px; color: #334155; margin-bottom: 14px; font-weight: 600; text-align: center;" id="guideDescMini">Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:</p>
+      <p style="font-size: 12px; color: var(--texto-sec); margin-bottom: 14px; font-weight: 600; text-align: center;" id="guideDescMini">Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:</p>
       
       <div class="guide-steps">
         <div class="guide-step-row">
-          <span class="guide-icon">🗺️</span>
+          <div class="guide-icon-box">
+            <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          </div>
           <div class="guide-text">
             <b id="g1t">1. Tocá tu lote en el mapa</b>
             <span id="g1s">Seleccioná cualquier lote disponible (color crema) para ver medidas oficiales.</span>
           </div>
         </div>
         <div class="guide-step-row">
-          <span class="guide-icon">✍️</span>
+          <div class="guide-icon-box">
+            <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
           <div class="guide-text">
             <b id="g2t">2. Ingresá tu Nombre, WhatsApp y Ciudad</b>
             <span id="g2s">Conocé precios de preventa y calculá tus opciones de financiamiento.</span>
           </div>
         </div>
         <div class="guide-step-row">
-          <span class="guide-icon">📲</span>
+          <div class="guide-icon-box">
+            <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
           <div class="guide-text">
             <b id="g3t">3. Cotizá o agendá tu visita</b>
             <span id="g3s">Calculá tus cuotas mensuales y coordiná todo directamente por WhatsApp.</span>
@@ -648,30 +744,36 @@
         </div>
       </div>
 
-      <button class="btn" id="guideBtn" style="width:100%; padding:12px; font-size:13.5px; background:var(--azul); color:#fff; justify-content:center; font-weight:900; box-shadow: 0 4px 12px rgba(15,61,83,0.25);" onclick="cerrarGuia()">
-        ¡Ver Lotes Disponibles! 🚀
+      <button class="btn btn-sand" id="guideBtn" style="width:100%; padding:12px; font-size:13.5px; justify-content:center; font-weight:800;" onclick="cerrarGuia()">
+        Ver Lotes Disponibles
       </button>
     </div>
   </div>
 </div>
 
 <script>
-// ==================== CONFIGURACIÓN Y IDIOMA ====================
+// ==================== CONFIGURACIÓN Y ICONOS SVG ====================
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx-8QA-LxM9l087GxNwAlb0Bvwe5oyvQgwfxMEiubSjzXPrFyaifiKCLho082iWItJo/exec";
 
-const WA_ICON_SVG = `<svg viewBox="0 0 32 32" width="19" height="19" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;"><path d="M16.002 2.667C8.636 2.667 2.667 8.636 2.667 16c0 2.353.614 4.65 1.78 6.674L2.56 29.333l6.827-1.79A13.27 13.27 0 0 0 16.002 29.333C23.367 29.333 29.333 23.364 29.333 16S23.367 2.667 16.002 2.667zm0 24.426a11.06 11.06 0 0 1-5.643-1.547l-.405-.24-4.051 1.063 1.082-3.95-.264-.42A11.036 11.036 0 0 1 4.91 16c0-6.115 4.976-11.09 11.092-11.09 2.963 0 5.747 1.154 7.841 3.25a11.018 11.018 0 0 1 3.25 7.84c0 6.116-4.976 11.093-11.091 11.093zm6.085-8.306c-.334-.167-1.974-.974-2.28-1.085-.306-.112-.528-.167-.751.167-.222.334-.862 1.085-1.057 1.308-.195.223-.39.25-.723.084-.334-.167-1.409-.52-2.683-1.656-.991-.884-1.66-1.976-1.855-2.31-.195-.334-.021-.514.146-.68.15-.15.334-.39.5-.585.167-.195.223-.334.334-.556.111-.223.056-.418-.028-.585-.083-.167-.751-1.81-1.029-2.478-.271-.65-.546-.562-.751-.573-.195-.01-.418-.012-.64-.012-.222 0-.584.084-.89.418-.306.334-1.168 1.141-1.168 2.783 0 1.642 1.196 3.229 1.363 3.452.167.223 2.354 3.594 5.702 5.04.796.344 1.418.549 1.902.703.8.254 1.527.218 2.102.132.641-.096 1.974-.807 2.252-1.586.278-.78.278-1.448.195-1.587-.083-.139-.306-.222-.64-.39z"/></svg>`;
+const WA_ICON_SVG = `<svg viewBox="0 0 32 32" width="18" height="18" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;"><path d="M16.002 2.667C8.636 2.667 2.667 8.636 2.667 16c0 2.353.614 4.65 1.78 6.674L2.56 29.333l6.827-1.79A13.27 13.27 0 0 0 16.002 29.333C23.367 29.333 29.333 23.364 29.333 16S23.367 2.667 16.002 2.667zm0 24.426a11.06 11.06 0 0 1-5.643-1.547l-.405-.24-4.051 1.063 1.082-3.95-.264-.42A11.036 11.036 0 0 1 4.91 16c0-6.115 4.976-11.09 11.092-11.09 2.963 0 5.747 1.154 7.841 3.25a11.018 11.018 0 0 1 3.25 7.84c0 6.116-4.976 11.093-11.091 11.093zm6.085-8.306c-.334-.167-1.974-.974-2.28-1.085-.306-.112-.528-.167-.751.167-.222.334-.862 1.085-1.057 1.308-.195.223-.39.25-.723.084-.334-.167-1.409-.52-2.683-1.656-.991-.884-1.66-1.976-1.855-2.31-.195-.334-.021-.514.146-.68.15-.15.334-.39.5-.585.167-.195.223-.334.334-.556.111-.223.056-.418-.028-.585-.083-.167-.751-1.81-1.029-2.478-.271-.65-.546-.562-.751-.573-.195-.01-.418-.012-.64-.012-.222 0-.584.084-.89.418-.306.334-1.168 1.141-1.168 2.783 0 1.642 1.196 3.229 1.363 3.452.167.223 2.354 3.594 5.702 5.04.796.344 1.418.549 1.902.703.8.254 1.527.218 2.102.132.641-.096 1.974-.807 2.252-1.586.278-.78.278-1.448.195-1.587-.083-.139-.306-.222-.64-.39z"/></svg>`;
+const ICO_PIN = `<svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+const ICO_MAP = `<svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>`;
+const ICO_USER = `<svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+const ICO_CALC = `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>`;
+const ICO_CAL = `<svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+const ICO_CHECK = `<svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>`;
 
 let idiomaActual = 'es';
-let planSeleccionado = 'm36'; // Abre por defecto en 36 meses
+let planSeleccionado = 'm36';
 
 const textos = {
   es: {
     pageTitle: "Mareas del Sur — Lotes en Preventa en San Juan del Sur",
-    topTag: "LOTES EN PREVENTA",
+    topTag: "PREVENTA 2ª ETAPA",
     topText: "Tu lote de inversión en San Juan del Sur • Primas desde <b>$2,000 USD</b> • Servicios a <b>31 meses</b> • Apartá con <b>$250 USD</b> • Tel:",
-    brandTitle: "MAREAS DEL SUR — <span>LOTES EN PREVENTA</span>",
-    brandSubtitle: "Lotes a 700m de la Costanera • 3 min Playa Remanso • 7 min Centro de San Juan del Sur",
-    btnLang: "🇬🇧 English",
+    brandTitle: "MAREAS DEL SUR <span>• LOTES EN PREVENTA</span>",
+    brandSubtitle: "A 700m de la Costanera • 3 min Playa Remanso • 7 min Centro de San Juan del Sur",
+    btnLang: "English",
     btnGuide: "¿Cómo usar?",
     btnWeb: "Web Oficial",
     btnAll: "Todos (125)",
@@ -691,11 +793,11 @@ const textos = {
     step2: "Tus Datos",
     step3: "Tu Cuota",
     agentTitle: "Asesor Asignado",
-    infoCard: "<b>LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>• <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>• <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 31 meses.<br>• <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Aplican restricciones. Reserva no reembolsable en caso de desistimiento.</span>",
+    infoCard: "<b>LOTES EN PREVENTA • INVERSIÓN SEGURA</b><br>• <b>Tu lote en San Juan del Sur:</b> Asegurás tu terreno con precio congelado antes del alza de plusvalía.<br>• <b>Servicios básicos (agua y luz):</b> Entrega proyectada a 31 meses.<br>• <b>Apartado promocional:</b> Solo <b>$250 USD</b> (100% abonables a tu prima del 15%).<br><span style='font-size:10px; color:#7C652B; display:block; margin-top:4px;'>*Aplican restricciones. Reserva no reembolsable en caso de desistimiento.</span>",
     emptyCardTitle: "Paso 1: Seleccioná un lote en el mapa",
     emptyCardDesc: "Tocá cualquier lote disponible (color crema) en el mapa de arriba o escribí su número en el buscador para ver sus medidas oficiales y cotizar.",
-    guideBtnModal: "¡Ver Lotes Disponibles! 🚀",
-    btnLangModal: "🇬🇧 English",
+    guideBtnModal: "Ver Lotes Disponibles",
+    btnLangModal: "English",
     guideTitle: "LOTES EN VENTA EN SAN JUAN DEL SUR",
     guideSub: "PROYECTO MAREAS DEL SUR",
     guideDescMini: "Elegir y cotizar tu lote en preventa es muy fácil. Seguí estos 3 pasos:",
@@ -713,11 +815,11 @@ const textos = {
   },
   en: {
     pageTitle: "Mareas del Sur — Pre-sale Lots in San Juan del Sur",
-    topTag: "PRE-SALE LOTS",
+    topTag: "STAGE 2 PRE-SALE",
     topText: "Your investment lot in San Juan del Sur • Down payments from <b>$2,000 USD</b> • Services in <b>31 months</b> • Reserve with <b>$250 USD</b> • Tel:",
-    brandTitle: "MAREAS DEL SUR — <span>PRE-SALE LOTS</span>",
-    brandSubtitle: "Lots 700m from Coastal Hwy • 3 min Remanso Beach • 7 min San Juan del Sur Center",
-    btnLang: "🇪🇸 Español",
+    brandTitle: "MAREAS DEL SUR <span>• PRE-SALE LOTS</span>",
+    brandSubtitle: "700m from Coastal Hwy • 3 min Remanso Beach • 7 min San Juan del Sur Center",
+    btnLang: "Español",
     btnGuide: "How to use?",
     btnWeb: "Official Web",
     btnAll: "All (125)",
@@ -737,11 +839,11 @@ const textos = {
     step2: "Your Info",
     step3: "Your Plan",
     agentTitle: "Assigned Agent",
-    infoCard: "<b>PRE-SALE LOTS • SECURE INVESTMENT</b><br>• <b>Your lot in San Juan del Sur:</b> Secure your land with frozen pricing before appreciation.<br>• <b>Basic services (water & power):</b> Projected delivery in 31 months.<br>• <b>Promotional Reservation:</b> Only <b>$250 USD</b> (100% applicable to your 15% down payment).<br><span style='font-size:10px; color:#92400e; display:block; margin-top:3px;'>*Restrictions apply. Non-refundable reservation in case of withdrawal.</span>",
+    infoCard: "<b>PRE-SALE LOTS • SECURE INVESTMENT</b><br>• <b>Your lot in San Juan del Sur:</b> Secure your land with frozen pricing before appreciation.<br>• <b>Basic services (water & power):</b> Projected delivery in 31 months.<br>• <b>Promotional Reservation:</b> Only <b>$250 USD</b> (100% applicable to your 15% down payment).<br><span style='font-size:10px; color:#7C652B; display:block; margin-top:4px;'>*Restrictions apply. Non-refundable reservation in case of withdrawal.</span>",
     emptyCardTitle: "Step 1: Select a lot on the map",
     emptyCardDesc: "Tap any available lot (cream color) on the map above or type its number in the search box to view official measurements and pricing.",
-    guideBtnModal: "View Available Lots! 🚀",
-    btnLangModal: "🇪🇸 Español",
+    guideBtnModal: "View Available Lots",
+    btnLangModal: "Español",
     guideTitle: "LOTS FOR SALE IN SAN JUAN DEL SUR",
     guideSub: "MAREAS DEL SUR PROJECT",
     guideDescMini: "Choosing and quoting your pre-sale lot is very easy. Follow these 3 steps:",
@@ -771,7 +873,7 @@ function toggleIdiomaModal() { toggleIdioma(); }
 function actualizarTextosInterfaz() {
   document.getElementById('pageTitle').innerText = t('pageTitle');
   document.getElementById('topTag').innerText = t('topTag');
-  document.getElementById('topText').innerHTML = t('topText') + ` <a href="tel:${asesorActual.tel}" id="top-phone-link" style="color:#fef08a;"><span id="top-phone-text">${asesorActual.display}</span></a>`;
+  document.getElementById('topText').innerHTML = t('topText') + ` <a href="tel:${asesorActual.tel}" id="top-phone-link"><span id="top-phone-text">${asesorActual.display}</span></a>`;
   document.getElementById('brandTitle').innerHTML = t('brandTitle');
   document.getElementById('brandSubtitle').innerText = t('brandSubtitle');
   document.getElementById('btnLang').innerText = t('btnLang');
@@ -779,10 +881,10 @@ function actualizarTextosInterfaz() {
   document.getElementById('btnWeb').innerText = t('btnWeb');
   document.getElementById('btnAll').innerText = t('btnAll');
   document.getElementById('btnAvail').innerText = t('btnAvail');
-  document.getElementById('btnPdf').innerText = t('btnPdf');
+  document.getElementById('btnPdf').querySelector('span').innerText = t('btnPdf');
   document.getElementById('hintBadge').innerText = t('hintBadge');
   document.getElementById('hintText').innerText = t('hintText');
-  
+
   document.getElementById('leg1').innerText = t('leg1');
   document.getElementById('leg2').innerText = t('leg2');
   document.getElementById('leg3').innerText = t('leg3');
@@ -859,7 +961,7 @@ function inicializarAsesor() {
   } catch(e) {}
 }
 
-// ==================== GEOMETRÍA Y DATOS ====================
+// ==================== GEOMETRÍA Y DATOS (SIN MODIFICAR) ====================
 const tablaPrecios = {
   1: { contado: 17987, m12: 19380, m24: 20727, m36: 22131 }, 2: { contado: 17987, m12: 19380, m24: 20727, m36: 22131 },
   3: { contado: 18619, m12: 20061, m24: 21455, m36: 22909 }, 4: { contado: 18619, m12: 20061, m24: 21455, m36: 22909 },
@@ -1004,52 +1106,52 @@ function registrarLote(id, pts, cTop, cBot, cLeft, cRight, customPath="") {
 
 function construirGeometriaBase() {
   document.getElementById('capaCallesCompactadas').innerHTML = `
-    <path d="M 275,85 L 930,85 L 942,120 L 426,120 L 426,268 L 398,268 L 398,142 Q 398,120 370,120 L 275,120 Z" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
-    <polygon points="305,268 785,268 795,302 305,302" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
-    <polygon points="292,468 1014,468 1010,502 320,502 320,662 292,662" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
-    <polygon points="280,662 992,662 988,696 280,696" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
-    <polygon points="845,852 985,852 982,888 845,888" fill="url(#compactadaPatron)" stroke="#474C52" stroke-width="1.1"/>
+    <path d="M 275,85 L 930,85 L 942,120 L 426,120 L 426,268 L 398,268 L 398,142 Q 398,120 370,120 L 275,120 Z" fill="url(#compactadaPatron)" stroke="#526772" stroke-width="1.05"/>
+    <polygon points="305,268 785,268 795,302 305,302" fill="url(#compactadaPatron)" stroke="#526772" stroke-width="1.05"/>
+    <polygon points="292,468 1014,468 1010,502 320,502 320,662 292,662" fill="url(#compactadaPatron)" stroke="#526772" stroke-width="1.05"/>
+    <polygon points="280,662 992,662 988,696 280,696" fill="url(#compactadaPatron)" stroke="#526772" stroke-width="1.05"/>
+    <polygon points="845,852 985,852 982,888 845,888" fill="url(#compactadaPatron)" stroke="#526772" stroke-width="1.05"/>
   `;
 
   const ptsParqueCentral = [...sampleCurve(xEastRoad, 222, 392, 16), [xOuterEast(392), 392], [xOuterEast(222), 222]].map(p => p.join(",")).join(" ");
 
   document.getElementById('capaAreasVerdes').innerHTML = `
-    <polygon points="175,20 275,20 275,85 245,85" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
-    <circle cx="240" cy="44" r="14" fill="#fff" stroke="#1B4332" stroke-width="1"/>
-    <text x="240" y="44" font-size="4.5" font-weight="900" text-anchor="middle" fill="#1B4332">${idiomaActual==='es'?'ÁREA VERDE':'GREEN AREA'} 788 m²</text>
+    <polygon points="175,20 275,20 275,85 245,85" fill="url(#bosquePlano)" stroke="#3E5C38" stroke-width="1.2"/>
+    <circle cx="240" cy="44" r="14" fill="#FAF8F5" stroke="#3E5C38" stroke-width="1"/>
+    <text x="240" y="44" font-size="4.5" font-weight="900" text-anchor="middle" fill="#2E4A29">${idiomaActual==='es'?'ÁREA VERDE':'GREEN AREA'} 788 m²</text>
 
-    <path d="M 398,142 L 398,252 Q 338,197 398,142 Z" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
-    <circle cx="366" cy="138" r="12" fill="#fff" stroke="#1B4332" stroke-width="0.9"/>
-    <text x="366" y="140" font-size="4.1" font-weight="900" text-anchor="middle" fill="#1B4332">${idiomaActual==='es'?'ÁREA':'AREA'} 311 m²</text>
+    <path d="M 398,142 L 398,252 Q 338,197 398,142 Z" fill="url(#bosquePlano)" stroke="#3E5C38" stroke-width="1.2"/>
+    <circle cx="366" cy="138" r="12" fill="#FAF8F5" stroke="#3E5C38" stroke-width="0.9"/>
+    <text x="366" y="140" font-size="4.1" font-weight="900" text-anchor="middle" fill="#2E4A29">${idiomaActual==='es'?'ÁREA':'AREA'} 311 m²</text>
 
-    <polygon points="305,302 284,335 278,445 242,492 278,565 232,638 256,696 254,820 252,946 280,946 280,696 292,662 292,468 305,468 305,302" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
-    <circle cx="266" cy="462" r="14" fill="#fff" stroke="#1B4332" stroke-width="1"/>
-    <text x="266" y="464" font-size="4.5" font-weight="900" text-anchor="middle" fill="#1B4332">${idiomaActual==='es'?'ÁREA':'AREA'} 1309 m²</text>
+    <polygon points="305,302 284,335 278,445 242,492 278,565 232,638 256,696 254,820 252,946 280,946 280,696 292,662 292,468 305,468 305,302" fill="url(#bosquePlano)" stroke="#3E5C38" stroke-width="1.2"/>
+    <circle cx="266" cy="462" r="14" fill="#FAF8F5" stroke="#3E5C38" stroke-width="1"/>
+    <text x="266" y="464" font-size="4.5" font-weight="900" text-anchor="middle" fill="#2E4A29">${idiomaActual==='es'?'ÁREA':'AREA'} 1309 m²</text>
 
-    <polygon points="${ptsParqueCentral}" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.3"/>
-    <circle cx="898" cy="255" r="15" fill="#fff" stroke="#1B4332" stroke-width="1"/>
-    <text x="898" y="257" font-size="4.8" font-weight="900" text-anchor="middle" fill="#1B4332">${idiomaActual==='es'?'ÁREA':'AREA'} 594 m²</text>
-    <circle cx="918" cy="340" r="16" fill="#fff" stroke="#1B4332" stroke-width="1"/>
-    <text x="918" y="342" font-size="4.8" font-weight="900" text-anchor="middle" fill="#1B4332">${idiomaActual==='es'?'ÁREA':'AREA'} 1135 m²</text>
+    <polygon points="${ptsParqueCentral}" fill="url(#bosquePlano)" stroke="#3E5C38" stroke-width="1.2"/>
+    <circle cx="898" cy="255" r="15" fill="#FAF8F5" stroke="#3E5C38" stroke-width="1"/>
+    <text x="898" y="257" font-size="4.8" font-weight="900" text-anchor="middle" fill="#2E4A29">${idiomaActual==='es'?'ÁREA':'AREA'} 594 m²</text>
+    <circle cx="918" cy="340" r="16" fill="#FAF8F5" stroke="#3E5C38" stroke-width="1"/>
+    <text x="918" y="342" font-size="4.8" font-weight="900" text-anchor="middle" fill="#2E4A29">${idiomaActual==='es'?'ÁREA':'AREA'} 1135 m²</text>
 
-    <polygon points="${sampleCurve(xEastRoad, 802, 852, 4).map(p=>p.join(',')).join(' ')} ${xOuterEast(852)},852 ${xOuterEast(802)},802" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.2"/>
-    <polygon points="856,888 ${xOuterEast(888)},888 ${xOuterEast(985)},985 856,992" fill="url(#bosquePlano)" stroke="#1B4332" stroke-width="1.2"/>
+    <polygon points="${sampleCurve(xEastRoad, 802, 852, 4).map(p=>p.join(',')).join(' ')} ${xOuterEast(852)},852 ${xOuterEast(802)},802" fill="url(#bosquePlano)" stroke="#3E5C38" stroke-width="1.1"/>
+    <polygon points="856,888 ${xOuterEast(888)},888 ${xOuterEast(985)},985 856,992" fill="url(#bosquePlano)" stroke="#3E5C38" stroke-width="1.1"/>
   `;
 
   const ptsCalleAdoq = [...sampleCurve(xWestRoad, 20, 855, 45), [280,946], [182,954], [182,980], [280,981], [856,888], ...sampleCurve(xEastRoad, 888, 20, 45)].map(p=>p.join(",")).join(" ");
 
   document.getElementById('capaCalleAdoquinada').innerHTML = `
-    <polygon points="${ptsCalleAdoq}" fill="url(#adoquinGris)" stroke="#1E293B" stroke-width="1.5"/>
-    <text x="870" y="585" fill="#ffffff" font-size="7.2" font-weight="900" transform="rotate(-84.5 870,585)" text-anchor="middle">${idiomaActual==='es'?'CALLE PRINCIPAL ADOQUINADA (10.0m)':'MAIN COBBLESTONE STREET (10.0m)'}</text>
-    <text x="550" y="915" fill="#ffffff" font-size="7.2" font-weight="900" transform="rotate(-9.5 550,915)" text-anchor="middle">${idiomaActual==='es'?'CALLE PRINCIPAL ADOQUINADA (11.0m)':'MAIN COBBLESTONE STREET (11.0m)'}</text>
+    <polygon points="${ptsCalleAdoq}" fill="url(#adoquinGris)" stroke="#263138" stroke-width="1.4"/>
+    <text x="870" y="585" fill="#FAF8F5" font-size="7.2" font-weight="900" transform="rotate(-84.5 870,585)" text-anchor="middle">${idiomaActual==='es'?'CALLE PRINCIPAL ADOQUINADA (10.0m)':'MAIN COBBLESTONE STREET (10.0m)'}</text>
+    <text x="550" y="915" fill="#FAF8F5" font-size="7.2" font-weight="900" transform="rotate(-9.5 550,915)" text-anchor="middle">${idiomaActual==='es'?'CALLE PRINCIPAL ADOQUINADA (11.0m)':'MAIN COBBLESTONE STREET (11.0m)'}</text>
   `;
 
   document.getElementById('capaExterior').innerHTML = `
-    <g stroke="#64748B" stroke-width="0.85" fill="none" opacity="0.8">
+    <g stroke="#7A8B94" stroke-width="0.85" fill="none" opacity="0.75">
       <path d="M 110,15 L 222,98 L 328,144 Q 302,197 328,252 L 262,298 L 245,335 L 242,435 L 218,482 L 248,548 L 204,622 L 226,696 L 222,950"/>
       <path d="M 126,15 L 236,94 L 342,142 Q 316,197 342,254 L 274,300 L 256,336 L 253,435 L 229,482 L 259,548 L 215,622 L 237,696 L 233,950" stroke-dasharray="6,4"/>
     </g>
-    <path d="M 10,85 L 42,102 L 182,954 L 235,1042 L 960,1035 L 960,1055 L 212,1062 L 152,962 L 18,125 L 10,120 Z" stroke="#1E293B" stroke-width="1.3" fill="#F8FAFC"/>
+    <path d="M 10,85 L 42,102 L 182,954 L 235,1042 L 960,1035 L 960,1055 L 212,1062 L 152,962 L 18,125 L 10,120 Z" stroke="#334E5E" stroke-width="1.2" fill="#F9F7F3"/>
     <text x="15" y="72" font-size="7.5" font-weight="900" fill="#0F3D53">${idiomaActual==='es'?'← HACIA SAN JUAN DEL SUR':'← TOWARDS SAN JUAN DEL SUR'}</text>
   `;
 
@@ -1186,7 +1288,7 @@ function actualizarStepper() {
 
   if(loteActualId) {
     node1.className = "step-node completed";
-    label1.innerText = idiomaActual==='es' ? `Lote ${loteActualId} ✓` : `Lot ${loteActualId} ✓`;
+    label1.innerText = idiomaActual==='es' ? `Lote ${loteActualId}` : `Lot ${loteActualId}`;
     circ1.innerText = "✓";
   } else {
     node1.className = "step-node active";
@@ -1207,13 +1309,13 @@ function mostrarPantallaInicial() {
   actualizarStepper();
   document.getElementById('detalleLote').innerHTML = `
     <div class="empty-pick-card">
-      <div style="font-size:38px; margin-bottom:8px;">🗺️</div>
+      <div class="empty-icon-circle">${ICO_MAP}</div>
       <h3>${t('emptyCardTitle')}</h3>
       <p>${t('emptyCardDesc')}</p>
       <div style="display:flex; justify-content:center; gap:6px; flex-wrap:wrap;">
-        <span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🛣️ ${idiomaActual==='es'?'700m Costanera':'700m Coastal Hwy'}</span>
-        <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 ${idiomaActual==='es'?'3 min Remanso':'3 min Remanso Beach'}</span>
-        <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 ${idiomaActual==='es'?'7 min Centro de San Juan del Sur':'7 min San Juan del Sur Center'}</span>
+        <span class="chip-info">${ICO_PIN} ${idiomaActual==='es'?'700m Costanera':'700m Coastal Hwy'}</span>
+        <span class="chip-info">${ICO_PIN} ${idiomaActual==='es'?'3 min Remanso':'3 min Remanso Beach'}</span>
+        <span class="chip-info">${ICO_PIN} ${idiomaActual==='es'?'7 min Centro de San Juan del Sur':'7 min San Juan del Sur Center'}</span>
       </div>
     </div>
   `;
@@ -1228,32 +1330,32 @@ function seleccionar(id, hacerScroll=false) {
   const el = document.getElementById('lot-' + id);
   if(el) el.classList.add('selected');
 
-  const colorPill = l.est === "Disponible" || l.est === "Available" ? "#2E7D32" : (l.est === "Reservado S/P" || l.est === "Reserved S/P" ? "#0288D1" : (l.est === "Vendido" || l.est === "Sold" ? "#8E24AA" : "#B8962E"));
+  const colorPill = l.est === "Disponible" || l.est === "Available" ? "#1B7A4E" : (l.est === "Reservado S/P" || l.est === "Reserved S/P" ? "#4F839B" : (l.est === "Vendido" || l.est === "Sold" ? "#1E495E" : "#9E8340"));
 
   let seccionCotizador = "";
   if (l.est === "Disponible" || l.est === "Available") {
     if (!usuarioDesbloqueado) {
       seccionCotizador = `
         <div class="calc-box">
-          <h4>📋 ${idiomaActual==='es'?'Cotizador de Lotes en Preventa':'Pre-sale Lot Estimator'}</h4>
-          <p style="font-size:11px; color:#556b75; margin-bottom:10px; line-height:1.35;">
-            ${idiomaActual==='es'?'Ingresá tus datos para ver precios, planes de financiamiento y activar el chat rápido para el':'Enter your details to view pricing, financing plans and activate quick chat for'} <b>Lote ${l.id}</b>:
+          <h4>${ICO_CALC} ${idiomaActual==='es'?'Cotizador de Lotes en Preventa':'Pre-sale Lot Estimator'}</h4>
+          <p style="font-size:11.2px; color:#526772; margin-bottom:10px; line-height:1.4;">
+            ${idiomaActual==='es'?'Ingresá tus datos para consultar precios, planes de financiamiento y activar el chat de asistencia para el':'Enter your details to view pricing, financing plans and activate quick assistance for'} <b>Lote ${l.id}</b>:
           </p>
           <div class="calc-field">
-            <label for="clientName"><b>${idiomaActual==='es'?'1. Nombre y Apellido:':'1. Full Name:'}</b> <span style="color:#dc2626;">*</span></label>
+            <label for="clientName"><b>${idiomaActual==='es'?'1. Nombre y Apellido:':'1. Full Name:'}</b> <span style="color:#B91C1C;">*</span></label>
             <input type="text" id="clientName" value="${nombreClientePersistente}" placeholder="${idiomaActual==='es'?'Ej. Carlos Mendoza':'E.g. Carlos Mendoza'}">
           </div>
           <div class="calc-field">
-            <label for="clientPhone"><b>${idiomaActual==='es'?'2. Teléfono / WhatsApp:':'2. Phone / WhatsApp:'}</b> <span style="color:#dc2626;">*</span></label>
+            <label for="clientPhone"><b>${idiomaActual==='es'?'2. Teléfono / WhatsApp:':'2. Phone / WhatsApp:'}</b> <span style="color:#B91C1C;">*</span></label>
             <input type="tel" id="clientPhone" value="${telefonoClientePersistente}" placeholder="Ej. 8888-8888">
           </div>
           <div class="calc-field">
-            <label for="clientCity"><b>${idiomaActual==='es'?'3. Ciudad o País:':'3. City or Country:'}</b> <span style="color:#dc2626;">*</span></label>
+            <label for="clientCity"><b>${idiomaActual==='es'?'3. Ciudad o País:':'3. City or Country:'}</b> <span style="color:#B91C1C;">*</span></label>
             <input type="text" id="clientCity" value="${ciudadClientePersistente}" placeholder="${idiomaActual==='es'?'Ej. Managua, Miami...':'E.g. Miami, Managua...'}">
           </div>
-          <div class="error-text" id="datosError" style="margin-bottom:8px;">⚠️ ${idiomaActual==='es'?'Completá tu nombre, WhatsApp (mínimo 8 dígitos) y ciudad.':'Please complete your name, WhatsApp (min 8 digits) and city.'}</div>
-          <button class="btn" id="btnDesbloquear" style="width:100%; padding:10px; font-size:13px; background:#00695c; color:#fff; justify-content:center; font-weight:800;" onclick="desbloquearYRegistrar(${l.id})">
-            🔓 ${idiomaActual==='es'?'Ver Precios y Financiamiento':'View Pricing & Financing'}
+          <div class="error-text" id="datosError" style="margin-bottom:8px;">${idiomaActual==='es'?'Completá tu nombre, WhatsApp (mínimo 8 dígitos) y ciudad.':'Please complete your name, WhatsApp (min 8 digits) and city.'}</div>
+          <button class="btn btn-sand" id="btnDesbloquear" style="width:100%; padding:11px; font-size:13px; justify-content:center; font-weight:800;" onclick="desbloquearYRegistrar(${l.id})">
+            ${idiomaActual==='es'?'Ver Plan de Pagos y Precios':'View Payment Plan & Pricing'}
           </button>
         </div>
       `;
@@ -1261,12 +1363,12 @@ function seleccionar(id, hacerScroll=false) {
       const hoyStr = new Date().toISOString().split('T')[0];
       seccionCotizador = `
         <div class="calc-box">
-          <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:6px 9px; border-radius:6px; font-size:11px; color:#166534; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <span>👤 <b>${nombreClientePersistente}</b> (${telefonoClientePersistente})</span>
-            <a href="javascript:void(0)" onclick="editarDatos()" style="color:#0369a1; font-weight:700; text-decoration:none;">${idiomaActual==='es'?'Editar':'Edit'}</a>
+          <div style="background:#FFFFFF; border:1px solid #E5E0D5; padding:7px 10px; border-radius:8px; font-size:11.2px; color:#0F3D53; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="display:inline-flex; align-items:center; gap:5px;">${ICO_USER} <b>${nombreClientePersistente}</b> (${telefonoClientePersistente})</span>
+            <a href="javascript:void(0)" onclick="editarDatos()" style="color:#7C652B; font-weight:700; text-decoration:none;">${idiomaActual==='es'?'Editar':'Edit'}</a>
           </div>
 
-          <h4>🧮 ${idiomaActual==='es'?'Elegí tu Plan para Lote':'Choose your Plan for Lot'} ${l.id}</h4>
+          <h4>${ICO_CALC} ${idiomaActual==='es'?'Elegí tu Plan para Lote':'Choose your Plan for Lot'} ${l.id}</h4>
           
           <div class="plan-grid">
             <button type="button" class="plan-btn ${planSeleccionado==='m36'?'active':''}" id="btnPlan-m36" onclick="seleccionarPlan('m36', ${l.id})">
@@ -1298,16 +1400,16 @@ function seleccionar(id, hacerScroll=false) {
           <div class="cita-opt-box">
             <label class="cita-checkbox-label">
               <input type="checkbox" id="checkAgendarVisita" onchange="toggleCamposCita()">
-              <span>📅 ${idiomaActual==='es'?'¿Deseás agendar una visita al terreno? (Opcional)':'Would you like to schedule a site visit? (Optional)'}</span>
+              <span style="display:inline-flex; align-items:center; gap:5px;">${ICO_CAL} ${idiomaActual==='es'?'¿Deseás agendar una visita al terreno? (Opcional)':'Would you like to schedule a site visit? (Optional)'}</span>
             </label>
             <div id="citaCampos" class="cita-dropdowns" style="display:none;">
               <div>
-                <label style="display:block; font-size:10.5px; font-weight:700; color:#334155; margin-bottom:2px;">${idiomaActual==='es'?'Fecha deseada:':'Preferred Date:'}</label>
-                <input type="date" id="citaFecha" min="${hoyStr}" style="width:100%; padding:6px; border-radius:6px; border:1px solid #cbd5e1; font-size:11.5px; font-weight:600; background:#fff;">
+                <label style="display:block; font-size:10.5px; font-weight:700; color:#526772; margin-bottom:2px;">${idiomaActual==='es'?'Fecha deseada:':'Preferred Date:'}</label>
+                <input type="date" id="citaFecha" min="${hoyStr}" style="width:100%; padding:6px; border-radius:6px; border:1px solid #CBD5DF; font-size:11.5px; font-weight:600; background:#fff; color:#0F3D53;">
               </div>
               <div>
-                <label style="display:block; font-size:10.5px; font-weight:700; color:#334155; margin-bottom:2px;">${idiomaActual==='es'?'Horario disponible:':'Available Time:'}</label>
-                <select id="citaHora" style="width:100%; padding:6px; border-radius:6px; border:1px solid #cbd5e1; font-size:11.5px; font-weight:600; background:#fff;">
+                <label style="display:block; font-size:10.5px; font-weight:700; color:#526772; margin-bottom:2px;">${idiomaActual==='es'?'Horario disponible:':'Available Time:'}</label>
+                <select id="citaHora" style="width:100%; padding:6px; border-radius:6px; border:1px solid #CBD5DF; font-size:11.5px; font-weight:600; background:#fff; color:#0F3D53;">
                   <option value="09:00 AM">09:00 AM</option>
                   <option value="10:00 AM" selected>10:00 AM</option>
                   <option value="11:00 AM">11:00 AM</option>
@@ -1329,8 +1431,8 @@ function seleccionar(id, hacerScroll=false) {
     }
   } else {
     seccionCotizador = `
-      <div style="background:#ffebee; border:1px solid #ffcdd2; color:#c62828; padding:10px; border-radius:6px; font-size:11.5px; margin-top:10px; text-align:center;">
-        <b>${idiomaActual==='es'?'Lote no disponible para cotizar':'Lot not available for quotation'}</b><br>${idiomaActual==='es'?'Este lote se encuentra':'This lot is currently'} ${l.est}. ${idiomaActual==='es'?'Consulta con un asesor por opciones disponibles.':'Consult with an agent for available alternatives.'}
+      <div style="background:#F9F7F3; border:1px solid #E5E0D5; color:#526772; padding:12px; border-radius:10px; font-size:11.8px; margin-top:10px; text-align:center;">
+        <b style="color:#0F3D53;">${idiomaActual==='es'?'Lote no disponible para cotizar':'Lot not available for quotation'}</b><br>${idiomaActual==='es'?'Este lote se encuentra':'This lot is currently'} ${l.est}. ${idiomaActual==='es'?'Consultá con un asesor por opciones disponibles.':'Consult with an agent for available alternatives.'}
       </div>
     `;
   }
@@ -1349,18 +1451,18 @@ function seleccionar(id, hacerScroll=false) {
           <div class="stat"><small>${idiomaActual==='es'?'Largo (Fondo)':'Depth'}</small><b>${l.fondo}</b></div>
         </div>
 
-        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:9px;">
-          <span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🛣️ ${idiomaActual==='es'?'700m Costanera':'700m Coastal Hwy'}</span>
-          <span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🏄 ${idiomaActual==='es'?'3 min Remanso':'3 min Remanso Beach'}</span>
-          <span style="background:#dcfce7; color:#166534; padding:3px 8px; border-radius:12px; font-size:10.5px; font-weight:700;">🌴 ${idiomaActual==='es'?'7 min Centro de San Juan del Sur':'7 min San Juan del Sur Center'}</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+          <span class="chip-info">${ICO_PIN} ${idiomaActual==='es'?'700m Costanera':'700m Coastal Hwy'}</span>
+          <span class="chip-info">${ICO_PIN} ${idiomaActual==='es'?'3 min Remanso':'3 min Remanso Beach'}</span>
+          <span class="chip-info">${ICO_PIN} ${idiomaActual==='es'?'7 min Centro de San Juan del Sur':'7 min San Juan del Sur Center'}</span>
         </div>
 
-        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-left:3.5px solid #16a34a; padding:6px 9px; border-radius:6px; font-size:11px; color:#14532d; margin-bottom:8px; line-height:1.35;">
-          <b>✓ ${idiomaActual==='es'?'Certeza Jurídica:':'Legal Certainty:'}</b> ${idiomaActual==='es'?'Documentación y permisos al día. Escritura inscrita, libertad de gravamen y permisos de la alcaldía.':'Documentation and permits fully up to date. Registered deed, unencumbered title, and municipal permits.'}
+        <div class="cert-box">
+          <b>${ICO_CHECK} ${idiomaActual==='es'?'Certeza Jurídica:':'Legal Certainty:'}</b> ${idiomaActual==='es'?'Documentación y permisos al día. Escritura inscrita, libertad de gravamen y permisos de la alcaldía.':'Documentation and permits fully up to date. Registered deed, unencumbered title, and municipal permits.'}
         </div>
 
-        <p style="font-size:11.8px;margin-bottom:3px;"><b>• ${idiomaActual==='es'?'Acceso Vial:':'Road Access:'}</b> ${l.via}</p>
-        <p style="font-size:11.8px;margin-bottom:6px;"><b>• ${idiomaActual==='es'?'Entrega de Servicios:':'Services Delivery:'}</b> ${idiomaActual==='es'?'Proyectada a 31 meses (Agua y Luz)':'Projected in 31 months (Water & Power)'}</p>
+        <p style="font-size:11.8px;margin-bottom:4px;color:#526772;"><b style="color:#0F3D53;">• ${idiomaActual==='es'?'Acceso Vial:':'Road Access:'}</b> ${l.via}</p>
+        <p style="font-size:11.8px;margin-bottom:6px;color:#526772;"><b style="color:#0F3D53;">• ${idiomaActual==='es'?'Entrega de Servicios:':'Services Delivery:'}</b> ${idiomaActual==='es'?'Proyectada a 31 meses (Agua y Luz)':'Projected in 31 months (Water & Power)'}</p>
 
         ${seccionCotizador}
       </div>
@@ -1424,7 +1526,7 @@ function desbloquearYRegistrar(id) {
   ciudadClientePersistente = ciu;
   usuarioDesbloqueado = true;
 
-  if (btn) { btn.innerText = idiomaActual==='es' ? "⏳ Desbloqueando..." : "⏳ Unlocking..."; btn.disabled = true; }
+  if (btn) { btn.innerText = idiomaActual==='es' ? "Cargando plan..." : "Loading plan..."; btn.disabled = true; }
 
   const l = lotes.find(x => x.id == id);
   if (GOOGLE_SHEETS_URL) {
@@ -1463,10 +1565,10 @@ function calcularCuota(id) {
   if (planSeleccionado === 'contado') {
     resDiv.innerHTML = `
       <div><span>${idiomaActual==='es'?'Modalidad:':'Plan:'}</span> <b>${idiomaActual==='es'?'Pago Directo de Contado':'Direct Cash Payment'}</b></div>
-      <div><span>${idiomaActual==='es'?'Precio de Contado:':'Cash Price:'}</span> <b style="color:var(--azul); font-size:15px;">$${l.precios.contado.toLocaleString()} USD</b></div>
-      <div style="border-top:1px dashed #cbd5e1; padding-top:6px; margin-top:4px;">
+      <div><span>${idiomaActual==='es'?'Precio de Contado:':'Cash Price:'}</span> <b style="color:var(--azul); font-size:15.5px;">$${l.precios.contado.toLocaleString()} USD</b></div>
+      <div style="border-top:1px dashed #E5E0D5; padding-top:6px; margin-top:4px;">
         <span>${idiomaActual==='es'?'Reserva para congelar lote:':'Reservation to lock lot:'}</span>
-        <b style="color:#b45309;">$250 USD (${idiomaActual==='es'?'abona al precio':'applies to price'})</b>
+        <b style="color:#7C652B;">$250 USD (${idiomaActual==='es'?'abona al precio':'applies to price'})</b>
       </div>
     `;
   } else {
@@ -1477,12 +1579,12 @@ function calcularCuota(id) {
     const cuota = saldo / meses;
 
     resDiv.innerHTML = `
-      <div style="padding-bottom:6px; border-bottom:1px dashed #cbd5e1; margin-bottom:6px;">
+      <div style="padding-bottom:7px; border-bottom:1px dashed #E5E0D5; margin-bottom:7px;">
         <span style="font-weight:700; color:var(--azul);">${idiomaActual==='es'?'Cuota Mensual ('+meses+'m):':'Monthly Payment ('+meses+'m):'}</span>
-        <b style="color:#00695c; font-size:16px; font-weight:900;">$${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} / ${idiomaActual==='es'?'mes':'mo'}</b>
+        <b style="color:var(--azul); font-size:16.5px; font-weight:900;">$${cuota.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} / ${idiomaActual==='es'?'mes':'mo'}</b>
       </div>
-      <div><span>${idiomaActual==='es'?'Prima Estándar (15%):':'Standard Down Payment (15%):'}</span> <b>$${prima15.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} USD</b></div>
-      <div><span>${idiomaActual==='es'?'Reserva para congelar lote:':'Reservation to lock lot:'}</span> <b style="color:#b45309;">$250 USD (${idiomaActual==='es'?'abona a tu prima':'applies to down'})</b></div>
+      <div><span>${idiomaActual==='es'?'Prima Estándar (15%):':'Standard Down Payment (15%):'}</span> <b style="color:var(--azul);">$${prima15.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} USD</b></div>
+      <div><span>${idiomaActual==='es'?'Reserva para congelar lote:':'Reservation to lock lot:'}</span> <b style="color:#7C652B;">$250 USD (${idiomaActual==='es'?'abona a tu prima':'applies to down'})</b></div>
     `;
   }
 }
@@ -1554,7 +1656,7 @@ function enviarCotizacionWhatsApp(id) {
   window.open(`https://wa.me/${asesorActual.tel}?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
-// ==================== CHAT DE PAULA (IA + 4 FILTROS ANTI-BASURA) ====================
+// ==================== CHAT DE PAULA ====================
 let paulaInicializada = false;
 let paulaHistorial = [];
 let paulaUltimoEnvio = 0;
@@ -1569,16 +1671,12 @@ function scrollPaulaAlFinal() {
 
 function activarPaulaUI() {
   const fab = document.getElementById('paulaFab');
-  if (fab) {
-    fab.style.display = 'flex';
-    fab.classList.add('intro-pulse');
-    setTimeout(() => fab.classList.remove('intro-pulse'), 3500);
-  }
+  if (fab) fab.style.display = 'flex';
   if (!paulaInicializada) {
     paulaInicializada = true;
     const saludo = idiomaActual === 'es'
-      ? `¡Hola ${nombreClientePersistente}! 👋 Soy Paula, de Mareas del Sur. Ya tenés acceso a precios y planes. ¿Tenés alguna duda rápida sobre este lote o el financiamiento?`
-      : `Hi ${nombreClientePersistente}! 👋 I'm Paula, from Mareas del Sur. You now have access to prices and plans. Any quick questions about this lot or financing?`;
+      ? `¡Hola ${nombreClientePersistente}! Soy Paula, asesora de Mareas del Sur. Ya tenés acceso a precios y planes. ¿Tenés alguna duda rápida sobre este lote o el financiamiento?`
+      : `Hi ${nombreClientePersistente}! I'm Paula, advisor at Mareas del Sur. You now have access to prices and plans. Any quick questions about this lot or financing?`;
     agregarBurbujaPaula(saludo, 'bot');
     renderQuickReplies();
   }
@@ -1627,34 +1725,31 @@ function enviarMensajePaula(textoChip) {
   const msg = (textoChip || input.value).trim();
   if (!msg) return;
 
-  // Filtro 1: Límite diario (12 mensajes/día)
   if (obtenerConteoDiarioPaula() >= 12) {
     agregarBurbujaPaula(
       idiomaActual === 'es'
-        ? "Para seguir atendiendo tus consultas a detalle, tocá el botón verde 'Consultar este lote por WhatsApp' aquí en la página 🙌."
-        : "To continue assisting you in detail, please tap the green 'Inquire about this lot on WhatsApp' button on this page 🙌.",
+        ? "Para seguir atendiendo tus consultas a detalle, tocá el botón verde 'Consultar este lote por WhatsApp' aquí en la página."
+        : "To continue assisting you in detail, please tap the green 'Inquire about this lot on WhatsApp' button on this page.",
       'bot'
     );
     return;
   }
 
-  // Filtro 2: Pausa anti-spam de 5 segundos
   const ahora = Date.now();
   if (ahora - paulaUltimoEnvio < 5000) {
     agregarBurbujaPaula(
-      idiomaActual === 'es' ? "Esperá un par de segundos antes de enviar otro mensaje 👍." : "Please wait a few seconds before sending another message 👍.",
+      idiomaActual === 'es' ? "Esperá un par de segundos antes de enviar otro mensaje." : "Please wait a few seconds before sending another message.",
       'bot'
     );
     return;
   }
 
-  // Filtro 3: Anti-basura local (0 consumo de API)
   const soloLetras = msg.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]/g, '');
   if (soloLetras.length < 4 || msg.length > 250 || /(.)\1{4,}/.test(msg)) {
     agregarBurbujaPaula(
       idiomaActual === 'es'
-        ? "Escribime una consulta clara sobre los lotes, precios o financiamiento de Mareas del Sur para poder ayudarte mejor 😄."
-        : "Please write a clear question about Mareas del Sur lots, pricing, or financing so I can help you better 😄.",
+        ? "Escribime una consulta clara sobre los lotes, precios o financiamiento de Mareas del Sur para poder ayudarte mejor."
+        : "Please write a clear question about Mareas del Sur lots, pricing, or financing so I can help you better.",
       'bot'
     );
     if (!textoChip) input.value = "";
@@ -1671,7 +1766,7 @@ function enviarMensajePaula(textoChip) {
   const dispIds = lotes.filter(x => x.est === "Disponible" || x.est === "Available").map(x => x.id);
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 9000);
+  const timeoutId = setTimeout(() => controller.abort(), 15000);
 
   fetch(GOOGLE_SHEETS_URL, {
     method: "POST",
@@ -1689,7 +1784,7 @@ function enviarMensajePaula(textoChip) {
   })
   .then(r => r.json())
   .then(data => {
-    const reply = (data && data.reply) ? data.reply : (idiomaActual === 'es' ? "Tocá el botón verde 'Consultar este lote por WhatsApp' para hablar directo con tu asesor 👍." : "Tap the green 'Inquire about this lot on WhatsApp' button to talk directly with your advisor 👍.");
+    const reply = (data && data.reply) ? data.reply : (idiomaActual === 'es' ? "Tocá el botón verde 'Consultar este lote por WhatsApp' para hablar directo con tu asesor." : "Tap the green 'Inquire about this lot on WhatsApp' button to talk directly with your advisor.");
     typingEl.innerText = reply;
     scrollPaulaAlFinal();
     paulaHistorial.push({ role: "user", text: msg });
@@ -1698,8 +1793,8 @@ function enviarMensajePaula(textoChip) {
   })
   .catch(() => {
     typingEl.innerText = idiomaActual === 'es'
-      ? "Hubo un problema de conexión. Tocá el botón verde 'Consultar este lote por WhatsApp' para atenderte de inmediato."
-      : "Connection issue. Tap the green 'Inquire about this lot on WhatsApp' button so we can assist you right away.";
+      ? "Estoy verificando ese detalle. También podés tocar el botón verde 'Consultar este lote por WhatsApp' para que un asesor te atienda al instante."
+      : "I'm checking that detail for you. You can also tap the green 'Inquire about this lot on WhatsApp' button for immediate assistance.";
     scrollPaulaAlFinal();
   })
   .finally(() => {
@@ -1742,7 +1837,7 @@ function cambiarEstatusAdminNube() {
 
   const btn = document.getElementById('btnGuardarAdmin');
   const originalText = btn.innerText;
-  btn.innerText = "⏳ Guardando..."; btn.disabled = true;
+  btn.innerText = "Guardando..."; btn.disabled = true;
 
   if (GOOGLE_SHEETS_URL) {
     fetch(GOOGLE_SHEETS_URL, {
@@ -1751,9 +1846,9 @@ function cambiarEstatusAdminNube() {
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({ action: "update_status", lote: id, estado: nuevoEst })
     }).then(() => {
-      setTimeout(() => { btn.innerText = "💾 Guardado en la nube ✓"; btn.disabled = false; setTimeout(() => { btn.innerText = originalText; }, 3000); }, 1000);
+      setTimeout(() => { btn.innerText = "Guardado en la nube ✓"; btn.disabled = false; setTimeout(() => { btn.innerText = originalText; }, 3000); }, 1000);
     }).catch(() => {
-      setTimeout(() => { btn.innerText = "❌ Error"; btn.disabled = false; setTimeout(() => { btn.innerText = originalText; }, 3000); }, 1000);
+      setTimeout(() => { btn.innerText = "Error al guardar"; btn.disabled = false; setTimeout(() => { btn.innerText = originalText; }, 3000); }, 1000);
     });
   }
 }
